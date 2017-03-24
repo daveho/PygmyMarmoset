@@ -1,0 +1,30 @@
+http://central.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar
+  Jetty9/lib/servlet-api-3.1.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.3.v20170317/jetty-server-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-server-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-jmx/9.4.3.v20170317/jetty-jmx-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-jmx-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.3.v20170317/jetty-util-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-util-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-webapp/9.4.3.v20170317/jetty-webapp-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-webapp-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-servlet/9.4.3.v20170317/jetty-servlet-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-servlet-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.3.v20170317/jetty-http-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-http-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.3.v20170317/jetty-io-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-io-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-security/9.4.3.v20170317/jetty-security-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-security-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-annotations/9.4.3.v20170317/jetty-annotations-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-annotations-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-xml/9.4.3.v20170317/jetty-xml-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-xml-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/jetty-plus/9.4.3.v20170317/jetty-plus-9.4.3.v20170317.jar
+  Jetty9/lib/jetty-plus-9.4.3.v20170317.jar
+http://central.maven.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar
+  Jetty9/lib/annotations/javax.annotation-api-1.2.jar
+http://central.maven.org/maven2/org/ow2/asm/asm/5.1/asm-5.1.jar
+  Jetty9/lib/annotations/asm-5.1.jar
+http://central.maven.org/maven2/org/ow2/asm/asm-commons/5.1/asm-commons-5.1.jar
+  Jetty9/lib/annotations/asm-commons-5.1.jar
