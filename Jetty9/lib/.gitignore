@@ -1,2 +1,4 @@
 /*.jar
 /annotations/*.jar
+/apache-jsp/*.jar
+/apache-jstl/*.jar

@@ -11,11 +11,19 @@
 		<servlet-name>Index</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Index</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Login</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
 	<servlet-mapping>
 		<servlet-name>Index</servlet-name>
 		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 		
 	<!-- Use the /index servlet as the welcome file -->

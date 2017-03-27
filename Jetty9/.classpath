@@ -16,5 +16,11 @@
 	<classpathentry exported="true" kind="lib" path="lib/annotations/asm-5.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/annotations/asm-commons-5.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/annotations/javax.annotation-api-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jsp/org.eclipse.jdt.core.compiler.ecj-4.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jsp/org.eclipse.jetty.apache-jsp-9.4.3.v20170317.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jsp/org.mortbay.jasper.apache-el-8.5.9.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jsp/org.mortbay.jasper.apache-jsp-8.5.9.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jstl/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-jstl/org.apache.taglibs.taglibs-standard-spec-1.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

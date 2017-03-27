@@ -28,6 +28,22 @@ http://central.maven.org/maven2/org/ow2/asm/asm/5.1/asm-5.1.jar
   Jetty9/lib/annotations/asm-5.1.jar
 http://central.maven.org/maven2/org/ow2/asm/asm-commons/5.1/asm-commons-5.1.jar
   Jetty9/lib/annotations/asm-commons-5.1.jar
+
+# I couldn't find the following in Maven, so I uploaded them to
+# an S3 bucket.
+https://s3.amazonaws.com/pygmymarmoset/org.eclipse.jdt.core.compiler.ecj-4.4.2.jar
+  Jetty9/lib/apache-jsp/org.eclipse.jdt.core.compiler.ecj-4.4.2.jar
+https://s3.amazonaws.com/pygmymarmoset/org.eclipse.jetty.apache-jsp-9.4.3.v20170317.jar
+  Jetty9/lib/apache-jsp/org.eclipse.jetty.apache-jsp-9.4.3.v20170317.jar
+https://s3.amazonaws.com/pygmymarmoset/org.mortbay.jasper.apache-el-8.5.9.1.jar
+  Jetty9/lib/apache-jsp/org.mortbay.jasper.apache-el-8.5.9.1.jar
+https://s3.amazonaws.com/pygmymarmoset/org.mortbay.jasper.apache-jsp-8.5.9.1.jar
+  Jetty9/lib/apache-jsp/org.mortbay.jasper.apache-jsp-8.5.9.1.jar
+https://s3.amazonaws.com/pygmymarmoset/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar
+  Jetty9/lib/apache-jstl/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar
+https://s3.amazonaws.com/pygmymarmoset/org.apache.taglibs.taglibs-standard-spec-1.2.5.jar
+  Jetty9/lib/apache-jstl/org.apache.taglibs.taglibs-standard-spec-1.2.5.jar
+
 https://downloads.mariadb.com/Connectors/java/connector-java-1.5.7/mariadb-java-client-1.5.7.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/mariadb-java-client-1.5.7.jar
 
