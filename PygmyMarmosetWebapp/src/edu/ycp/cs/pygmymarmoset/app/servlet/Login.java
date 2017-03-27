@@ -14,4 +14,18 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Params params = new Params()
+				.getExpected(req, "username", "password");
+
+		if (params.hasMissing()) {
+			req.setAttribute("missing", params.getMissing());
+			req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+			return;
+		} else {
+			resp.sendRedirect(req.getContextPath() + "/index");
+		}
+	}
 }
