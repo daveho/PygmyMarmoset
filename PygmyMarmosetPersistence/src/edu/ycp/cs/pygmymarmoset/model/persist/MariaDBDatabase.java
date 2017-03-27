@@ -1,34 +1,61 @@
 package edu.ycp.cs.pygmymarmoset.model.persist;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 
 public class MariaDBDatabase implements IDatabase {
+	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
+	static {
+		try {
+			Class.forName(JDBC_DRIVER_CLASS);
+		} catch (Exception e) {
+			throw new IllegalStateException("Couldn't load MariaDB driver", e);
+		}
+	}
+	
 	private static Logger logger = LoggerFactory.getLogger(MariaDBDatabase.class);
+	
+	// TODO: don't hard-code
+	public static final String JDBC_URL =
+			"jdbc:mysql://localhost/pygmymarmoset?user=root&password=root";
 
+	@Override
+	public void createModelClassTable(Class<?> modelCls) {
+		execute(new CreateModelClassTable(modelCls));
+	}
+	
 	@Override
 	public User findUserForUsername(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private<E> E execute(DatabaseRunnable<E> txn) {
-		Connection conn = getConnection();
+	private Connection createConnection() {
 		try {
-			return doExecute(conn, txn);
-		} finally {
-			DBUtil.closeQuietly(conn);
+			return DriverManager.getConnection(JDBC_URL);
+		} catch (SQLException e) {
+			throw new PersistenceException("Couldn't create JDBC connection", e);
 		}
 	}
 	
-	private Connection getConnection() {
-		// TODO Auto-generated method stub
-		return null;
+	private void releaseConnection(Connection conn) {
+		DBUtil.closeQuietly(conn);
+	}
+	
+	private<E> E execute(DatabaseRunnable<E> txn) {
+		Connection conn = createConnection();
+		try {
+			return doExecute(conn, txn);
+		} finally {
+			releaseConnection(conn);
+		}
 	}
 
 	private<E> E doExecute(Connection conn, DatabaseRunnable<E> txn) {

@@ -25,6 +25,7 @@ public class Query {
 				buf.append(" not null");
 			}
 			if (f.isPrimaryKey()) {
+				buf.append(" auto_increment");
 				pk = f;
 			}
 			count++;
@@ -36,6 +37,7 @@ public class Query {
 		}
 		
 		buf.append(")");
+		buf.append(" character set 'utf8' collate 'utf8_general_ci'");
 		
 		return buf.toString();
 	}
