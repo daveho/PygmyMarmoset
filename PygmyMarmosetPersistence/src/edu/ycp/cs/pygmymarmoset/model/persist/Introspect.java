@@ -7,6 +7,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Desc;
@@ -20,7 +21,7 @@ public class Introspect<E> {
 	private String name;
 	private List<DBField> fields;
 
-	public Introspect(Class<E> cls) throws IntrospectionException, NoSuchFieldException, SecurityException {
+	private Introspect(Class<E> cls) throws IntrospectionException, NoSuchFieldException, SecurityException {
 		this.cls = cls;
 		analyze();
 	}
@@ -81,7 +82,7 @@ public class Introspect<E> {
 	}
 	
 	private static<E> void doIntrospect(Class<E> cls) throws Exception {
-		Introspect<E> info = new Introspect<>(cls);
+		Introspect<E> info = getIntrospect(cls);
 		System.out.println("name=" + info.getName());
 		System.out.println("tableName=" + info.getTableName());
 		for (DBField f : info.getFields()) {
@@ -92,5 +93,30 @@ public class Introspect<E> {
 					f.getSize(),
 					f.isFixed());
 		}
+	}
+	
+	private static final ConcurrentHashMap<Class<?>, Introspect<?>> cache = new ConcurrentHashMap<>();
+	
+	/**
+	 * Get an {@link Introspect} object for given model class.
+	 * A cached object is returned if possible.
+	 * 
+	 * @param cls a model class
+	 * @return the {@link Introspect} object for the model class
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IntrospectionException
+	 */
+	@SuppressWarnings("unchecked")
+	public static<E> Introspect<E> getIntrospect(Class<E> cls) throws NoSuchFieldException, SecurityException, IntrospectionException {
+		Introspect<E> info = (Introspect<E>) cache.get(cls);
+		if (info == null) {
+			info = new Introspect<>(cls);
+			Introspect<E> prev = (Introspect<E>) cache.putIfAbsent(cls, info);
+			if (prev != null) {
+				info = prev;
+			}
+		}
+		return info;
 	}
 }
