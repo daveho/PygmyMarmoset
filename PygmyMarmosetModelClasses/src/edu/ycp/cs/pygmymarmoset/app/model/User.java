@@ -2,10 +2,19 @@ package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class User {
 	private int id;
+
+	@Desc(size=40)
 	private String username;
+	
+	@Desc(size=60)
 	private String firstName;
+	
+	@Desc(size=60)
 	private String lastName;
+	
+	@Desc(size=40, fixed=true)
 	private String passwordHash;
+	
 	private boolean superUser;
 	
 	public User() {

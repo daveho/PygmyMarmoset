@@ -28,3 +28,14 @@ http://central.maven.org/maven2/org/ow2/asm/asm/5.1/asm-5.1.jar
   Jetty9/lib/annotations/asm-5.1.jar
 http://central.maven.org/maven2/org/ow2/asm/asm-commons/5.1/asm-commons-5.1.jar
   Jetty9/lib/annotations/asm-commons-5.1.jar
+https://downloads.mariadb.com/Connectors/java/connector-java-1.5.7/mariadb-java-client-1.5.7.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/mariadb-java-client-1.5.7.jar
+
+http://central.maven.org/maven2/log4j/log4j/1.2.16/log4j-1.2.16.jar
+  PygmyMarmosetLogging/lib/log4j-1.2.16.jar
+
+slf4j_version=1.6.4
+http://repo1.maven.org/maven2/org/slf4j/slf4j-api/${slf4j_version}/slf4j-api-${slf4j_version}.jar
+  PygmyMarmosetLogging/lib/slf4j-api-${slf4j_version}.jar
+http://repo2.maven.org/maven2/org/slf4j/slf4j-log4j12/${slf4j_version}/slf4j-log4j12-${slf4j_version}.jar
+  PygmyMarmosetLogging/lib/slf4j-log4j12-${slf4j_version}.jar
