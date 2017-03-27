@@ -8,7 +8,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Desc;
+import edu.ycp.cs.pygmymarmoset.app.model.Project;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class Introspect<E> {
@@ -69,13 +73,21 @@ public class Introspect<E> {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		Introspect<User> info = new Introspect<>(User.class);
+		doIntrospect(Course.class);
+		doIntrospect(Project.class);
+		doIntrospect(Role.class);
+		doIntrospect(Submission.class);
+		doIntrospect(User.class);
+	}
+	
+	private static<E> void doIntrospect(Class<E> cls) throws Exception {
+		Introspect<E> info = new Introspect<>(cls);
 		System.out.println("name=" + info.getName());
 		System.out.println("tableName=" + info.getTableName());
 		for (DBField f : info.getFields()) {
 			System.out.printf("  Field %s, type=%s, sqltype=%s, size=%d, fixed=%s\n",
 					f.getName(),
-					f.getJavaType(),
+					f.getJavaType().getSimpleName(),
 					f.getSqlType(),
 					f.getSize(),
 					f.isFixed());

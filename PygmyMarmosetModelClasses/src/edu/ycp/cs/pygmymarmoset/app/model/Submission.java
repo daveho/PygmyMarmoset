@@ -1,12 +1,19 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class Submission {
+	@PrimaryKey
 	private int id;
+	
 	private int projectId;
+	
 	private int userId;
+	
 	private int submissionNumber;
+	
+	@Timestamp
 	private long timestamp;
-	private boolean isZip;
+	
+	private boolean zip;
 	
 	public Submission() {
 		
@@ -53,10 +60,10 @@ public class Submission {
 	}
 
 	public boolean isZip() {
-		return isZip;
+		return zip;
 	}
 
-	public void setZip(boolean isZip) {
-		this.isZip = isZip;
+	public void setZip(boolean zip) {
+		this.zip = zip;
 	}
 }

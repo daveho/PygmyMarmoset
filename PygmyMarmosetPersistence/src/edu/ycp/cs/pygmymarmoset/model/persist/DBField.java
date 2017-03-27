@@ -47,10 +47,12 @@ public class DBField {
 	
 	private static Map<Class<?>, String> javaToSqlType = new HashMap<>();
 	static {
-		javaToSqlType.put(Integer.class, "integer(10)");
-		javaToSqlType.put(Integer.TYPE, "integer(10)");
+		javaToSqlType.put(Integer.class, "int");
+		javaToSqlType.put(Integer.TYPE, "int");
 		javaToSqlType.put(Boolean.class, "tinyint");
 		javaToSqlType.put(Boolean.TYPE, "tinyint");
+		javaToSqlType.put(Long.class, "bigint");
+		javaToSqlType.put(Long.TYPE, "bigint");
 	}
 	
 	public String getSqlType() {
@@ -69,6 +71,9 @@ public class DBField {
 			buf.append(size);
 			buf.append(")");
 			return buf.toString();
+		} else if (Enum.class.isAssignableFrom(javaType)) {
+			// Enums are mapped to intss in the database
+			return "int";
 		} else {
 			String sqlType = javaToSqlType.get(javaType);
 			if (sqlType == null) {

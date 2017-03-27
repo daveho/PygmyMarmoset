@@ -1,8 +1,13 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class Course {
+	@PrimaryKey
 	private int id;
+	
+	@Desc(size=60)
 	private String name;
+	
+	@Desc(size=40)
 	private String term;
 	
 	public Course() {

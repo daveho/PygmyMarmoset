@@ -1,11 +1,20 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class Project {
+	@PrimaryKey
 	private int id;
+	
 	private int courseId;
+
+	@Desc(size=60)
 	private String name;
+	
+	@Timestamp
 	private long ontime;
+	
+	@Timestamp
 	private long late;
+	
 	private boolean visible;
 
 	public Project() {

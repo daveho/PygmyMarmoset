@@ -7,12 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Persistence-related metadata for a model object field.
+ * Annotation used to mark timestamp fields.
+ * These must be mapped to type <code>long</code> in Java,
+ * and represent milliseconds since the epoch.
  */
 @Retention(RUNTIME)
 @Target(FIELD)
-public @interface Desc {
-	public int size();
-	public boolean fixed() default false;
-	public boolean allowNull() default false;
+public @interface Timestamp {
+
 }

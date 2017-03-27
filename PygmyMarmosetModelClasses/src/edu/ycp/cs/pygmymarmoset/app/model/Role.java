@@ -1,9 +1,13 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class Role {
+	@PrimaryKey
 	private int id;
+	
 	private int userId;
+	
 	private int courseId;
+	
 	private RoleType type;
 	
 	public Role() {
