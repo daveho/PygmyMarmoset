@@ -7,6 +7,8 @@ public class DBField {
 	private String name;
 	private int size;
 	private boolean fixed;
+	private boolean allowNull;
+	private boolean primaryKey;
 	private Class<?> javaType;
 	
 	public DBField() {
@@ -35,6 +37,22 @@ public class DBField {
 
 	public void setFixed(boolean fixed) {
 		this.fixed = fixed;
+	}
+	
+	public boolean isAllowNull() {
+		return allowNull;
+	}
+	
+	public void setAllowNull(boolean allowNull) {
+		this.allowNull = allowNull;
+	}
+	
+	public void setPrimaryKey(boolean primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+	
+	public boolean isPrimaryKey() {
+		return primaryKey;
 	}
 
 	public void setJavaType(Class<?> type) {

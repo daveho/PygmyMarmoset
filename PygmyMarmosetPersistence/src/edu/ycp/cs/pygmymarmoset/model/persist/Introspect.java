@@ -5,12 +5,17 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Desc;
+import edu.ycp.cs.pygmymarmoset.app.model.PrimaryKey;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
@@ -46,11 +51,31 @@ public class Introspect<E> {
 					if (desc != null) {
 						dbField.setSize(desc.size());
 						dbField.setFixed(desc.fixed());
+						dbField.setAllowNull(desc.allowNull());
+					}
+					PrimaryKey pk = f.getAnnotation(PrimaryKey.class);
+					if (pk != null) {
+						dbField.setPrimaryKey(true);
 					}
 				}
 				fields.add(dbField);
 			}
 		}
+		
+		// Put fields in the order in which they appear in the class.
+		
+		Map<String, Integer> fieldOrder = new HashMap<>();
+		int count = 0;
+		for (Field field : cls.getDeclaredFields()) {
+			int mods = field.getModifiers();
+			if (field.isSynthetic() || Modifier.isStatic(mods)) {
+				continue;
+			}
+			fieldOrder.put(field.getName().toLowerCase(), count);
+			count++;
+		}
+		
+		Collections.sort(fields, (lhs, rhs) -> fieldOrder.get(lhs.getName()) - fieldOrder.get(rhs.getName()));
 	}
 	
 	public String getName() {
@@ -108,15 +133,19 @@ public class Introspect<E> {
 	 * @throws IntrospectionException
 	 */
 	@SuppressWarnings("unchecked")
-	public static<E> Introspect<E> getIntrospect(Class<E> cls) throws NoSuchFieldException, SecurityException, IntrospectionException {
-		Introspect<E> info = (Introspect<E>) cache.get(cls);
-		if (info == null) {
-			info = new Introspect<>(cls);
-			Introspect<E> prev = (Introspect<E>) cache.putIfAbsent(cls, info);
-			if (prev != null) {
-				info = prev;
+	public static<E> Introspect<E> getIntrospect(Class<E> cls) {
+		try {
+			Introspect<E> info = (Introspect<E>) cache.get(cls);
+			if (info == null) {
+				info = new Introspect<>(cls);
+				Introspect<E> prev = (Introspect<E>) cache.putIfAbsent(cls, info);
+				if (prev != null) {
+					info = prev;
+				}
 			}
+			return info;
+		} catch (NoSuchFieldException|SecurityException|IntrospectionException e) {
+			throw new IllegalStateException("Error introspecting model class " + cls.getSimpleName(), e);
 		}
-		return info;
 	}
 }

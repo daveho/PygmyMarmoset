@@ -1,9 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class User {
+	@PrimaryKey
 	private int id;
 
-	@PrimaryKey
 	@Desc(size=40)
 	private String username;
 	
