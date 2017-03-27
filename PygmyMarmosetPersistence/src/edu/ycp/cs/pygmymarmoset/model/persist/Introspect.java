@@ -73,7 +73,12 @@ public class Introspect<E> {
 		System.out.println("name=" + info.getName());
 		System.out.println("tableName=" + info.getTableName());
 		for (DBField f : info.getFields()) {
-			System.out.printf("  Field %s, type=%s, size=%d, fixed=%s\n", f.getName(), f.getJavaType(), f.getSize(), f.isFixed());
+			System.out.printf("  Field %s, type=%s, sqltype=%s, size=%d, fixed=%s\n",
+					f.getName(),
+					f.getJavaType(),
+					f.getSqlType(),
+					f.getSize(),
+					f.isFixed());
 		}
 	}
 }
