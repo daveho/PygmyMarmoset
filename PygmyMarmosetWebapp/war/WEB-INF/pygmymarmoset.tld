@@ -13,4 +13,19 @@
 		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.HelloTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+	<tag>
+		<name>input</name>
+		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.InputTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>obj</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>field</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>
