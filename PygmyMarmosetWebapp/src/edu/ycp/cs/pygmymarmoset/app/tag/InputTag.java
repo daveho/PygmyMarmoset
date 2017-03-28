@@ -13,6 +13,7 @@ import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 public class InputTag extends SimpleTagSupport {
 	private String obj;
 	private String field;
+	private String type;
 	
 	public void setObj(String obj) {
 		this.obj = obj;
@@ -22,11 +23,15 @@ public class InputTag extends SimpleTagSupport {
 		this.field = field;
 	}
 	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
 		
-		String type = "text"; // TODO: handle password fields
+		String type = this.type != null ? this.type : "text";
 		
 		String escapedValue = "";
 		Object bean = getJspContext().getAttribute(obj);

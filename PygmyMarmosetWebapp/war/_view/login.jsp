@@ -25,7 +25,7 @@
 				</tr>
 				<tr>
 					<td class="formlabel">Password:</td>
-					<td><pm:input obj="creds" field="password"/></td>
+					<td><pm:input obj="creds" field="password" type="password"/></td>
 				</tr>
 				<tr>
 					<td class="formlabel"></td>

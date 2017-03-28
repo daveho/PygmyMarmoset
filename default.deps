@@ -55,3 +55,8 @@ http://repo1.maven.org/maven2/org/slf4j/slf4j-api/${slf4j_version}/slf4j-api-${s
   PygmyMarmosetLogging/lib/slf4j-api-${slf4j_version}.jar
 http://repo2.maven.org/maven2/org/slf4j/slf4j-log4j12/${slf4j_version}/slf4j-log4j12-${slf4j_version}.jar
   PygmyMarmosetLogging/lib/slf4j-log4j12-${slf4j_version}.jar
+
+http://central.maven.org/maven2/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/commons-lang3-3.5.jar
+http://central.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/commons-beanutils-1.9.3.jar
