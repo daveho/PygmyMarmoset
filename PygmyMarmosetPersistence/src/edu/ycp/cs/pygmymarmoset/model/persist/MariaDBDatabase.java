@@ -54,6 +54,7 @@ public class MariaDBDatabase implements IDatabase {
 		try {
 			return doExecute(conn, txn);
 		} finally {
+			txn.cleanup();
 			releaseConnection(conn);
 		}
 	}
