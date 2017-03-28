@@ -1,48 +1,54 @@
 package edu.ycp.cs.pygmymarmoset.app.servlet;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
+
 public class Params {
-	private Map<String, String> pairs;
-	private List<String> missing;
+	private static Logger logger = LoggerFactory.getLogger(Params.class);
+	
+	private Map<String, Object> modelObjects;
 	
 	public Params() {
-		pairs = new HashMap<>();
-		missing = new ArrayList<>();
+		modelObjects = new HashMap<>();
 	}
 	
-	public Params getExpected(HttpServletRequest req, String... names) {
-		for (String name : names) {
-			String val = req.getParameter(name);
-			if (val == null || val.trim().equals("")) {
-				missing.add(name);
-			} else {
-				pairs.put(name, val);
+	public Params add(String name, Object obj) {
+		modelObjects.put(name, obj);
+		return this;
+	}
+	
+	public void unmarshal(HttpServletRequest req) {
+		// TODO: handle missing fields
+		for (Map.Entry<String, Object> entry : modelObjects.entrySet()) {
+			String name = entry.getKey();
+			Object obj = entry.getValue();
+			
+			for (String propertyName : BeanUtil.getPropertyNames(obj)) {
+				String paramName = name + "." + propertyName;
+				String value = req.getParameter(paramName);
+				if (value != null) {
+					value = value.trim();
+					if (!value.equals("")) {
+						try {
+							BeanUtils.setProperty(obj, propertyName, value);
+						} catch (Exception e) {
+							logger.warn("Exception unmarshaling parameter " + paramName, e);
+						}
+					}
+				}
 			}
 		}
-		return this;
 	}
 
-	public Params getOptional(HttpServletRequest req, String... names) {
-		for (String name : names) {
-			String val = req.getParameter(name);
-			if (val != null) {
-				pairs.put(name, val);
-			}
-		}
-		return this;
-	}
-	
-	public boolean hasMissing() {
-		return !missing.isEmpty();
-	}
-	
-	public List<String> getMissing() {
-		return missing;
+	public Object get(String name) {
+		return modelObjects.get(name);
 	}
 }
