@@ -1,3 +1,27 @@
+#loginbox {
+	width: 20em;
+	margin-left: 3em;
+	margin-top: 3em;
+	background: white;
+	border: 1px solid transparent;
+	border-radius: 24px;
+	padding: 1em 2em;
+}
+
+#loginbox h1 {
+	font-size: 120%;
+}
+
+table.formtab {
+	border-collapse: collapse;
+}
+
+table.formtab tr td {
+	padding-top: .5em;
+	padding-bottom: .5em;
+}
+
 .formlabel {
 	text-align: right;
+	padding-right: 1em;
 }
