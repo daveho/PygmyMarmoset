@@ -8,6 +8,10 @@
 
 	<!-- Servlets -->
 	<servlet>
+		<servlet-name>Welcome</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Welcome</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Index</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Index</servlet-class>
 	</servlet>
@@ -15,8 +19,16 @@
 		<servlet-name>Login</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Login</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Logout</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
+	<servlet-mapping>
+		<servlet-name>Welcome</servlet-name>
+		<url-pattern>/welcome</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Index</servlet-name>
 		<url-pattern>/u/index</url-pattern>
@@ -24,6 +36,10 @@
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters. -->
@@ -37,12 +53,12 @@
 	</filter-mapping>
 	
 	<!--
-		Use the /u/index servlet as the welcome file.
-		Note that most often this will result in a redirection
-		to the login page, but that's fine.
+		Use the Welcome servlet as the welcome page.
+		It will redirect to the login page or index page
+		as appropriate.
 	-->
 	<welcome-file-list>
-		<welcome-file>/u/index</welcome-file>
+		<welcome-file>/welcome</welcome-file>
 	</welcome-file-list>
 	<!-- Listeners -->
 

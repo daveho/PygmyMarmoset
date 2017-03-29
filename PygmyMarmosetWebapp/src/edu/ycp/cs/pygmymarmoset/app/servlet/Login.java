@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
 		params.unmarshal(req);
 		
 		LoginCredentials creds = params.get("creds");
-		System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
+		//System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
 		
 		LoginController controller = new LoginController();
 		User user = controller.execute(creds);
