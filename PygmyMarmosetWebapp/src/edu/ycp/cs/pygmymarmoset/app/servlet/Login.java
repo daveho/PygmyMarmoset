@@ -23,7 +23,10 @@ public class Login extends HttpServlet {
 				.add("creds", new LoginCredentials());
 		params.unmarshal(req);
 		
-		req.setAttribute("creds", params.get("creds"));
+		LoginCredentials creds = params.get("creds");
+		System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
+		
+		req.setAttribute("creds", creds);
 		
 		// TODO: actually do the login
 		

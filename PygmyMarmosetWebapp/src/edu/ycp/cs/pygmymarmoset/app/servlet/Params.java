@@ -48,7 +48,8 @@ public class Params {
 		}
 	}
 
-	public Object get(String name) {
-		return modelObjects.get(name);
+	@SuppressWarnings("unchecked")
+	public<E> E get(String name) {
+		return (E) modelObjects.get(name);
 	}
 }

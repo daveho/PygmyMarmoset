@@ -15,8 +15,10 @@ public class Main {
 	private static final int PORT = 8080;
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("Hello, world");
-
+		launch(true);
+	}
+	
+	public static void launch(boolean fromEclipse) throws Exception {
 		Server server = new Server(PORT);
 
 		MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
@@ -41,6 +43,12 @@ public class Main {
 		// Allow the welcome file to be a servlet
 		webapp.setInitParameter("org.eclipse.jetty.servlet.Default.welcomeServlets", "true");
 
+		if (fromEclipse) {
+			// Set up "extra" classpath directories/jarfiles from referenced
+			// Eclipse projects.
+			webapp.setExtraClasspath("../PygmyMarmosetModelClasses/bin/");
+		}
+		
 		server.setHandler(webapp);
 
 		server.start();
