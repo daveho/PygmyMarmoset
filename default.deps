@@ -22,6 +22,8 @@ http://central.maven.org/maven2/org/eclipse/jetty/jetty-xml/9.4.3.v20170317/jett
   Jetty9/lib/jetty-xml-9.4.3.v20170317.jar
 http://central.maven.org/maven2/org/eclipse/jetty/jetty-plus/9.4.3.v20170317/jetty-plus-9.4.3.v20170317.jar
   Jetty9/lib/jetty-plus-9.4.3.v20170317.jar
+http://central.maven.org/maven2/org/eclipse/jetty/toolchain/jetty-schemas/3.1/jetty-schemas-3.1.jar
+  Jetty9/lib/jetty-schemas-3.1.jar
 http://central.maven.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar
   Jetty9/lib/annotations/javax.annotation-api-1.2.jar
 http://central.maven.org/maven2/org/ow2/asm/asm/5.1/asm-5.1.jar
