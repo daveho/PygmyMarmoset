@@ -23,7 +23,7 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Params params = new Params(req)
-				.add("creds", new LoginCredentials());
+				.add("creds", LoginCredentials.class);
 		params.unmarshal(req);
 		
 		LoginCredentials creds = params.get("creds");

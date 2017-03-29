@@ -25,18 +25,20 @@ public class Params {
 	/**
 	 * Add a model object to the {@link Params}.
 	 * If the named model object is already present in the
-	 * session, it is used.  Otherwise, the
-	 * one passed in is used.
+	 * session, it is used.  Otherwise, a new instance of
+	 * the specified model class is used.
 	 * 
 	 * @param name name of model object
-	 * @param obj model object (only used if not already present in session)
+	 * @param modelCls model class to be instantiated if there is not already a
+	 *                 model object present in the session
 	 * @return this object, for method chaining
 	 */
-	public Params add(String name, Object obj) {
+	public Params add(String name, Class<?> modelCls) {
 		Object reqObj = req.getSession().getAttribute(name);
 		if (reqObj != null) {
 			modelObjects.put(name, reqObj);
 		} else {
+			Object obj = BeanUtil.newInstance(modelCls);
 			modelObjects.put(name, obj);
 		}
 		return this;
