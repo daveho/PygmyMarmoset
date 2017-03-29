@@ -4,8 +4,12 @@
 <%@ taglib uri="http://cs.ycp.edu/pygmymarmoset" prefix="pm" %>
 <html>
 	<head>
-		<title>Pygmy Marmoset: Login</title>
-		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/pygmymarmoset.css">
+		<pm:headStuff title="Log in"/>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#username_field").focus();
+		});
+		</script>
 	</head>
 	
 	<body style="background-image: url('${pageContext.servletContext.contextPath}/img/pygmyMarmoset-lg.jpg');">
@@ -16,7 +20,7 @@
 				<table class="formtab">
 					<tr>
 						<td class="formlabel">Username:</td>
-						<td><pm:input obj="creds" field="username"/></td>
+						<td><pm:input id="username_field" obj="creds" field="username"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel">Password:</td>

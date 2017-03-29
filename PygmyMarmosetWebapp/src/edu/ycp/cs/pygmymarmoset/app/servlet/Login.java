@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 			if (creds.hasGoal()) {
 				target = creds.getGoal();
 			} else {
-				target = req.getContextPath() + "/index";
+				target = req.getContextPath() + "/u/index";
 			}
 			resp.sendRedirect(target);
 

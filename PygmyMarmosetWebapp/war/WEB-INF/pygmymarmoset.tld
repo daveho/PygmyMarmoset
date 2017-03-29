@@ -32,5 +32,15 @@
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
 	</tag>
+	
+	<tag-file>
+		<name>headStuff</name>
+		<path>/WEB-INF/tags/headStuff.tag</path>
+	</tag-file>
 </taglib>

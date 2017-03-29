@@ -14,6 +14,7 @@ public class InputTag extends SimpleTagSupport {
 	private String obj;
 	private String field;
 	private String type;
+	private String id;
 	
 	public void setObj(String obj) {
 		this.obj = obj;
@@ -25,6 +26,10 @@ public class InputTag extends SimpleTagSupport {
 	
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	@Override
@@ -46,7 +51,13 @@ public class InputTag extends SimpleTagSupport {
 		out.print(obj);
 		out.print(".");
 		out.print(field);
-		out.print("\" type=\"");
+		out.print("\"");
+		if (id != null) {
+			out.print(" id=\"");
+			out.print(id);
+			out.print("\"");
+		}
+		out.print(" type=\"");
 		out.print(type);
 		out.print("\" value=\"");
 		out.print(escapedValue);
