@@ -27,6 +27,7 @@
 						<td><input type="submit" name="submit" value="Log in"></input></td>
 					</tr>
 				</table>
+				<input type="hidden" name="creds.goal" value="${fn:escapeXml(creds.goal)}"></input>
 			</form>
 			
 			<c:if test="${not empty errmsg}">

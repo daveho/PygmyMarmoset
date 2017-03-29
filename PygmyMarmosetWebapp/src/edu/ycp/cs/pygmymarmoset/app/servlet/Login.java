@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Params params = new Params()
+		Params params = new Params(req)
 				.add("creds", new LoginCredentials());
 		params.unmarshal(req);
 		
@@ -33,9 +33,18 @@ public class Login extends HttpServlet {
 		User user = controller.execute(creds);
 		if (user != null) {
 			// Successful login.  Put user in session and redirect to
-			// index page.
+			// goal URL (if there is one) or the index page.
+
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect(req.getContextPath() + "/index");
+			
+			String target;
+			if (creds.hasGoal()) {
+				target = creds.getGoal();
+			} else {
+				target = req.getContextPath() + "/index";
+			}
+			resp.sendRedirect(target);
+
 			return;
 		}
 		

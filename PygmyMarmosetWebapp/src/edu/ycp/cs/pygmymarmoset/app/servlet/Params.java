@@ -13,15 +13,32 @@ import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 
 public class Params {
 	private static Logger logger = LoggerFactory.getLogger(Params.class);
-	
+
+	private HttpServletRequest req;
 	private Map<String, Object> modelObjects;
 	
-	public Params() {
-		modelObjects = new HashMap<>();
+	public Params(HttpServletRequest req) {
+		this.req = req;
+		this.modelObjects = new HashMap<>();
 	}
 	
+	/**
+	 * Add a model object to the {@link Params}.
+	 * If the named model object is already present in the
+	 * session, it is used.  Otherwise, the
+	 * one passed in is used.
+	 * 
+	 * @param name name of model object
+	 * @param obj model object (only used if not already present in session)
+	 * @return this object, for method chaining
+	 */
 	public Params add(String name, Object obj) {
-		modelObjects.put(name, obj);
+		Object reqObj = req.getSession().getAttribute(name);
+		if (reqObj != null) {
+			modelObjects.put(name, reqObj);
+		} else {
+			modelObjects.put(name, obj);
+		}
 		return this;
 	}
 	
