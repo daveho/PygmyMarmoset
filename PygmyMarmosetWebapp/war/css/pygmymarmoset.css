@@ -4,11 +4,19 @@ body {
 	border: 0;
 }
 
-.errmsg {
+.errmsg, .resultmsg {
 	margin-top: 1em;
 	margin-bottom: 1em;
+}
+
+.errmsg {
 	font-style: italic;
 	color: red;
+}
+
+.resultmsg {
+	font-style: bold;
+	color: DarkGreen;
 }
 
 #loginbox {

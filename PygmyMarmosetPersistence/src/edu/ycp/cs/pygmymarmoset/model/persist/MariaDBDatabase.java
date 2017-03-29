@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 
@@ -35,6 +37,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public User findUserForUsername(String username) {
 		return execute(new FindUserForUsername(username));
+	}
+	
+	@Override
+	public boolean createCourse(Course course) {
+		return execute(new CreateCourse(course));
 	}
 
 	private Connection createConnection() {

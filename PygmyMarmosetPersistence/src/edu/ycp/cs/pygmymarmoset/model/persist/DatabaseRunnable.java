@@ -23,13 +23,23 @@ public abstract class DatabaseRunnable<E> {
 	public abstract E execute(Connection conn) throws SQLException;
 	
 	public PreparedStatement prepareStatement(Connection conn, String sql) throws SQLException {
-		PreparedStatement stmt = conn.prepareStatement(sql);
+		return prepareStatement(conn, sql, 0);
+	}
+
+	public PreparedStatement prepareStatement(Connection conn, String sql, int flags) throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement(sql, flags);
 		cleanupStack.add(stmt);
 		return stmt;
 	}
-	
+
 	public ResultSet executeQuery(PreparedStatement stmt) throws SQLException {
 		ResultSet resultSet = stmt.executeQuery();
+		cleanupStack.add(resultSet);
+		return resultSet;
+	}
+	
+	public ResultSet getGeneratedKeys(PreparedStatement stmt) throws SQLException {
+		ResultSet resultSet = stmt.getGeneratedKeys();
 		cleanupStack.add(resultSet);
 		return resultSet;
 	}

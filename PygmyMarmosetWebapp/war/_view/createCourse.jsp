@@ -11,7 +11,28 @@
 		<pm:header/>
 		<div id="content">
 			<h1>Create course</h1>
-			<p>Coming soon.</p>
+			<form action="${pageContext.servletContext.contextPath}/a/createCourse" method="post">
+				<table class="formtab">
+					<tr>
+						<td class="formlabel">Course name:</td>
+						<td><pm:input obj="course" field="name"/></td>
+					</tr>
+					<tr>
+						<td class="formlabel">Term:</td>
+						<td><pm:input obj="course" field="term"/></td>
+					</tr>
+					<tr>
+						<td class="formlabel"></td>
+						<td><input type="submit" name="submit" value="Create course"></input></td>
+					</tr>
+				</table>
+			</form>
+			<c:if test="${not empty resultmsg}">
+				<span class="resultmsg">${resultmsg}</span>
+			</c:if>
+			<c:if test="${not empty errmsg}">
+				<span class="errmsg">${errmsg}</span>
+			</c:if>
 		</div>
 	</body>
 </html>
