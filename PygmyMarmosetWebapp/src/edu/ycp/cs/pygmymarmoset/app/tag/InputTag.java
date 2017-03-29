@@ -34,11 +34,11 @@ public class InputTag extends SimpleTagSupport {
 		String type = this.type != null ? this.type : "text";
 		
 		String escapedValue = "";
-		Object bean = getJspContext().getAttribute(obj);
+		Object bean = TagUtil.getRequestAttribute(getJspContext(), obj);
 		if (bean != null) {
 			String propVal = BeanUtil.getProperty(bean, field);
 			if (propVal != null) {
-				escapedValue = StringEscapeUtils.escapeHtml4(escapedValue);
+				escapedValue = StringEscapeUtils.escapeHtml4(propVal);
 			}
 		}
 		
