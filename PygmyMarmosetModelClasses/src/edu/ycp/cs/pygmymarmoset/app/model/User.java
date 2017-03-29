@@ -13,7 +13,7 @@ public class User {
 	@Desc(size=60)
 	private String lastName;
 	
-	@Desc(size=40, fixed=true)
+	@Desc(size=60, fixed=true)
 	private String passwordHash;
 	
 	private boolean superUser;

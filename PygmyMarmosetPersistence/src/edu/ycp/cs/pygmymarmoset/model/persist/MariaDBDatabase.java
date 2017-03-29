@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -33,8 +34,7 @@ public class MariaDBDatabase implements IDatabase {
 	
 	@Override
 	public User findUserForUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return execute(new FindUserForUsername(username));
 	}
 
 	private Connection createConnection() {

@@ -10,6 +10,8 @@ public class DBField {
 	private boolean allowNull;
 	private boolean primaryKey;
 	private Class<?> javaType;
+	private String propertyName;
+	private int index;
 	
 	public DBField() {
 		
@@ -63,6 +65,24 @@ public class DBField {
 		return javaType;
 	}
 	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+
+
 	private static Map<Class<?>, String> javaToSqlType = new HashMap<>();
 	static {
 		javaToSqlType.put(Integer.class, "int");

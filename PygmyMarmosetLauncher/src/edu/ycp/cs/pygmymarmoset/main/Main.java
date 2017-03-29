@@ -46,7 +46,7 @@ public class Main {
 		if (fromEclipse) {
 			// Set up "extra" classpath directories/jarfiles from referenced
 			// Eclipse projects.
-			webapp.setExtraClasspath("../PygmyMarmosetModelClasses/bin/");
+			webapp.setExtraClasspath("../PygmyMarmosetModelClasses/bin/,../PygmyMarmosetPersistence/bin/,../PygmyMarmosetControllers/bin/");
 		}
 		
 		server.setHandler(webapp);

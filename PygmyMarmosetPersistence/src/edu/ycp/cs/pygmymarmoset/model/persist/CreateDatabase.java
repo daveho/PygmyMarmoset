@@ -10,7 +10,7 @@ public class CreateDatabase {
 	public static void main(String[] args) throws Exception {
 		configureLog4j();
 		
-		IDatabase db = new MariaDBDatabase();
+		IDatabase db = DatabaseProvider.getInstance();
 		
 		createTable(db, Course.class);
 		createTable(db, Project.class);

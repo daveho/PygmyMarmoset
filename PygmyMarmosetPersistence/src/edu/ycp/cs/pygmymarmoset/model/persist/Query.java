@@ -1,5 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.model.persist;
 
+import java.sql.ResultSet;
+
+import org.apache.commons.beanutils.BeanUtils;
+
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class Query {
@@ -44,5 +48,22 @@ public class Query {
 	
 	public static void main(String[] args) {
 		System.out.println(getCreateTableStatement(User.class));
+	}
+
+	public static<E> void loadFields(E modelObj, ResultSet resultSet) {
+		try {
+			doLoadFields(modelObj, resultSet);
+		} catch (Exception e) {
+			throw new PersistenceException("Could not load model object fields from result set", e);
+		}
+	}
+	
+	private static<E> void doLoadFields(E modelObj, ResultSet resultSet) throws Exception {
+		@SuppressWarnings("unchecked")
+		Class<E> cls = (Class<E>) modelObj.getClass();
+		Introspect<E> info = Introspect.getIntrospect(cls);
+		for (DBField field : info.getFields()) {
+			BeanUtils.setProperty(modelObj, field.getPropertyName(), resultSet.getObject(field.getIndex()));
+		}
 	}
 }

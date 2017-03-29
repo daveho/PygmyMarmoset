@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs.pygmymarmoset.app.controller.LoginController;
+import edu.ycp.cs.pygmymarmoset.app.model.ErrorMessage;
 import edu.ycp.cs.pygmymarmoset.app.model.LoginCredentials;
+import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,10 +29,22 @@ public class Login extends HttpServlet {
 		LoginCredentials creds = params.get("creds");
 		System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
 		
+		LoginController controller = new LoginController();
+		User user = controller.execute(creds);
+		if (user != null) {
+			// Successful login.  Put user in session and redirect to
+			// index page.
+			req.getSession().setAttribute("user", user);
+			resp.sendRedirect(req.getContextPath() + "/index");
+			return;
+		}
+		
+		// Unsuccessful login, display error message
+		ErrorMessage errmsg = new ErrorMessage();
+		errmsg.setText("Unknown username/password, please try again");
+		req.setAttribute("errmsg", errmsg);
+		creds.setPassword(""); // assume password was entered incorrectly
 		req.setAttribute("creds", creds);
-		
-		// TODO: actually do the login
-		
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}
 }

@@ -28,6 +28,10 @@
 					</tr>
 				</table>
 			</form>
+			
+			<c:if test="${not empty errmsg}">
+				<span class="errmsg">${errmsg.text}</span>
+			</c:if>
 		</div>
 	</body>
 </html>

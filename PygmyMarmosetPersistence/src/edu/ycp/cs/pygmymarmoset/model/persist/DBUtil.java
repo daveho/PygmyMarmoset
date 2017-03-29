@@ -2,6 +2,7 @@ package edu.ycp.cs.pygmymarmoset.model.persist;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.slf4j.Logger;
@@ -26,6 +27,16 @@ public class DBUtil {
 				stmt.close();
 			} catch (SQLException e) {
 				logger.warn("Couldn't close prepared statement", e);
+			}
+		}
+	}
+
+	public static void closeQuietly(ResultSet resultSet) {
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				logger.warn("Couldn't close result set", e);
 			}
 		}
 	}

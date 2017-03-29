@@ -40,6 +40,7 @@ public class Introspect<E> {
 			if (!propertyDesc.getName().equals("class")) {
 				DBField dbField = new DBField();
 				dbField.setName(propertyDesc.getName().toLowerCase());
+				dbField.setPropertyName(propertyDesc.getName());
 				dbField.setJavaType(propertyDesc.getPropertyType());
 				// Note that we require a declared field of the name
 				// indicated by the bean property descriptor.
@@ -63,7 +64,6 @@ public class Introspect<E> {
 		}
 		
 		// Put fields in the order in which they appear in the class.
-		
 		Map<String, Integer> fieldOrder = new HashMap<>();
 		int count = 0;
 		for (Field field : cls.getDeclaredFields()) {
@@ -74,8 +74,15 @@ public class Introspect<E> {
 			fieldOrder.put(field.getName().toLowerCase(), count);
 			count++;
 		}
-		
 		Collections.sort(fields, (lhs, rhs) -> fieldOrder.get(lhs.getName()) - fieldOrder.get(rhs.getName()));
+		
+		// Set indices of database fields, corresponding to the order in which
+		// they will be returned in result tuples.
+		int index = 1;
+		for (DBField dbField : fields) {
+			dbField.setIndex(index);
+			index++;
+		}
 	}
 	
 	public String getName() {
