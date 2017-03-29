@@ -44,7 +44,7 @@ public class Params {
 		return this;
 	}
 	
-	public void unmarshal(HttpServletRequest req) {
+	public void unmarshal() {
 		// TODO: handle missing fields
 		for (Map.Entry<String, Object> entry : modelObjects.entrySet()) {
 			String name = entry.getKey();

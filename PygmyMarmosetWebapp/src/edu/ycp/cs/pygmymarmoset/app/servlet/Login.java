@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Params params = new Params(req)
 				.add("creds", LoginCredentials.class);
-		params.unmarshal(req);
+		params.unmarshal();
 		
 		LoginCredentials creds = params.get("creds");
 		//System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
