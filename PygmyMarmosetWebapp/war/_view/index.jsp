@@ -11,7 +11,6 @@
 		<pm:header/>
 		<div id="content">
 			<p>Welcome to Pygmy Marmoset!</p>
-			<p><pm:hello/></p>
 		</div>
 	</body>
 </html>

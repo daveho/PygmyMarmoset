@@ -4,18 +4,14 @@
 <%@ taglib uri="http://cs.ycp.edu/pygmymarmoset" prefix="pm" %>
 <html>
 	<head>
-		<pm:headStuff title="Admin Home"/>
+		<pm:headStuff title="Create course"/>
 	</head>
 	
 	<body>
 		<pm:header/>
 		<div id="content">
-			<h1>Admin Home</h1>
-			<div class="navgroup">
-				<ul>
-				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/a/createCourse">Create course</a></li>
-				</ul>
-			</div>
+			<h1>Create course</h1>
+			<p>Coming soon.</p>
 		</div>
 	</body>
 </html>

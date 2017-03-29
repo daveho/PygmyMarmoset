@@ -75,3 +75,7 @@ table.formtab tr td {
 #content {
 	padding: 1em;
 }
+
+.navgroup ul {
+	list-style: none;
+}

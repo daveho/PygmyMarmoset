@@ -9,11 +9,6 @@
 	<uri>http://cs.ycp.edu/pygmymarmoset</uri>
 	
 	<tag>
-		<name>hello</name>
-		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.HelloTag</tag-class>
-		<body-content>empty</body-content>
-	</tag>
-	<tag>
 		<name>input</name>
 		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.InputTag</tag-class>
 		<body-content>empty</body-content>
