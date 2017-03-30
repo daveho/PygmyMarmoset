@@ -117,10 +117,6 @@ public class Query {
 				continue; // skip id
 			}
 			Object value = PropertyUtils.getProperty(modelObj, field.getPropertyName());
-			if (value instanceof Boolean) {
-				// Special case: convert Boolean to Integer
-				value = ((Boolean)value).booleanValue() ? 1 : 0;
-			}
 			stmt.setObject(index, value);
 			//System.out.println("Set field at index " + index);
 			index++;

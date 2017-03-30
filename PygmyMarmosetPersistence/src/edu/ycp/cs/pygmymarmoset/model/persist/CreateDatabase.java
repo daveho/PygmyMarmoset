@@ -35,6 +35,7 @@ public class CreateDatabase {
 		user.setLastName(lastName);
 		String salt = BCrypt.gensalt(12);
 		user.setPasswordHash(BCrypt.hashpw(passwd, salt));
+		user.setSuperUser(true);
 		db.createUser(user);
 	}
 	
