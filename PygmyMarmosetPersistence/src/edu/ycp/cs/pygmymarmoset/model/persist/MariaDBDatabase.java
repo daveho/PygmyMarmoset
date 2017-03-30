@@ -11,6 +11,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 
 public class MariaDBDatabase implements IDatabase {
@@ -42,6 +43,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean createCourse(Course course) {
 		return execute(new CreateCourse(course));
+	}
+	
+	@Override
+	public boolean createUser(User user) {
+		return execute(new CreateUser(user));
 	}
 
 	private Connection createConnection() {

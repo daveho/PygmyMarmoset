@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -115,7 +116,11 @@ public class Query {
 			if (field.isPrimaryKey()) {
 				continue; // skip id
 			}
-			Object value = BeanUtils.getProperty(modelObj, field.getPropertyName());
+			Object value = PropertyUtils.getProperty(modelObj, field.getPropertyName());
+			if (value instanceof Boolean) {
+				// Special case: convert Boolean to Integer
+				value = ((Boolean)value).booleanValue() ? 1 : 0;
+			}
 			stmt.setObject(index, value);
 			//System.out.println("Set field at index " + index);
 			index++;

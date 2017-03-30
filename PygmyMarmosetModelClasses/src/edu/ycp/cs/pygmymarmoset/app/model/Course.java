@@ -4,8 +4,11 @@ public class Course {
 	@PrimaryKey
 	private int id;
 	
-	@Desc(size=60)
+	@Desc(size=40)
 	private String name;
+	
+	@Desc(size=80)
+	private String title;
 	
 	@Desc(size=40)
 	private String term;
@@ -30,6 +33,14 @@ public class Course {
 		this.name = name;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	public String getTerm() {
 		return term;
 	}

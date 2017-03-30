@@ -7,4 +7,5 @@ public interface IDatabase {
 	public void createModelClassTable(Class<?> modelCls);
 	public User findUserForUsername(String username);
 	public boolean createCourse(Course course);
+	public boolean createUser(User user);
 }
