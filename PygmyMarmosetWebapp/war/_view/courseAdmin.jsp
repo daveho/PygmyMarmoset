@@ -4,7 +4,7 @@
 <%@ taglib uri="http://cs.ycp.edu/pygmymarmoset" prefix="pm" %>
 <html>
 	<head>
-		<pm:headStuff title="Admin Home"/>
+		<pm:headStuff title="Course admin"/>
 	</head>
 	
 	<body>
