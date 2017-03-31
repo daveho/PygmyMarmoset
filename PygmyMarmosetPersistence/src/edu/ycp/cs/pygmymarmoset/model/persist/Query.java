@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
+import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;

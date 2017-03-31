@@ -1,6 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
-public class ValidationException extends RuntimeException {
+public class ValidationException extends PygmyMarmosetException {
 	private static final long serialVersionUID = 1L;
 
 	public ValidationException(String msg) {

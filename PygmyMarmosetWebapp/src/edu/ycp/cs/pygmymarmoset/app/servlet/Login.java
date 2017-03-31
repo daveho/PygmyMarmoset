@@ -2,8 +2,6 @@ package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,31 +10,28 @@ import edu.ycp.cs.pygmymarmoset.app.model.ErrorMessage;
 import edu.ycp.cs.pygmymarmoset.app.model.LoginCredentials;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
-public class Login extends HttpServlet {
+public class Login extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+	public Login() {
+		super("/_view/login.jsp");
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Params params = new Params(req)
+	protected Params createParams(HttpServletRequest req) {
+		return new Params(req)
 				.add("creds", LoginCredentials.class);
-		params.unmarshal();
-		
+	}
+	
+	@Override
+	protected LogicOutcome doLogic(Params params, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		LoginCredentials creds = params.get("creds");
-		//System.out.printf("Login credentials: username=%s, password=%s\n", creds.getUsername(), creds.getPassword());
-		
 		LoginController controller = new LoginController();
 		User user = controller.execute(creds);
 		if (user != null) {
 			// Successful login.  Put user in session and redirect to
 			// goal URL (if there is one) or the index page.
-
 			req.getSession().setAttribute("user", user);
-			
 			String target;
 			if (creds.hasGoal()) {
 				target = creds.getGoal();
@@ -45,15 +40,15 @@ public class Login extends HttpServlet {
 			}
 			resp.sendRedirect(target);
 
-			return;
+			return LogicOutcome.REDIRECT;
 		}
-		
+
 		// Unsuccessful login, display error message
 		ErrorMessage errmsg = new ErrorMessage();
 		errmsg.setText("Unknown username/password, please try again");
 		req.setAttribute("errmsg", errmsg);
 		creds.setPassword(""); // assume password was entered incorrectly
 		req.setAttribute("creds", creds);
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		return LogicOutcome.STAY_ON_PAGE;
 	}
 }

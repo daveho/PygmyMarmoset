@@ -1,6 +1,5 @@
 package edu.ycp.cs.pygmymarmoset.app.tag;
 
-import java.beans.Introspector;
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
@@ -9,6 +8,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 
 public class InputTag extends SimpleTagSupport {
@@ -41,14 +42,25 @@ public class InputTag extends SimpleTagSupport {
 		
 		String escapedValue = "";
 		Object bean = TagUtil.getRequestAttribute(getJspContext(), obj);
-		if (bean != null) {
-			String propVal = BeanUtil.getProperty(bean, field);
-			if (propVal != null) {
-				escapedValue = StringEscapeUtils.escapeHtml4(propVal);
-			}
+		if (bean == null) {
+			throw new IllegalStateException("Missing model object: " + obj);
+		}
+		String propVal = BeanUtil.getProperty(bean, field);
+		if (propVal != null) {
+			escapedValue = StringEscapeUtils.escapeHtml4(propVal);
 		}
 		
 		String size = null;
+		if (type.equals("text") || type.equals("password")) {
+			Introspect<?> info = Introspect.getIntrospect(bean.getClass());
+			DBField dbfield = info.getFieldForPropertyName(field);
+			System.out.println("Found field " + field);
+			if (dbfield.getSize() > 0) {
+				// Set the field width as 3/4 of the maximum size
+				size = String.valueOf((dbfield.getSize() * 3) / 4);
+				System.out.println("Setting size to " + size);
+			}
+		}
 		
 		out.print("<input name=\"");
 		out.print(obj);
@@ -62,7 +74,13 @@ public class InputTag extends SimpleTagSupport {
 		}
 		out.print(" type=\"");
 		out.print(type);
-		out.print("\" value=\"");
+		out.print("\"");
+		if (size != null) {
+			out.print(" size=\"");
+			out.print(size);
+			out.print("\"");
+		}
+		out.print(" value=\"");
 		out.print(escapedValue);
 		out.print("\"></input>");
 	}

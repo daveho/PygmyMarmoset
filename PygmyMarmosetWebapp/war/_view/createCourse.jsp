@@ -18,6 +18,10 @@
 						<td><pm:input obj="course" field="name"/></td>
 					</tr>
 					<tr>
+						<td class="formlabel">Course title:</td>
+						<td><pm:input obj="course" field="title"/></td>
+					</tr>
+					<tr>
 						<td class="formlabel">Term:</td>
 						<td><pm:input obj="course" field="term"/></td>
 					</tr>
@@ -31,7 +35,7 @@
 				<span class="resultmsg">${resultmsg}</span>
 			</c:if>
 			<c:if test="${not empty errmsg}">
-				<span class="errmsg">${errmsg}</span>
+				<span class="errmsg">${errmsg.text}</span>
 			</c:if>
 		</div>
 	</body>

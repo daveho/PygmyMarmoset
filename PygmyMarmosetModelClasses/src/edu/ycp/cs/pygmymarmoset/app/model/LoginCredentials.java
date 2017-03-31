@@ -1,7 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class LoginCredentials {
+	@Desc(size=30)
 	private String username;
+	@Desc(size=30)
 	private String password;
 	private String goal;
 	

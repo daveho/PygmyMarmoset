@@ -1,4 +1,4 @@
-package edu.ycp.cs.pygmymarmoset.model.persist;
+package edu.ycp.cs.pygmymarmoset.app.model;
 
 public class PersistenceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

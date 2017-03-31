@@ -53,6 +53,12 @@ public class Introspect<E> {
 						dbField.setSize(desc.size());
 						dbField.setFixed(desc.fixed());
 						dbField.setAllowNull(desc.allowNull());
+						System.out.printf("Found @Desc for %s.%s: size=%d, fixed=%s, allowNull=%s\n",
+								name,
+								propertyDesc.getName(),
+								desc.size(),
+								desc.fixed(),
+								desc.allowNull());
 					}
 					PrimaryKey pk = f.getAnnotation(PrimaryKey.class);
 					if (pk != null) {
@@ -103,6 +109,15 @@ public class Introspect<E> {
 		} else {
 			return name + "s";
 		}
+	}
+
+	public DBField getFieldForPropertyName(String propertyName) {
+		for (DBField field : fields) {
+			if (field.getPropertyName().equals(propertyName)) {
+				return field;
+			}
+		}
+		throw new IllegalArgumentException("Model class " + cls.getSimpleName() +  "has no field " + propertyName);
 	}
 	
 	public static void main(String[] args) throws Exception {

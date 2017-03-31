@@ -2,40 +2,37 @@ package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.CreateCourseController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
-import edu.ycp.cs.pygmymarmoset.app.model.ValidationException;
 
-public class CreateCourse extends HttpServlet {
+public class CreateCourse extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/createCourse.jsp").forward(req, resp);
+	
+	public CreateCourse() {
+		super("/_view/createCourse.jsp");
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Params params = new Params(req)
+	protected Params createParams(HttpServletRequest req) {
+		return new Params(req)
 				.add("course", Course.class);
-		params.unmarshal();
-		
+	}
+	
+	@Override
+	protected LogicOutcome doLogic(Params params, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Course course = params.get("course");
+		CreateCourseController controller = new CreateCourseController();
+		controller.execute(course);
+		// Success!
+		req.setAttribute("resultmsg", "Course created successfully");
 		
-		try {
-			CreateCourseController controller = new CreateCourseController();
-			controller.execute(course);
-			// Success!
-			req.setAttribute("resultmsg", "Course created successfully");
-		} catch (ValidationException e) {
-			// Validation error
-			req.setAttribute("errmsg", "Course creation failed: " + e.getMessage());
-		}
-		req.getRequestDispatcher("/_view/createCourse.jsp").forward(req, resp);
+		// Put an empty Course object in the request so that the form
+		// fields will be blanked out
+		req.setAttribute("course", new Course());
+		
+		return LogicOutcome.STAY_ON_PAGE;
 	}
 }
