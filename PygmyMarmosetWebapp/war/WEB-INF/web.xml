@@ -31,6 +31,10 @@
 		<servlet-name>CreateCourse</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.CreateCourse</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CreateUser</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.CreateUser</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
 	<servlet-mapping>
@@ -56,6 +60,10 @@
 	<servlet-mapping>
 		<servlet-name>CreateCourse</servlet-name>
 		<url-pattern>/a/createCourse</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CreateUser</servlet-name>
+		<url-pattern>/a/createUser</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters and filter mappings -->

@@ -88,6 +88,8 @@ public class MariaDBDatabase implements IDatabase {
 				if (isDeadlock(e)) {
 					logger.warn("Deadlock detected, retrying transaction " + txn.getName(), e);
 					attempts++;
+				} else if (e.getSQLState().equals("23000")) {
+					throw new PersistenceException("Integrity constraint violation (duplicate field value detected)");
 				} else {
 					throw new PersistenceException("Transaction " + txn.getName() + " failed", e);
 				}
@@ -99,7 +101,7 @@ public class MariaDBDatabase implements IDatabase {
 
 	private boolean isDeadlock(SQLException e) {
 		String sqlState = e.getSQLState();
-		return sqlState != null && (sqlState.equals("40001") || sqlState.equals("41000") || sqlState.equals("23000"));
+		return sqlState != null && (sqlState.equals("40001") || sqlState.equals("41000"));
 	}
 
 }

@@ -36,15 +36,27 @@ public class InputTag extends SimpleTagSupport {
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		JspWriter out = getJspContext().getOut();
-		
-		String type = this.type != null ? this.type : "text";
-		
-		String escapedValue = "";
 		Object bean = TagUtil.getRequestAttribute(getJspContext(), obj);
 		if (bean == null) {
 			throw new IllegalStateException("Missing model object: " + obj);
 		}
+
+		Introspect<?> info = Introspect.getIntrospect(bean.getClass());
+		DBField dbfield = info.getFieldForPropertyName(field);
+		JspWriter out = getJspContext().getOut();
+		
+		String type;
+		if (this.type != null) {
+			type = this.type;
+		} else {
+			if (dbfield.isBoolean()) {
+				type = "checkbox";
+			} else {
+				type = "text";
+			}
+		}
+		
+		String escapedValue = "";
 		String propVal = BeanUtil.getProperty(bean, field);
 		if (propVal != null) {
 			escapedValue = StringEscapeUtils.escapeHtml4(propVal);
@@ -52,8 +64,6 @@ public class InputTag extends SimpleTagSupport {
 		
 		String size = null;
 		if (type.equals("text") || type.equals("password")) {
-			Introspect<?> info = Introspect.getIntrospect(bean.getClass());
-			DBField dbfield = info.getFieldForPropertyName(field);
 			//System.out.println("Found field " + field);
 			if (dbfield.getSize() > 0) {
 				// Set the field width as 2/3 of the maximum size
@@ -62,10 +72,10 @@ public class InputTag extends SimpleTagSupport {
 			}
 		}
 		
+		String inputName = obj + "." + field;
+		
 		out.print("<input name=\"");
-		out.print(obj);
-		out.print(".");
-		out.print(field);
+		out.print(inputName);
 		out.print("\"");
 		if (id != null) {
 			out.print(" id=\"");
@@ -81,7 +91,23 @@ public class InputTag extends SimpleTagSupport {
 			out.print("\"");
 		}
 		out.print(" value=\"");
-		out.print(escapedValue);
-		out.print("\"></input>");
+		if (type.equals("checkbox")) {
+			// Checkboxes are weird.
+			// The value is supposed to distinguish them from
+			// among a group of related checkboxes with the same name,
+			// which is not at all how we want to use them.
+			// So the value field is basically meaningless.
+			out.print(inputName);
+		} else {
+			out.print(escapedValue);
+		}
+		out.print("\"");
+		if (type.equals("checkbox")) {
+			if (propVal.equals("true")) {
+				out.print(" checked");
+			}
+		}
+		out.print(">");
+		out.print("</input>");
 	}
 }

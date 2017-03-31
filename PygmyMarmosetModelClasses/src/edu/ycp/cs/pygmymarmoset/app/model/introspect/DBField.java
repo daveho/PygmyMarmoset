@@ -138,4 +138,8 @@ public class DBField {
 			return sqlType;
 		}
 	}
+
+	public boolean isBoolean() {
+		return javaType == Boolean.class || javaType == Boolean.TYPE;
+	}
 }

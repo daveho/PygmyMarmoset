@@ -6,9 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 
 public class Params {
@@ -56,18 +59,37 @@ public class Params {
 			String name = entry.getKey();
 			Object obj = entry.getValue();
 			
-			for (String propertyName : BeanUtil.getPropertyNames(obj)) {
+			Introspect<?> info = Introspect.getIntrospect(obj.getClass());
+			
+			//for (String propertyName : BeanUtil.getPropertyNames(obj)) {
+			for (DBField f : info.getFields()) {
+				String propertyName = f.getPropertyName();
 				String paramName = name + "." + propertyName;
 				String value = req.getParameter(paramName);
-				if (value != null) {
-					value = value.trim();
-					if (!value.equals("")) {
-						try {
-							BeanUtils.setProperty(obj, propertyName, value);
-						} catch (Exception e) {
-							logger.warn("Exception unmarshaling parameter " + paramName, e);
+				
+				try {
+					if (f.isBoolean()) {
+						// Unmarshal the data from a checkbox.
+						// This is a case where if the named parameter
+						// value is present at all, it means that the checkbox
+						// was checked (true), and if the value is not present,
+						// then the checkbox was not checked (false).
+						boolean isChecked = (value != null && !value.trim().equals(""));
+						//System.out.println(paramName + "=" + isChecked);
+						PropertyUtils.setProperty(obj, propertyName, isChecked);
+					} else {
+						// Other types of fields can be unmarshaled from the
+						// value of the parameter.
+						if (value != null) {
+							value = value.trim();
+							if (!value.equals("")) {
+								//System.out.println(paramName + "=" + value);
+								BeanUtils.setProperty(obj, propertyName, value);
+							}
 						}
 					}
+				} catch (Exception e) {
+					logger.warn("Exception unmarshaling parameter " + paramName, e);
 				}
 			}
 		}
