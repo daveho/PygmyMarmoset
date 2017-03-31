@@ -54,11 +54,11 @@ public class InputTag extends SimpleTagSupport {
 		if (type.equals("text") || type.equals("password")) {
 			Introspect<?> info = Introspect.getIntrospect(bean.getClass());
 			DBField dbfield = info.getFieldForPropertyName(field);
-			System.out.println("Found field " + field);
+			//System.out.println("Found field " + field);
 			if (dbfield.getSize() > 0) {
-				// Set the field width as 3/4 of the maximum size
-				size = String.valueOf((dbfield.getSize() * 3) / 4);
-				System.out.println("Setting size to " + size);
+				// Set the field width as 2/3 of the maximum size
+				size = String.valueOf((dbfield.getSize() * 2) / 3);
+				//System.out.println("Setting size to " + size);
 			}
 		}
 		
