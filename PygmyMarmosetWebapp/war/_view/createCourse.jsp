@@ -31,12 +31,7 @@
 					</tr>
 				</table>
 			</form>
-			<c:if test="${not empty resultmsg}">
-				<span class="resultmsg">${resultmsg}</span>
-			</c:if>
-			<c:if test="${not empty errmsg}">
-				<span class="errmsg">${errmsg.text}</span>
-			</c:if>
+			<pm:notification/>			
 		</div>
 	</body>
 </html>

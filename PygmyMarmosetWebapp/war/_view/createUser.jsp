@@ -10,7 +10,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
-			<h1>Create course</h1>
+			<h1>Create user</h1>
 			<form action="${pageContext.servletContext.contextPath}/a/createUser" method="post">
 				<table class="formtab">
 					<tr>
@@ -39,12 +39,7 @@
 					</tr>
 				</table>
 			</form>
-			<c:if test="${not empty resultmsg}">
-				<span class="resultmsg">${resultmsg}</span>
-			</c:if>
-			<c:if test="${not empty errmsg}">
-				<span class="errmsg">${errmsg.text}</span>
-			</c:if>
+			<pm:notification/>			
 		</div>
 	</body>
 </html>

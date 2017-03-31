@@ -33,10 +33,8 @@
 				</table>
 				<input type="hidden" name="creds.goal" value="${fn:escapeXml(creds.goal)}"></input>
 			</form>
-			
-			<c:if test="${not empty errmsg}">
-				<span class="errmsg">${errmsg.text}</span>
-			</c:if>
+
+			<pm:notification/>			
 		</div>
 	</body>
 </html>

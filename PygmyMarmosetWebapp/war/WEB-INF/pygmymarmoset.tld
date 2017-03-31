@@ -42,4 +42,8 @@
 		<name>header</name>
 		<path>/WEB-INF/tags/header.tag</path>
 	</tag-file>
+	<tag-file>
+		<name>notification</name>
+		<path>/WEB-INF/tags/notification.tag</path>
+	</tag-file>
 </taglib>
