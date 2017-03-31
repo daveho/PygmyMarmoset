@@ -1,5 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.app.tag;
 
+import java.beans.Introspector;
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
@@ -46,6 +47,8 @@ public class InputTag extends SimpleTagSupport {
 				escapedValue = StringEscapeUtils.escapeHtml4(propVal);
 			}
 		}
+		
+		String size = null;
 		
 		out.print("<input name=\"");
 		out.print(obj);

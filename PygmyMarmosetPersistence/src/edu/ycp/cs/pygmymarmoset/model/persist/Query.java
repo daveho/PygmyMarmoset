@@ -7,6 +7,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 
 public class Query {
 	public static<E> String getCreateTableStatement(Class<E> modelCls) {

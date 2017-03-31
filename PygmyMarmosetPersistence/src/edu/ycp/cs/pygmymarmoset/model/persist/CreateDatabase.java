@@ -8,6 +8,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 
 public class CreateDatabase {
     public static void main(String[] args) throws Exception {

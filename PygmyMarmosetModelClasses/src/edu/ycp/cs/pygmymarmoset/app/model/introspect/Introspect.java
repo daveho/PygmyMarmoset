@@ -1,4 +1,4 @@
-package edu.ycp.cs.pygmymarmoset.model.persist;
+package edu.ycp.cs.pygmymarmoset.app.model.introspect;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
