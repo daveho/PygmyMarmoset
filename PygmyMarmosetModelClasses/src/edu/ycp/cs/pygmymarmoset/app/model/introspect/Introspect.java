@@ -19,6 +19,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.PrimaryKey;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.Unique;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class Introspect<E> {
@@ -53,16 +54,23 @@ public class Introspect<E> {
 						dbField.setSize(desc.size());
 						dbField.setFixed(desc.fixed());
 						dbField.setAllowNull(desc.allowNull());
+						/*
 						System.out.printf("Found @Desc for %s.%s: size=%d, fixed=%s, allowNull=%s\n",
 								name,
 								propertyDesc.getName(),
 								desc.size(),
 								desc.fixed(),
 								desc.allowNull());
+						*/
 					}
 					PrimaryKey pk = f.getAnnotation(PrimaryKey.class);
 					if (pk != null) {
 						dbField.setPrimaryKey(true);
+					}
+					Unique u = f.getAnnotation(Unique.class);
+					if (u != null) {
+						dbField.setUnique(true);
+						dbField.setUniqueWith(u.with());
 					}
 				}
 				fields.add(dbField);
@@ -117,7 +125,7 @@ public class Introspect<E> {
 				return field;
 			}
 		}
-		throw new IllegalArgumentException("Model class " + cls.getSimpleName() +  "has no field " + propertyName);
+		throw new IllegalArgumentException("Model class " + cls.getSimpleName() +  " has no field " + propertyName);
 	}
 	
 	public static void main(String[] args) throws Exception {

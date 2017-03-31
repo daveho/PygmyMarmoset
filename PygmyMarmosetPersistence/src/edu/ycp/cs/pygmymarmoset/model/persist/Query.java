@@ -2,6 +2,8 @@ package edu.ycp.cs.pygmymarmoset.model.persist;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -43,6 +45,24 @@ public class Query {
 			buf.append(", primary key (");
 			buf.append(pk.getName());
 			buf.append(")");
+		}
+		
+		// Create other keys
+		for (DBField f : info.getFields()) {
+			if (f.isUnique()) {
+				List<String> combo = new ArrayList<>();
+				combo.add(f.getName());
+				if (!f.getUniqueWith().equals("")) {
+					for (String other : f.getUniqueWith().split(",")) {
+						DBField otherField = info.getFieldForPropertyName(other.trim());
+						combo.add(otherField.getName());
+					}
+				}
+				buf.append(", unique key (");
+				buf.append(String.join(", ", combo));
+				buf.append(")");
+			}
+			// TODO: allow non-unique index
 		}
 		
 		buf.append(")");

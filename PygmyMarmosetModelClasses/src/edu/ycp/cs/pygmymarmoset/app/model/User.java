@@ -4,6 +4,7 @@ public class User {
 	@PrimaryKey
 	private int id;
 
+	@Unique
 	@Desc(size=40)
 	private String username;
 	

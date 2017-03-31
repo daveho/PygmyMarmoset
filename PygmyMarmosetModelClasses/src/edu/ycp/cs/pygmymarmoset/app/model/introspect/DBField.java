@@ -12,6 +12,8 @@ public class DBField {
 	private Class<?> javaType;
 	private String propertyName;
 	private int index;
+	private boolean unique;
+	private String uniqueWith;
 	
 	public DBField() {
 		
@@ -79,6 +81,22 @@ public class DBField {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public boolean isUnique() {
+		return unique;
+	}
+
+	public void setUnique(boolean unique) {
+		this.unique = unique;
+	}
+
+	public String getUniqueWith() {
+		return uniqueWith;
+	}
+
+	public void setUniqueWith(String uniqueWith) {
+		this.uniqueWith = uniqueWith;
 	}
 
 
