@@ -15,6 +15,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 
 public class MariaDBDatabase implements IDatabase {
@@ -56,6 +57,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean createTerm(Term term) {
 		return execute(new InsertModelObject<Term>(term));
+	}
+	
+	@Override
+	public List<Term> getAllTerms() {
+		return execute(new GetAllTerms());
 	}
 	
 	@Override

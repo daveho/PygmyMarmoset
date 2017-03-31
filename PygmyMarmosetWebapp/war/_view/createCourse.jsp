@@ -23,7 +23,11 @@
 					</tr>
 					<tr>
 						<td class="formlabel">Term:</td>
-						<td><pm:input obj="course" field="term"/></td>
+						<td><pm:chooseTerm obj="course" field="termId"/></td>
+					</tr>
+					<tr>
+						<td class="formlabel">Year:</td>
+						<td><pm:input obj="course" field="year"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel"></td>

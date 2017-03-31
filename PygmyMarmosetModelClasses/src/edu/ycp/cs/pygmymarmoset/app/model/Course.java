@@ -9,9 +9,11 @@ public class Course {
 	
 	@Desc(size=80)
 	private String title;
+
+	// TODO: foreign key annotation
+	private int termId;
 	
-	@Desc(size=40)
-	private String term;
+	private int year;
 	
 	public Course() {
 		
@@ -40,12 +42,20 @@ public class Course {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	public String getTerm() {
-		return term;
+
+	public int getTermId() {
+		return termId;
 	}
 
-	public void setTerm(String term) {
-		this.term = term;
+	public void setTermId(int termId) {
+		this.termId = termId;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 }

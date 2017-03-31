@@ -15,10 +15,6 @@ public class CreateCourseController {
 			// FIXME: should communicate which field failed to validate
 			throw new ValidationException("Missing course name");
 		}
-		if (!ModelObjectUtil.isSet(course.getTerm())) {
-			// FIXME: should communicate which field failed to validate
-			throw new ValidationException("Missing course term");
-		}
 
 		return db.createCourse(course);
 	}

@@ -13,4 +13,5 @@ public interface IDatabase {
 	public boolean createUser(User user);
 	public List<Course> getAllCourses();
 	public boolean createTerm(Term term);
+	public List<Term> getAllTerms();
 }

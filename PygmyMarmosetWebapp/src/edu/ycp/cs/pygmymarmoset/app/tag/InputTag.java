@@ -4,27 +4,15 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
-import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 
-public class InputTag extends SimpleTagSupport {
-	private String obj;
-	private String field;
+public class InputTag extends BeanTag {
 	private String type;
 	private String id;
-	
-	public void setObj(String obj) {
-		this.obj = obj;
-	}
-	
-	public void setField(String field) {
-		this.field = field;
-	}
 	
 	public void setType(String type) {
 		this.type = type;
@@ -36,14 +24,14 @@ public class InputTag extends SimpleTagSupport {
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		Object bean = TagUtil.getRequestAttribute(getJspContext(), obj);
-		if (bean == null) {
-			throw new IllegalStateException("Missing model object: " + obj);
-		}
-
-		Introspect<?> info = Introspect.getIntrospect(bean.getClass());
-		DBField dbfield = info.getFieldForPropertyName(field);
+		super.doTag();
+		
 		JspWriter out = getJspContext().getOut();
+		
+		String obj = getObj();
+		String field = getField();
+		DBField dbfield = getDbfield();
+		Object bean = getBean();
 		
 		String type;
 		if (this.type != null) {

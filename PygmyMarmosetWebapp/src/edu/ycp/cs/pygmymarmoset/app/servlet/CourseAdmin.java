@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.ListAllCoursesController;
+import edu.ycp.cs.pygmymarmoset.app.controller.ListAllTermsController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
+import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
 public class CourseAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +23,10 @@ public class CourseAdmin extends HttpServlet {
 			ListAllCoursesController controller = new ListAllCoursesController();
 			List<Course> courses = controller.execute();
 			req.setAttribute("courses", courses);
+			
+			ListAllTermsController termsController = new ListAllTermsController();
+			List<Term> terms = termsController.getAllTerms();
+			req.setAttribute("terms", terms);
 		} catch (PygmyMarmosetException e) {
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}

@@ -34,6 +34,34 @@
 		</attribute>
 	</tag>
 	
+	<tag>
+		<name>chooseTerm</name>
+		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.ChooseTermTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>obj</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>field</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- displays term/year for course -->
+	<tag>
+		<name>displayTerm</name>
+		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.DisplayTermTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>course</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
 	<tag-file>
 		<name>headStuff</name>
 		<path>/WEB-INF/tags/headStuff.tag</path>

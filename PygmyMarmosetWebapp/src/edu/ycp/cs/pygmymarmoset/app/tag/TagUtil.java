@@ -5,9 +5,10 @@ import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.PageContext;
 
 public class TagUtil {
-	public static Object getRequestAttribute(JspContext jspCtx, String attrName) {
+	@SuppressWarnings("unchecked")
+	public static<E> E getRequestAttribute(JspContext jspCtx, String attrName) {
 		PageContext pageCtx = (PageContext) jspCtx;
 		HttpServletRequest req = (HttpServletRequest) pageCtx.getRequest();
-		return req.getAttribute(attrName);
+		return (E) req.getAttribute(attrName);
 	}
 }
