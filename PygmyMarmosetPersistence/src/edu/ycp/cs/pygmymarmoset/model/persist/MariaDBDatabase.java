@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
+import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
-import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
-import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -45,12 +45,17 @@ public class MariaDBDatabase implements IDatabase {
 	
 	@Override
 	public boolean createCourse(Course course) {
-		return execute(new CreateCourse(course));
+		return execute(new InsertModelObject<Course>(course));
 	}
 	
 	@Override
 	public boolean createUser(User user) {
-		return execute(new CreateUser(user));
+		return execute(new InsertModelObject<User>(user));
+	}
+	
+	@Override
+	public boolean createTerm(Term term) {
+		return execute(new InsertModelObject<Term>(term));
 	}
 	
 	@Override

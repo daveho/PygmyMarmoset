@@ -7,6 +7,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 
@@ -29,6 +30,7 @@ public class CreateDatabase {
 		createTable(db, Role.class);
 		createTable(db, Submission.class);
 		createTable(db, User.class);
+		createTable(db, Term.class);
 		
 		User user = new User();
 		user.setUsername(username);
@@ -38,14 +40,26 @@ public class CreateDatabase {
 		user.setPasswordHash(BCrypt.hashpw(passwd, salt));
 		user.setSuperUser(true);
 		db.createUser(user);
+		
+		// FIXME: shouldn't hard code these
+		createTerm(db, "Spring", 1);
+		createTerm(db, "Summer", 2);
+		createTerm(db, "Fall", 3);
 	}
-	
+
 	private static<E> void createTable(IDatabase db, Class<E> modelCls) {
 		Introspect<E> info = Introspect.getIntrospect(modelCls);
 		System.out.print("Creating table " + info.getTableName() + "...");
 		System.out.flush();
 		db.createModelClassTable(modelCls);
 		System.out.println("done");
+	}
+	
+	private static void createTerm(IDatabase db, String name, int seq) {
+		Term term = new Term();
+		term.setName(name);
+		term.setSeq(seq);
+		db.createTerm(term);
 	}
 
 	/**
