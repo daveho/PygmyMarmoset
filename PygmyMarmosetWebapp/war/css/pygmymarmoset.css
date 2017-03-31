@@ -104,3 +104,21 @@ table.formtab tr td {
 .navgroup ul {
 	list-style: none;
 }
+
+.navgroup ul li {
+	margin: 1em 0;
+}
+
+a.navlink {
+	padding: .25em .5em;
+	border: 1px solid #d5ba53;
+	border-radius: 1em;
+	font-size: 120%;
+	text-decoration: none;
+	color: black;
+	background: white;
+}
+
+a.navlink:hover {
+	background: #d5ba53;
+}
