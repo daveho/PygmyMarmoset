@@ -122,3 +122,38 @@ a.navlink {
 a.navlink:hover {
 	background: #d5ba53;
 }
+
+table.objtable {
+	border-collapse: collapse;
+	margin-left: 4em;
+}
+
+table.objtable tr th {
+	text-align: left;
+}
+
+table.objtable tr:first-of-type {
+	border-top: 2px solid #444;
+	border-bottom: 2px solid #444;
+}
+
+table.objtable tr:last-of-type {
+	border-bottom: 2px solid #444;
+}
+
+table.objtable tr th, table.objtable tr td {
+	padding: 10px 20px;
+}
+
+table.objtable tr:nth-child(even) {
+	background: #ddd;
+}
+
+table.objtable tr td a {
+	color: black;
+	text-decoration: none;
+}
+
+table.objtable tr td a:hover {
+	text-decoration: underline;
+}

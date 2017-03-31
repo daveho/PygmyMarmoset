@@ -3,6 +3,7 @@ package edu.ycp.cs.pygmymarmoset.model.persist;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -49,6 +51,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean createUser(User user) {
 		return execute(new CreateUser(user));
+	}
+	
+	@Override
+	public List<Course> getAllCourses() {
+		return execute(new GetAllCourses());
 	}
 
 	private Connection createConnection() {
