@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs.pygmymarmoset.app.controller.CreateUserController;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
-public class CreateUser extends AbstractFormServlet {
+public class AdminCreateUser extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CreateUser() {
-		super("/_view/createUser.jsp");
+	public AdminCreateUser() {
+		super("/_view/adminCreateUser.jsp");
 	}
 
 	@Override

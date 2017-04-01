@@ -14,7 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
-public class Courses extends HttpServlet {
+public class AdminCourses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -30,6 +30,6 @@ public class Courses extends HttpServlet {
 		} catch (PygmyMarmosetException e) {
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}
-		req.getRequestDispatcher("/_view/courseAdmin.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/adminCourses.jsp").forward(req, resp);
 	}
 }

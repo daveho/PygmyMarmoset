@@ -9,11 +9,11 @@ import edu.ycp.cs.pygmymarmoset.app.controller.CreateCourseController;
 import edu.ycp.cs.pygmymarmoset.app.controller.ListAllTermsController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 
-public class CreateCourse extends AbstractFormServlet {
+public class AdminCreateCourse extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public CreateCourse() {
-		super("/_view/createCourse.jsp");
+	public AdminCreateCourse() {
+		super("/_view/adminCreateCourse.jsp");
 	}
 	
 	@Override
