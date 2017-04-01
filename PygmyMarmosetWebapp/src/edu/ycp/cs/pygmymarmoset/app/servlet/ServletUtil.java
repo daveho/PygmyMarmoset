@@ -16,4 +16,25 @@ public class ServletUtil {
 		req.setAttribute("errmsg", errmsg);
 		req.getRequestDispatcher("/_view/forbidden.jsp").forward(req, resp);
 	}
+	
+	public static Object[] parsePathInfo(String spec, String pathInfo) throws ServletException {
+		Object[] result = new Object[spec.length()];
+		if (pathInfo.startsWith("/")) {
+			pathInfo = pathInfo.substring(1);
+		}
+		String[] items = pathInfo.split("/");
+		if (items.length < spec.length()) {
+			throw new ServletException("Invalid path info " + pathInfo);
+		}
+		for (int i = 0; i < spec.length(); i++) {
+			switch (spec.charAt(i)) {
+			case 'i':
+				result[i] = Integer.parseInt(items[i]);
+				break;
+			default:
+				throw new ServletException("Illegal spec field: " + spec.charAt(i));
+			}
+		}
+		return result;
+	}
 }

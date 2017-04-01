@@ -3,6 +3,7 @@ package edu.ycp.cs.pygmymarmoset.model.persist;
 import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -14,4 +15,5 @@ public interface IDatabase {
 	public List<Course> getAllCourses();
 	public boolean createTerm(Term term);
 	public List<Term> getAllTerms();
+	public Pair<Course,Term> findCourseForCourseId(int courseId);
 }

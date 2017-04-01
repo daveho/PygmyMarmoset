@@ -17,7 +17,7 @@
 				</tr>
 				<c:forEach items="${courses}" var="c">
 					<tr>
-						<td><a href="${pageContext.servletContext.contextPath}/a/course/${c.id}">${c.name}: ${c.title}</a></td>
+						<td><a href="${pageContext.servletContext.contextPath}/i/course/${c.id}">${c.name}: ${c.title}</a></td>
 						<td><pm:displayTerm course="${c}"/></td>
 					</tr>
 				</c:forEach>

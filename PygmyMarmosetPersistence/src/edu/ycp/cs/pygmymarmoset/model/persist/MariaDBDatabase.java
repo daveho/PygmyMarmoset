@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
@@ -67,6 +69,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Course> getAllCourses() {
 		return execute(new GetAllCourses());
+	}
+	
+	@Override
+	public Pair<Course,Term> findCourseForCourseId(int courseId) {
+		return execute(new FindCourseForCourseId(courseId));
 	}
 
 	private Connection createConnection() {

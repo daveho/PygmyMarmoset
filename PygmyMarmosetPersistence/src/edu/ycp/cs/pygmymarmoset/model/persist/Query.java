@@ -105,21 +105,27 @@ public class Query {
 		System.out.println(getCreateTableStatement(User.class));
 	}
 
-	public static<E> void loadFields(E modelObj, ResultSet resultSet) {
+	public static<E> int loadFields(E modelObj, ResultSet resultSet) {
+		return loadFields(modelObj, resultSet, 1);
+	}
+	
+	public static<E> int loadFields(E modelObj, ResultSet resultSet, int index) {
 		try {
-			doLoadFields(modelObj, resultSet);
+			return doLoadFields(modelObj, resultSet, index);
 		} catch (Exception e) {
 			throw new PersistenceException("Could not load model object fields from result set", e);
 		}
 	}
 	
-	private static<E> void doLoadFields(E modelObj, ResultSet resultSet) throws Exception {
+	private static<E> int doLoadFields(E modelObj, ResultSet resultSet, int index) throws Exception {
 		@SuppressWarnings("unchecked")
 		Class<E> cls = (Class<E>) modelObj.getClass();
 		Introspect<E> info = Introspect.getIntrospect(cls);
 		for (DBField field : info.getFields()) {
-			BeanUtils.setProperty(modelObj, field.getPropertyName(), resultSet.getObject(field.getIndex()));
+			BeanUtils.setProperty(modelObj, field.getPropertyName(), resultSet.getObject(index));
+			index++;
 		}
+		return index;
 	}
 
 	public static<E> void storeFieldsNoId(E modelObj, PreparedStatement stmt) {
