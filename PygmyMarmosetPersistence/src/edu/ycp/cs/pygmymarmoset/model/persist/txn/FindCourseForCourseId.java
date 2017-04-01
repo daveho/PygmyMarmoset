@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
-import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
