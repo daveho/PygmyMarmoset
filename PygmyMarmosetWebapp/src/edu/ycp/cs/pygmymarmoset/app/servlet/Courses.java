@@ -14,7 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
-public class CourseAdmin extends HttpServlet {
+public class Courses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

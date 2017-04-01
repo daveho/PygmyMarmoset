@@ -15,7 +15,7 @@
 				<ul>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/a/createCourse">Create course</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/a/createUser">Create user</a></li>
-				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/a/courseAdmin">List courses</a></li>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/a/courses">List courses</a></li>
 				</ul>
 			</div>
 		</div>
