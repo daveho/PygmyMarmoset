@@ -12,7 +12,16 @@
 		<pm:header/>
 		<div id="content">
 			<h1>${courseDisplayName}</h1>
-			<p>TODO: stuff</p>
+			<h2>Projects</h2>
+			<p>TODO: projects</p>
+			<h2>Members</h2>
+			<p>TODO: members</p>
+			<h2>Admin</h2>
+			<div class="navgroup">
+				<ul>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/registerStudent">Register student</a></li>
+				</ul>
+			</div>
 		</div>
 		<pm:notification/>
 	</body>
