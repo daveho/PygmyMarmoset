@@ -5,23 +5,13 @@
 <c:set var="courseDisplayName" value="${course.name}, ${term.name} ${course.year}"/>
 <html>
 	<head>
-		<pm:headStuff title="${courseDisplayName}"/>
+		<pm:headStuff title="${courseDisplayName}: Register Student"/>
 	</head>
 	
 	<body>
 		<pm:header/>
 		<div id="content">
-			<h1>${courseDisplayName}</h1>
-			<h2>Projects</h2>
-			<p>TODO: projects</p>
-			<h2>Members</h2>
-			<p>TODO: members</p>
-			<h2>Admin</h2>
-			<div class="navgroup">
-				<ul>
-				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/course/regStudent/${course.id}">Register student</a></li>
-				</ul>
-			</div>
+			<p>TODO: form to register student</p>
 			<pm:notification/>
 		</div>
 	</body>

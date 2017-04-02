@@ -43,6 +43,10 @@
 		<servlet-name>InstCourse</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstCourse</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>InstRegisterStudent</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstRegisterStudent</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
 	<servlet-mapping>
@@ -79,7 +83,11 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InstCourse</servlet-name>
-		<url-pattern>/i/course/*</url-pattern>
+		<url-pattern>/i/course/index/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InstRegisterStudent</servlet-name>
+		<url-pattern>/i/course/regStudent/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters and filter mappings -->
@@ -90,6 +98,10 @@
 	<filter>
 		<filter-name>RequireSuperUser</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireSuperUser</filter-class>
+	</filter>
+	<filter>
+		<filter-name>LoadCourse</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.LoadCourse</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RequireLogin</filter-name>
@@ -103,6 +115,10 @@
 	<filter-mapping>
 		<filter-name>RequireSuperUser</filter-name>
 		<url-pattern>/i/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoadCourse</filter-name>
+		<url-pattern>/i/course/*</url-pattern>
 	</filter-mapping>
 	
 	<!--
