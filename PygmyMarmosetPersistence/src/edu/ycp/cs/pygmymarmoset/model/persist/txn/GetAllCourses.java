@@ -38,9 +38,6 @@ public class GetAllCourses extends DatabaseRunnable<List<Pair<Course,Term>>> {
 			Query.loadFields(term, resultSet, index);
 			courses.add(new Pair<>(course, term));
 		}
-		System.out.println("Retrieved " + courses.size() + " courses/terms");
-		
-		// TODO: sort in reverse chronological order by term/year
 		
 		return courses;
 	}
