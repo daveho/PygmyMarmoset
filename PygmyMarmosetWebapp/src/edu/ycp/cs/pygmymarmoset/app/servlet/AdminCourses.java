@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.ListAllCoursesController;
-import edu.ycp.cs.pygmymarmoset.app.controller.ListAllTermsController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
@@ -21,12 +21,8 @@ public class AdminCourses extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			ListAllCoursesController controller = new ListAllCoursesController();
-			List<Course> courses = controller.execute();
-			req.setAttribute("courses", courses);
-			
-			ListAllTermsController termsController = new ListAllTermsController();
-			List<Term> terms = termsController.getAllTerms();
-			req.setAttribute("terms", terms);
+			List<Pair<Course,Term>> courses = controller.execute();
+			req.setAttribute("coursesAndTerms", courses);
 		} catch (PygmyMarmosetException e) {
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}

@@ -67,7 +67,7 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public List<Course> getAllCourses() {
+	public List<Pair<Course,Term>> getAllCourses() {
 		return execute(new GetAllCourses());
 	}
 	

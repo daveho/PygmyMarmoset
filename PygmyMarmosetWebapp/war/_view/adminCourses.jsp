@@ -6,7 +6,6 @@
 	<head>
 		<pm:headStuff title="Course admin"/>
 	</head>
-	
 	<body>
 		<pm:header/>
 		<div id="content">
@@ -15,10 +14,11 @@
 				<tr>
 					<th>Course</th><th>Term</th>
 				</tr>
-				<c:forEach items="${courses}" var="c">
+				<!-- The items in ${coursesAndTerms} are Pair<Course,Term> -->
+				<c:forEach items="${coursesAndTerms}" var="ct">
 					<tr>
-						<td><a href="${pageContext.servletContext.contextPath}/i/course/${c.id}">${c.name}: ${c.title}</a></td>
-						<td><pm:displayTerm course="${c}"/></td>
+						<td><a href="${pageContext.servletContext.contextPath}/i/course/${ct.first.id}">${ct.first.name}: ${ct.first.title}</a></td>
+						<td>${ct.second.name} ${ct.first.year}</td>
 					</tr>
 				</c:forEach>
 			</table>

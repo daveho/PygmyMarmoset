@@ -8,24 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
+import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
-public class GetAllCourses extends DatabaseRunnable<List<Course>> {
+public class GetAllCourses extends DatabaseRunnable<List<Pair<Course,Term>>> {
 	public GetAllCourses() {
 		super("get all courses");
 	}
 
 	@Override
-	public List<Course> execute(Connection conn) throws SQLException {
-		PreparedStatement stmt = prepareStatement(conn, "select c.* from courses as c");
+	public List<Pair<Course,Term>> execute(Connection conn) throws SQLException {
+		// Courses are returned in reverse chronological order
+		PreparedStatement stmt = prepareStatement(
+				conn,
+				"select c.*, t.* from courses as c, terms as t" +
+				" where c.termid = t.id" +
+				" order by c.year desc," +
+				"  t.seq desc," +
+				"  c.name asc"
+				);
 		ResultSet resultSet = executeQuery(stmt);
-		List<Course> courses = new ArrayList<>();
+		List<Pair<Course,Term>> courses = new ArrayList<>();
 		while (resultSet.next()) {
 			Course course = new Course();
-			Query.loadFields(course, resultSet);
-			courses.add(course);
+			int index = Query.loadFields(course, resultSet);
+			Term term = new Term();
+			Query.loadFields(term, resultSet, index);
+			courses.add(new Pair<>(course, term));
 		}
+		System.out.println("Retrieved " + courses.size() + " courses/terms");
 		
 		// TODO: sort in reverse chronological order by term/year
 		

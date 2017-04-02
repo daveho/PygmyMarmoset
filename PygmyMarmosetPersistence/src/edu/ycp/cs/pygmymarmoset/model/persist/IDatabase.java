@@ -12,7 +12,7 @@ public interface IDatabase {
 	public User findUserForUsername(String username);
 	public boolean createCourse(Course course);
 	public boolean createUser(User user);
-	public List<Course> getAllCourses();
+	public List<Pair<Course, Term>> getAllCourses();
 	public boolean createTerm(Term term);
 	public List<Term> getAllTerms();
 	public Pair<Course,Term> findCourseForCourseId(int courseId);
