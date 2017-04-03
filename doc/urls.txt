@@ -25,5 +25,9 @@ TODO: should course/student URLs have a component to identify
 the user id?  My thought is no, since the user is identified
 either by logging in or by providing credentials to the request.
 
+  Actually, YES: that way the "student" view could be implemented
+  for the instructor by simply putting the student's ID in the
+  URLs.
+
 TODO: There will be course ids for some /u/* URLs, i.e., you must
 be registered in a course to see its content.
