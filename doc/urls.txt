@@ -1,0 +1,29 @@
+/a/* are admin-only URLs (require superuser privilege)
+
+/i/* are instructor URLs, which require either superuser
+privilege, or an instructor role in the Course being accessed.
+
+All instructor URLs use the first component of the path info
+to specify the integer id of the course being accessed.
+
+/i/course/* URLs have a "subfunction", i.e.
+
+  /i/course/index --- to list all courses
+  /i/course/regStudent --- to register a student
+
+The course URLs are instructor URLs, so they have a course as
+the first pathinfo element, e.g.
+
+  i/course/index/1
+
+would access the main course page for the course with id=1.
+
+/u/* URLs are "unprivileged" URLs, meaning you just need to have
+a user account.
+
+TODO: should course/student URLs have a component to identify
+the user id?  My thought is no, since the user is identified
+either by logging in or by providing credentials to the request.
+
+TODO: There will be course ids for some /u/* URLs, i.e., you must
+be registered in a course to see its content.
