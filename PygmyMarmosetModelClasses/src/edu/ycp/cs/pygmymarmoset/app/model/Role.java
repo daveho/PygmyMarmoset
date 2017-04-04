@@ -11,6 +11,8 @@ public class Role {
 	
 	private RoleType type;
 	
+	private int section;
+	
 	public Role() {
 		
 	}
@@ -45,5 +47,13 @@ public class Role {
 
 	public void setType(RoleType type) {
 		this.type = type;
+	}
+
+	public int getSection() {
+		return section;
+	}
+
+	public void setSection(int section) {
+		this.section = section;
 	}
 }

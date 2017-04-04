@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
@@ -78,8 +79,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean registerStudent(User student, Course course) {
-		return execute(new RegisterStudent(student, course));
+	public boolean registerStudent(User student, Course course, Role role) {
+		return execute(new RegisterStudent(student, course, role));
 	}
 
 	private Connection createConnection() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -16,5 +17,5 @@ public interface IDatabase {
 	public boolean createTerm(Term term);
 	public List<Term> getAllTerms();
 	public Pair<Course,Term> findCourseForCourseId(int courseId);
-	public boolean registerStudent(User student, Course course);
+	public boolean registerStudent(User student, Course course, Role role);
 }

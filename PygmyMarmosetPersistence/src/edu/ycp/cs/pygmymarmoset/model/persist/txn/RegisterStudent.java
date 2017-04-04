@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import edu.ycp.cs.pygmymarmoset.app.model.BCrypt;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
-import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 import edu.ycp.cs.pygmymarmoset.model.persist.Query;
@@ -16,11 +15,13 @@ import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 public class RegisterStudent extends DatabaseRunnable<Boolean> {
 	private User student;
 	private Course course;
+	private Role role;
 
-	public RegisterStudent(User student, Course course) {
+	public RegisterStudent(User student, Course course, Role role) {
 		super("register student in course");
 		this.student = student;
 		this.course = course;
+		this.role = role;
 	}
 
 	@Override
@@ -42,11 +43,9 @@ public class RegisterStudent extends DatabaseRunnable<Boolean> {
 			insertUser.execute(conn);
 		}
 		
-		// Create student Role
-		Role studentRole = new Role();
-		studentRole.setCourseId(course.getId());
-		studentRole.setUserId(student.getId());
-		studentRole.setType(RoleType.STUDENT);
+		// Insert student Role
+		Role studentRole = role;
+		role.setUserId(student.getId()); // user id should be known now
 		InsertModelObject<Role> insertRole = new InsertModelObject<>(studentRole);
 		insertRole.execute(conn);
 		

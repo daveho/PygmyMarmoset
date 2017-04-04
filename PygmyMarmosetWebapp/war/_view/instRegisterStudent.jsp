@@ -23,12 +23,16 @@
 						<td><pm:input obj="student" field="passwordHash" type="password"/></td>
 					</tr>
 					<tr>
-						<td class="formlabel">First name:td>
+						<td class="formlabel">First name:</td>
 						<td><pm:input obj="student" field="firstName"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel">Last name:</td>
 						<td><pm:input obj="student" field="lastName"/></td>
+					</tr>
+					<tr>
+						<td class="formlabel">Section:</td>
+						<td><pm:input obj="role" field="section"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel"></td>

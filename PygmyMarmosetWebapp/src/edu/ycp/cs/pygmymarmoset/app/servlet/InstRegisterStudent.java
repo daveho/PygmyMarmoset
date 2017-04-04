@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.RegisterStudentController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class InstRegisterStudent extends AbstractFormServlet {
@@ -19,7 +21,8 @@ public class InstRegisterStudent extends AbstractFormServlet {
 	@Override
 	protected Params createParams(HttpServletRequest req) {
 		Params params = new Params(req)
-				.add("student", User.class);
+				.add("student", User.class)
+				.add("role", Role.class);
 		return params;
 	}
 
@@ -29,10 +32,13 @@ public class InstRegisterStudent extends AbstractFormServlet {
 		
 		User student = params.get("student");
 		student.setSuperUser(false); // paranoia
+		Role role = params.get("role");
+		role.setCourseId(course.getId()); // make sure this is not forged
+		role.setType(RoleType.STUDENT); // make sure this is not forged
 		
 		// See if this student already exists
 		RegisterStudentController controller = new RegisterStudentController();
-		controller.execute(student, course);
+		controller.execute(student, course, role);
 		// Success!
 		req.setAttribute("resultmsg", "Student " + student.getUsername() + " registered successfully");
 		
