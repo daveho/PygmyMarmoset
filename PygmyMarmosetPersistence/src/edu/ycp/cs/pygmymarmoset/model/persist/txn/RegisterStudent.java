@@ -26,16 +26,14 @@ public class RegisterStudent extends DatabaseRunnable<Boolean> {
 
 	@Override
 	public Boolean execute(Connection conn) throws SQLException {
-		PreparedStatement findStudent = prepareStatement(conn, "select u.* from users as u where u.username = ?");
-		findStudent.setString(1, student.getUsername());
-		
-		// Find existing user, or create new User
-		ResultSet r1 = executeQuery(findStudent);
-		if (r1.next()) {
-			// User already exists
-			Query.loadFields(student, r1);
+		// See if user already exists
+		FindUserForUsername findUser = new FindUserForUsername(student.getUsername());
+		User existing = findUser.execute(conn);
+		if (existing != null) {
+			// Use existing User
+			student = existing;
 		} else {
-			// insert new User
+			// Insert new User
 			String salt = BCrypt.gensalt(12);
 			String plaintext = student.getPasswordHash();
 			student.setPasswordHash(BCrypt.hashpw(plaintext, salt));
@@ -46,6 +44,7 @@ public class RegisterStudent extends DatabaseRunnable<Boolean> {
 		// Insert student Role
 		Role studentRole = role;
 		role.setUserId(student.getId()); // user id should be known now
+		role.setCourseId(course.getId());
 		InsertModelObject<Role> insertRole = new InsertModelObject<>(studentRole);
 		insertRole.execute(conn);
 		
