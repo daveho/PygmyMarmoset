@@ -142,4 +142,8 @@ public class DBField {
 	public boolean isBoolean() {
 		return javaType == Boolean.class || javaType == Boolean.TYPE;
 	}
+
+	public boolean isEnum() {
+		return java.lang.Enum.class.isAssignableFrom(javaType);
+	}
 }

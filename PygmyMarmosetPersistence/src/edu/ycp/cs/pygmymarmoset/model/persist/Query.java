@@ -146,6 +146,10 @@ public class Query {
 				continue; // skip id
 			}
 			Object value = PropertyUtils.getProperty(modelObj, field.getPropertyName());
+			if (field.isEnum()) {
+				// Enum values are persisted as the integer ordinal value
+				value = ((Enum<?>)value).ordinal();
+			}
 			stmt.setObject(index, value);
 			//System.out.println("Set field at index " + index);
 			index++;

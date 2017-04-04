@@ -7,9 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 
 public abstract class AbstractFormServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(AbstractFormServlet.class);
+	
 	public enum LogicOutcome {
 		STAY_ON_PAGE,
 		REDIRECT,
@@ -43,6 +48,7 @@ public abstract class AbstractFormServlet extends HttpServlet {
 			params.unmarshal(); // read data from form into model object(s)
 			outcome = doLogic(params, req, resp);
 		} catch (PygmyMarmosetException e) {
+			logger.error("Error executing form logic", e);
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}
 		if (outcome == LogicOutcome.STAY_ON_PAGE) {

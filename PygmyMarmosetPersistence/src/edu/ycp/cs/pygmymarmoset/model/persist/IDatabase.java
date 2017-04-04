@@ -16,4 +16,5 @@ public interface IDatabase {
 	public boolean createTerm(Term term);
 	public List<Term> getAllTerms();
 	public Pair<Course,Term> findCourseForCourseId(int courseId);
+	public boolean registerStudent(User student, Course course);
 }

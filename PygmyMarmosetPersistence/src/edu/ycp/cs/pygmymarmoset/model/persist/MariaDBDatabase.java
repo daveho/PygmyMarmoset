@@ -19,6 +19,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -74,6 +75,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public Pair<Course,Term> findCourseForCourseId(int courseId) {
 		return execute(new FindCourseForCourseId(courseId));
+	}
+	
+	@Override
+	public boolean registerStudent(User student, Course course) {
+		return execute(new RegisterStudent(student, course));
 	}
 
 	private Connection createConnection() {
