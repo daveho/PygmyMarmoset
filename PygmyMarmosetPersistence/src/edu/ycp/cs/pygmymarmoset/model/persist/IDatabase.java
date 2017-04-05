@@ -22,4 +22,5 @@ public interface IDatabase {
 	public List<Pair<User, Role>> getRoster(Course course);
 	public boolean addInstructor(Course course, String username, int section);
 	public Roles getUserRolesInCourse(User user, Course course);
+	public List<String> suggestUsernames(String term);
 }

@@ -24,6 +24,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -99,6 +100,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public Roles getUserRolesInCourse(User user, Course course) {
 		return execute(new GetUserRolesInCourse(user, course));
+	}
+	
+	@Override
+	public List<String> suggestUsernames(String term) {
+		return execute(new SuggestUsernames(term));
 	}
 
 	private Connection createConnection() {

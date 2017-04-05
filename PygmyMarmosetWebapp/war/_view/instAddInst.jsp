@@ -6,6 +6,26 @@
 <html>
 	<head>
 		<pm:headStuff title="${courseDisplayName}: Add Instructor"/>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#inst-username").autocomplete({
+				source: function(req, resp) {
+					$.post(
+							// URL
+							"${pageContext.servletContext.contextPath}/i/suggestUsernames/${course.id}",
+							// Data to send
+							{ term: req.term },
+							// Success function
+							function(data) {
+								resp(data);
+							},
+							// Data type expected from server
+							'json'
+					);
+				}
+			});
+		});
+		</script>
 	</head>
 	
 	<body>
@@ -16,7 +36,7 @@
 				<table class="formtab">
 					<tr>
 						<td class="formlabel">Instructor username:</td>
-						<td><pm:input obj="inst" field="username"/></td>
+						<td><pm:input obj="inst" field="username" id="inst-username"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel">Section:</td>

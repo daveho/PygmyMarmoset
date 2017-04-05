@@ -51,6 +51,10 @@
 		<servlet-name>InstAddInstructor</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstAddInstructor</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>InstSuggestUsernames</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstSuggestUsernames</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
 	<servlet-mapping>
@@ -96,6 +100,10 @@
 	<servlet-mapping>
 		<servlet-name>InstAddInstructor</servlet-name>
 		<url-pattern>/i/addInst/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InstSuggestUsernames</servlet-name>
+		<url-pattern>/i/suggestUsernames/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters and filter mappings -->
