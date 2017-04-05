@@ -11,16 +11,20 @@
 		<div id="content">
 			<h1>All courses</h1>
 			<table class="objtable">
-				<tr>
-					<th>Course</th><th>Term</th>
-				</tr>
-				<!-- The items in ${coursesAndTerms} are Pair<Course,Term> -->
-				<c:forEach items="${coursesAndTerms}" var="ct">
+				<thead>
 					<tr>
-						<td><a href="${pageContext.servletContext.contextPath}/i/course/index/${ct.first.id}">${ct.first.name}: ${ct.first.title}</a></td>
-						<td>${ct.second.name} ${ct.first.year}</td>
+						<th>Course</th><th>Term</th>
 					</tr>
-				</c:forEach>
+				</thead>
+				<tbody>
+					<!-- The items in ${coursesAndTerms} are Pair<Course,Term> -->
+					<c:forEach items="${coursesAndTerms}" var="ct">
+						<tr>
+							<td><a href="${pageContext.servletContext.contextPath}/i/course/index/${ct.first.id}">${ct.first.name}: ${ct.first.title}</a></td>
+							<td>${ct.second.name} ${ct.first.year}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<pm:notification/>

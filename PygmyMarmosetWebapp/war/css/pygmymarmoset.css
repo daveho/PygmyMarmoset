@@ -125,24 +125,18 @@ a.navlink:hover {
 
 table.objtable {
 	border-collapse: collapse;
-	margin-left: 4em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	margin-left: 2.5em;
 }
 
-table.objtable tr th {
+table.objtable th {
+	border-bottom: 1px solid black;
 	text-align: left;
 }
 
-table.objtable tr:first-of-type {
-	border-top: 2px solid #444;
-	border-bottom: 2px solid #444;
-}
-
-table.objtable tr:last-of-type {
-	border-bottom: 2px solid #444;
-}
-
-table.objtable tr th, table.objtable tr td {
-	padding: 10px 20px;
+table.objtable th, table.objtable td {
+	padding: 6px 12px;
 }
 
 table.objtable tr:nth-child(even) {

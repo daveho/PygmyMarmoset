@@ -15,7 +15,25 @@
 			<h2>Projects</h2>
 			<p>TODO: projects</p>
 			<h2>Members</h2>
-			<p>TODO: members</p>
+			<table class="objtable">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Roster consists of pairs of User,Role -->
+					<c:forEach items="${roster}" var="pair">
+						<tr>
+							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.lastName}, ${pair.first.firstName}</a></td>
+							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.username}</a></td>
+							<td>${pair.second.type}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			<h2>Admin</h2>
 			<div class="navgroup">
 				<ul>

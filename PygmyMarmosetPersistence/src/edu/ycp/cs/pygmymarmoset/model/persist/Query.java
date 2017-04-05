@@ -122,7 +122,13 @@ public class Query {
 		Class<E> cls = (Class<E>) modelObj.getClass();
 		Introspect<E> info = Introspect.getIntrospect(cls);
 		for (DBField field : info.getFields()) {
-			BeanUtils.setProperty(modelObj, field.getPropertyName(), resultSet.getObject(index));
+			Object value = resultSet.getObject(index);
+			if (field.isEnum()) {
+				// Enum values are persisted as ordinals,
+				// so turn them back into enum values.
+				value = field.getJavaType().getEnumConstants()[(Integer)value];
+			}
+			BeanUtils.setProperty(modelObj, field.getPropertyName(), value);
 			index++;
 		}
 		return index;

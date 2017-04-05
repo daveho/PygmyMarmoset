@@ -18,4 +18,5 @@ public interface IDatabase {
 	public List<Term> getAllTerms();
 	public Pair<Course,Term> findCourseForCourseId(int courseId);
 	public boolean registerStudent(User student, Course course, Role role);
+	public List<Pair<User, Role>> getRoster(Course course);
 }
