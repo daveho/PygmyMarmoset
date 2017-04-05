@@ -87,15 +87,15 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InstCourse</servlet-name>
-		<url-pattern>/i/course/index/*</url-pattern>
+		<url-pattern>/i/index/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InstRegisterStudent</servlet-name>
-		<url-pattern>/i/course/regStudent/*</url-pattern>
+		<url-pattern>/i/regStudent/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InstAddInstructor</servlet-name>
-		<url-pattern>/i/course/addInst/*</url-pattern>
+		<url-pattern>/i/addInst/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters and filter mappings -->
@@ -125,11 +125,11 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>LoadCourse</filter-name>
-		<url-pattern>/i/course/*</url-pattern>
+		<url-pattern>/i/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>RequireInstructorOrAdmin</filter-name> <!-- Note: must be *after* LoadCourse -->
-		<url-pattern>/i/course/*</url-pattern>
+		<url-pattern>/i/*</url-pattern>
 	</filter-mapping>
 	
 	<!--

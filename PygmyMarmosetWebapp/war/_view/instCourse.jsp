@@ -28,8 +28,8 @@
 					<!-- Roster consists of pairs of User,Role -->
 					<c:forEach items="${roster}" var="pair">
 						<tr>
-							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.lastName}, ${pair.first.firstName}</a></td>
-							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.username}</a></td>
+							<td><a href="${pageContext.servletContext.contextPath}/i/student/${course.id}/${pair.first.id}">${pair.first.lastName}, ${pair.first.firstName}</a></td>
+							<td><a href="${pageContext.servletContext.contextPath}/i/student/${course.id}/${pair.first.id}">${pair.first.username}</a></td>
 							<td>${pair.second.section}</td>
 							<td>${pair.second.type}</td>
 						</tr>
@@ -39,8 +39,8 @@
 			<h2>Admin</h2>
 			<div class="navgroup">
 				<ul>
-				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/course/regStudent/${course.id}">Register student</a></li>
-				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/course/addInst/${course.id}">Add instructor</a></li>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/regStudent/${course.id}">Register student</a></li>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/addInst/${course.id}">Add instructor</a></li>
 				</ul>
 			</div>
 			<pm:notification/>

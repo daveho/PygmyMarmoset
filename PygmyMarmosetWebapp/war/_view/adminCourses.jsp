@@ -20,7 +20,7 @@
 					<!-- The items in ${coursesAndTerms} are Pair<Course,Term> -->
 					<c:forEach items="${coursesAndTerms}" var="ct">
 						<tr>
-							<td><a href="${pageContext.servletContext.contextPath}/i/course/index/${ct.first.id}">${ct.first.name}: ${ct.first.title}</a></td>
+							<td><a href="${pageContext.servletContext.contextPath}/i/index/${ct.first.id}">${ct.first.name}: ${ct.first.title}</a></td>
 							<td>${ct.second.name} ${ct.first.year}</td>
 						</tr>
 					</c:forEach>

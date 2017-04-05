@@ -12,7 +12,7 @@
 		<pm:header/>
 		<div id="content">
 			<h1>Add instructor in ${courseDisplayName}</h1>
-			<form action="${pageContext.servletContext.contextPath}/i/course/addInst/${course.id}" method="post">
+			<form action="${pageContext.servletContext.contextPath}/i/addInst/${course.id}" method="post">
 				<table class="formtab">
 					<tr>
 						<td class="formlabel">Instructor username:</td>

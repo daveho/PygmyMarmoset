@@ -5,18 +5,18 @@ privilege, or an instructor role in the Course being accessed.
 
 All instructor URLs use the first component of the path info
 to specify the integer id of the course being accessed.
+E.g.,
 
-/i/course/* URLs have a "subfunction", i.e.
+  /i/index/1
 
-  /i/course/index --- to list all courses
-  /i/course/regStudent --- to register a student
+is the instructor course page for the course with id 1.
+Course URLs identifying a student have the student user id
+as the second component of the path info, e.g.,
 
-The course URLs are instructor URLs, so they have a course as
-the first pathinfo element, e.g.
+  /i/student/1/3
 
-  i/course/index/1
-
-would access the main course page for the course with id=1.
+for the instructor's student page (submissions, etc.) for the
+course with id=1 and the student with id=3.
 
 /u/* URLs are "unprivileged" URLs, meaning you just need to have
 a user account.
