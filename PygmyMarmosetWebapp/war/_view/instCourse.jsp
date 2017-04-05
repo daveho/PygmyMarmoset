@@ -20,6 +20,7 @@
 					<tr>
 						<th>Name</th>
 						<th>Username</th>
+						<th>Section</th>
 						<th>Role</th>
 					</tr>
 				</thead>
@@ -29,6 +30,7 @@
 						<tr>
 							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.lastName}, ${pair.first.firstName}</a></td>
 							<td><a href="${pageContext.servletContext.contextPath}/i/course/student/${course.id}/${pair.first.id}">${pair.first.username}</a></td>
+							<td>${pair.second.section}</td>
 							<td>${pair.second.type}</td>
 						</tr>
 					</c:forEach>
@@ -38,6 +40,7 @@
 			<div class="navgroup">
 				<ul>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/course/regStudent/${course.id}">Register student</a></li>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/course/addInst/${course.id}">Add instructor</a></li>
 				</ul>
 			</div>
 			<pm:notification/>

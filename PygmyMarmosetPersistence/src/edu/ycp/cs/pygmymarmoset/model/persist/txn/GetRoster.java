@@ -29,7 +29,7 @@ public class GetRoster extends DatabaseRunnable<List<Pair<User, Role>>> {
 				"select u.*, r.* from users as u, roles as r" +
 				" where u.id = r.userid" +
 				"   and r.courseid = ?" +
-				" order by r.type desc, u.lastname asc, u.firstname asc, u.username asc");
+				" order by r.type desc, u.lastname asc, u.firstname asc, r.section asc, u.username asc");
 		stmt.setInt(1, course.getId());
 		ResultSet resultSet = executeQuery(stmt);
 		List<Pair<User, Role>> result = new ArrayList<>();
