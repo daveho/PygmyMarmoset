@@ -14,6 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
@@ -87,6 +88,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Pair<User, Role>> getRoster(Course course) {
 		return execute(new GetRoster(course));
+	}
+	
+	@Override
+	public boolean addInstructor(Course course, String username, int section) {
+		return execute(new AddInstructor(course, username, section));
 	}
 
 	private Connection createConnection() {

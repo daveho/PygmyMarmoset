@@ -47,6 +47,10 @@
 		<servlet-name>InstRegisterStudent</servlet-name>
 		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstRegisterStudent</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>InstAddInstructor</servlet-name>
+		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstAddInstructor</servlet-class>
+	</servlet>
 
 	<!-- Servlet-mapping -->
 	<servlet-mapping>
@@ -88,6 +92,10 @@
 	<servlet-mapping>
 		<servlet-name>InstRegisterStudent</servlet-name>
 		<url-pattern>/i/course/regStudent/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InstAddInstructor</servlet-name>
+		<url-pattern>/i/course/addInst/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Filters and filter mappings -->

@@ -4,7 +4,7 @@ public class Role {
 	@PrimaryKey
 	private int id;
 	
-	@Unique(with="courseId")
+	@Unique(with="courseId,section")
 	private int userId;
 	
 	private int courseId;
