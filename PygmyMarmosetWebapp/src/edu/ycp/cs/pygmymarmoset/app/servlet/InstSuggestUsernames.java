@@ -27,7 +27,7 @@ public class InstSuggestUsernames extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String term = req.getParameter("term");
-		System.out.println("term="+term);
+		//System.out.println("term="+term);
 		
 		SuggestUsernamesController suggestUsernames = new SuggestUsernamesController();
 		List<String> suggestions = suggestUsernames.execute(term);
@@ -36,7 +36,7 @@ public class InstSuggestUsernames extends HttpServlet {
 		for (int i = 0; i < suggestions.size(); i++) {
 			result[i] = new Suggestion(suggestions.get(i));
 		}
-		System.out.println("Returning " + result.length + " suggestions");
+		//System.out.println("Returning " + result.length + " suggestions");
 		
 		resp.setContentType("application/json");
 		JSON.getObjectMapper().writeValue(resp.getWriter(), result);

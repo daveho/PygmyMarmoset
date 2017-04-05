@@ -69,3 +69,10 @@ http://central.maven.org/maven2/org/apache/commons/commons-lang3/3.5/commons-lan
   PygmyMarmosetWebapp/war/WEB-INF/lib/commons-lang3-3.5.jar
 http://central.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/commons-beanutils-1.9.3.jar
+
+http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.7/jackson-annotations-2.8.7.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-annotations-2.8.7.jar
+http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.7/jackson-databind-2.8.7.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-databind-2.8.7.jar
+http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.7/jackson-core-2.8.7.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-core-2.8.7.jar

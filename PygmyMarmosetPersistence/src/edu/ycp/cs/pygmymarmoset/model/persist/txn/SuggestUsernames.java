@@ -20,13 +20,13 @@ public class SuggestUsernames extends DatabaseRunnable<List<String>> {
 	@Override
 	public List<String> execute(Connection conn) throws SQLException {
 		String q = "select u.username from users as u" +
-				" where u.username like '?'" +
+				" where u.username like ?" +
 				" order by u.username asc";
 		PreparedStatement stmt = prepareStatement(
 				conn,
 				q);
-		System.out.println("Query is " +q);
-		System.out.println("term=" + term);
+		//System.out.println("Query is " +q);
+		//System.out.println("term=" + term);
 		stmt.setString(1, term + "%");
 		ResultSet resultSet = executeQuery(stmt);
 		List<String> result = new ArrayList<>();
