@@ -34,6 +34,7 @@ public class InstAddInstructor extends AbstractFormServlet {
 		// Success!
 		req.setAttribute("resultmsg", "Successfully added instructor " + inst.getUsername());
 		req.setAttribute("inst", new User()); // clear out form fields
+		req.setAttribute("role", new Role()); // clear out form fields
 		return LogicOutcome.STAY_ON_PAGE;
 	}
 }

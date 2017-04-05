@@ -111,6 +111,10 @@
 		<filter-name>LoadCourse</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.LoadCourse</filter-class>
 	</filter>
+	<filter>
+		<filter-name>RequireInstructorOrAdmin</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireInstructorOrAdmin</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>RequireLogin</filter-name>
 		<url-pattern>/u/*</url-pattern>
@@ -119,13 +123,12 @@
 		<filter-name>RequireSuperUser</filter-name>
 		<url-pattern>/a/*</url-pattern>
 	</filter-mapping>
-	<!-- FIXME: need a filter that checks instructor status or superuser privileges -->
-	<filter-mapping>
-		<filter-name>RequireSuperUser</filter-name>
-		<url-pattern>/i/*</url-pattern>
-	</filter-mapping>
 	<filter-mapping>
 		<filter-name>LoadCourse</filter-name>
+		<url-pattern>/i/course/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RequireInstructorOrAdmin</filter-name> <!-- Note: must be *after* LoadCourse -->
 		<url-pattern>/i/course/*</url-pattern>
 	</filter-mapping>
 	

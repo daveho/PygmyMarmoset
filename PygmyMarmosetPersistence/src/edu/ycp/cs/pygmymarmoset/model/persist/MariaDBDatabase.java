@@ -12,6 +12,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
@@ -93,6 +94,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean addInstructor(Course course, String username, int section) {
 		return execute(new AddInstructor(course, username, section));
+	}
+	
+	@Override
+	public Roles getUserRolesInCourse(User user, Course course) {
+		return execute(new GetUserRolesInCourse(user, course));
 	}
 
 	private Connection createConnection() {
