@@ -1,8 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.model.persist.txn;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.ycp.cs.pygmymarmoset.app.model.BCrypt;
@@ -10,7 +8,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
-import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
 public class RegisterStudent extends DatabaseRunnable<Boolean> {
 	private User student;
