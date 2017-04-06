@@ -27,19 +27,6 @@ public class LoadCourse implements Filter {
 	public void doFilter(ServletRequest req_, ServletResponse resp_, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) req_;
-		/*
-		String pathInfo = req.getPathInfo();
-		if (pathInfo == null) {
-			System.out.println("uri=" + req.getRequestURI());
-			System.out.println("contextPath=" + req.getContextPath());
-			System.out.println("servletPath="+req.getServletPath());
-			throw new IllegalStateException("Path info is null?");
-		}
-		if (pathInfo.startsWith("/")) {
-			pathInfo = pathInfo.substring(1);
-		}
-		Object[] args = ServletUtil.parsePathInfo("i", pathInfo);
-		*/
 		Object[] args = ServletUtil.parseUrlParams("i", req.getRequestURI());
 		Integer courseId = (Integer) args[0];
 		
