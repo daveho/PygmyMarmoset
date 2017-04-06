@@ -12,6 +12,6 @@ public class AdminIndex extends AbstractServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/adminIndex.jsp").forward(req, resp);
+		delegateToView(req, resp);
 	}
 }

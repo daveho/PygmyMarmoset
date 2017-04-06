@@ -25,6 +25,6 @@ public class InstCourse extends AbstractServlet {
 		List<Pair<User, Role>> roster = getRoster.execute(course);
 		req.setAttribute("roster", roster);
 		// Render view
-		req.getRequestDispatcher("/_view/instCourse.jsp").forward(req, resp);
+		delegateToView(req, resp);
 	}
 }

@@ -14,10 +14,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 public class InstAddInstructor extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 
-	public InstAddInstructor() {
-		super("/_view/instAddInst.jsp");
-	}
-
 	@Override
 	protected Params createParams(HttpServletRequest req) {
 		return new Params(req)

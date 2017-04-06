@@ -26,6 +26,6 @@ public class AdminCourses extends AbstractServlet {
 		} catch (PygmyMarmosetException e) {
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}
-		req.getRequestDispatcher("/_view/adminCourses.jsp").forward(req, resp);
+		delegateToView(req, resp);
 	}
 }

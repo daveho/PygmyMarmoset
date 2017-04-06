@@ -13,10 +13,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 public class AdminCreateCourse extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public AdminCreateCourse() {
-		super("/_view/adminCreateCourse.jsp");
-	}
-	
 	@Override
 	protected Params createParams(HttpServletRequest req) {
 		// Note that because there is a Term drop-down,

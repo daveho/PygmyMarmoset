@@ -16,7 +16,8 @@ public class ServletUtil {
 		req.setAttribute("errmsg", errmsg);
 		req.getRequestDispatcher("/_view/forbidden.jsp").forward(req, resp);
 	}
-	
+
+	/*
 	public static Object[] parsePathInfo(String spec, String pathInfo) throws ServletException {
 		Object[] result = new Object[spec.length()];
 		if (pathInfo.startsWith("/")) {
@@ -36,5 +37,35 @@ public class ServletUtil {
 			}
 		}
 		return result;
+	}
+	*/
+
+	/**
+	 * <code>getPathInfo()</code> doesn't work for requests to dynamically
+	 * registered servlets.  So we use this instead.
+	 * @param spec argument specification
+	 * @param path pass <code>req.getServletPath()</code> here
+	 * @return array of arguments
+	 * @throws ServletException 
+	 */
+	public static Object[] parseUrlParams(String spec, String path) throws ServletException {
+		Object[] args = new Object[spec.length()];
+		if (path.startsWith("/")) {
+			path = path.substring(1);
+		}
+		String[] items = path.split("/");
+		if (items.length < spec.length()) {
+			throw new ServletException("Too few elements in path " + path + " (need " + spec.length() + " args)");
+		}
+		for (int i = spec.length() - 1, j = items.length - 1; i >= 0; i--, j--) {
+			switch (spec.charAt(i)) {
+			case 'i':
+				args[i] = Integer.parseInt(items[j]);
+				break;
+			default:
+				throw new ServletException("Illegal spec field: " + spec.charAt(i));
+			}
+		}
+		return args;
 	}
 }

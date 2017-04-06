@@ -14,10 +14,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 @Route(pattern="/i/regStudent/*", view="/_view/instRegisterStudent.jsp")
 public class InstRegisterStudent extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
-	
-	public InstRegisterStudent() {
-		super("/_view/instRegisterStudent.jsp");
-	}
 
 	@Override
 	protected Params createParams(HttpServletRequest req) {

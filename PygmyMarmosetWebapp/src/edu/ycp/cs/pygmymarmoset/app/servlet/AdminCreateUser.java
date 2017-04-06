@@ -12,10 +12,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 public class AdminCreateUser extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AdminCreateUser() {
-		super("/_view/adminCreateUser.jsp");
-	}
-
 	@Override
 	protected Params createParams(HttpServletRequest req) {
 		return new Params(req)

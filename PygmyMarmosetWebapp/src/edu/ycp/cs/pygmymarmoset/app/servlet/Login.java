@@ -13,10 +13,6 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 @Route(pattern="/login", view="/_view/login.jsp")
 public class Login extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
-
-	public Login() {
-		super("/_view/login.jsp");
-	}
 	
 	@Override
 	protected Params createParams(HttpServletRequest req) {

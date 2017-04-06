@@ -21,12 +21,6 @@ public abstract class AbstractFormServlet extends AbstractServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String viewPath;
-
-	public AbstractFormServlet(String viewPath) {
-		this.viewPath = viewPath;
-	}
-	
 	protected abstract Params createParams(HttpServletRequest req);
 	protected abstract LogicOutcome doLogic(Params params, HttpServletRequest req, HttpServletResponse resp) throws IOException;
 	
@@ -36,7 +30,7 @@ public abstract class AbstractFormServlet extends AbstractServlet {
 		
 		// Allow logic?
 		
-		req.getRequestDispatcher(viewPath).forward(req, resp);
+		delegateToView(req, resp);
 	}
 	
 	@Override
@@ -51,7 +45,7 @@ public abstract class AbstractFormServlet extends AbstractServlet {
 			req.setAttribute("errmsg", e.getErrorMessage());
 		}
 		if (outcome == LogicOutcome.STAY_ON_PAGE) {
-			req.getRequestDispatcher(viewPath).forward(req, resp);
+			delegateToView(req, resp);
 		}
 	}
 }
