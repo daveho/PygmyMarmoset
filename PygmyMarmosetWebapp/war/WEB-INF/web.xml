@@ -6,105 +6,11 @@
 
 	<!-- Context parameters -->
 
-	<!-- Servlets -->
-	<servlet>
-		<servlet-name>Welcome</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Welcome</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Index</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Index</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Login</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Logout</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.Logout</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>AdminIndex</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.AdminIndex</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>CreateCourse</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.AdminCreateCourse</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>CreateUser</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.AdminCreateUser</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Courses</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.AdminCourses</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>InstCourse</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstCourse</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>InstRegisterStudent</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstRegisterStudent</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>InstAddInstructor</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstAddInstructor</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>InstSuggestUsernames</servlet-name>
-		<servlet-class>edu.ycp.cs.pygmymarmoset.app.servlet.InstSuggestUsernames</servlet-class>
-	</servlet>
-
-	<!-- Servlet-mapping -->
-	<servlet-mapping>
-		<servlet-name>Welcome</servlet-name>
-		<url-pattern>/welcome</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Index</servlet-name>
-		<url-pattern>/u/index</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Logout</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AdminIndex</servlet-name>
-		<url-pattern>/a/index</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CreateCourse</servlet-name>
-		<url-pattern>/a/createCourse</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CreateUser</servlet-name>
-		<url-pattern>/a/createUser</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Courses</servlet-name>
-		<url-pattern>/a/courses</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>InstCourse</servlet-name>
-		<url-pattern>/i/index/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>InstRegisterStudent</servlet-name>
-		<url-pattern>/i/regStudent/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>InstAddInstructor</servlet-name>
-		<url-pattern>/i/addInst/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>InstSuggestUsernames</servlet-name>
-		<url-pattern>/i/suggestUsernames/*</url-pattern>
-	</servlet-mapping>
+	<!--
+		No servlet or servlet-mapping elements are needed because
+		all servlets are registered dynamically by the RegisterServlets
+		listener.
+	-->
 	
 	<!-- Filters and filter mappings -->
 	<filter>
@@ -148,6 +54,10 @@
 	<welcome-file-list>
 		<welcome-file>/welcome</welcome-file>
 	</welcome-file-list>
+	
 	<!-- Listeners -->
-
+	<listener>
+		<!-- Dynamically register all servlets, and add routes. -->
+		<listener-class>edu.ycp.cs.pygmymarmoset.app.servlet.RegisterServlets</listener-class>
+	</listener>
 </web-app>

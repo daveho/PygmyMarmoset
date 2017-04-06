@@ -76,3 +76,12 @@ http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.
   PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-databind-2.8.7.jar
 http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.7/jackson-core-2.8.7.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-core-2.8.7.jar
+
+http://central.maven.org/maven2/org/reflections/reflections/0.9.11/reflections-0.9.11.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/reflections-0.9.11.jar
+
+http://central.maven.org/maven2/com/google/guava/guava/21.0/guava-21.0.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/guava-21.0.jar
+
+http://central.maven.org/maven2/javassist/javassist/3.12.1.GA/javassist-3.12.1.GA.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/javassist-3.12.1.GA.jar

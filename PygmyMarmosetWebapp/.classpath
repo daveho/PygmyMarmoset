@@ -30,6 +30,21 @@
 			<attribute name="javadoc_location" value="http://fasterxml.github.io/jackson-databind/javadoc/2.8/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/reflections-0.9.11.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://ronmamo.github.io/reflections"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-21.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://google.github.io/guava/releases/21.0/api/docs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javassist-3.12.1.GA.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://jboss-javassist.github.io/javassist/html/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/PygmyMarmosetControllers"/>
 	<classpathentry kind="lib" path="/Jetty9/lib/servlet-api-3.1.jar">
 		<attributes>

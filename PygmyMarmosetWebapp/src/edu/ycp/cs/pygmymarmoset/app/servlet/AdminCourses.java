@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
 @Route(pattern="/a/courses", view="/_view/adminCourses.jsp")
-public class AdminCourses extends HttpServlet {
+public class AdminCourses extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

@@ -3,7 +3,6 @@ package edu.ycp.cs.pygmymarmoset.app.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 
-public abstract class AbstractFormServlet extends HttpServlet {
+public abstract class AbstractFormServlet extends AbstractServlet {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractFormServlet.class);
 	
 	public enum LogicOutcome {

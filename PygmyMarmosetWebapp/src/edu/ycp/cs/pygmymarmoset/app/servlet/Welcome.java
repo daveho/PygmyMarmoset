@@ -3,7 +3,6 @@ package edu.ycp.cs.pygmymarmoset.app.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
  * logged in) or the index page (if the user is logged in.)
  */
 @Route(pattern="/welcome")
-public class Welcome extends HttpServlet {
+public class Welcome extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

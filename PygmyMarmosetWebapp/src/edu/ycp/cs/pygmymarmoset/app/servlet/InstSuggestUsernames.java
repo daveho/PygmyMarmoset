@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.SuggestUsernamesController;
 
 @Route(pattern="/i/suggestUsernames/*")
-public class InstSuggestUsernames extends HttpServlet {
+public class InstSuggestUsernames extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static class Suggestion {
