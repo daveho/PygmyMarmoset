@@ -1,7 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 import java.lang.reflect.Modifier;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
@@ -24,8 +23,8 @@ public class RegisterServlets implements ServletContextListener {
 			if (Modifier.isAbstract(cls.getModifiers())) {
 				continue;
 			}
-			System.out.println("Registering servlet " + cls.getSimpleName());
 			Route route = AbstractServlet.getRouteForClass(cls);
+			System.out.println("Registering servlet " + cls.getSimpleName() + " using pattern " + route.pattern());
 			ServletRegistration.Dynamic addServlet = e.getServletContext().addServlet(cls.getSimpleName(), cls);
 			addServlet.addMapping(route.pattern());
 		}

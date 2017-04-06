@@ -13,7 +13,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
-@Route(pattern="/i/course/*", view="/_view/instCourse.jsp")
+@Route(pattern="/i/index/*", view="/_view/instCourse.jsp")
 public class InstCourse extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 	

@@ -40,7 +40,7 @@ public class LoadCourse implements Filter {
 		}
 		Object[] args = ServletUtil.parsePathInfo("i", pathInfo);
 		*/
-		Object[] args = ServletUtil.parseUrlParams("i", req.getServletPath());
+		Object[] args = ServletUtil.parseUrlParams("i", req.getRequestURI());
 		Integer courseId = (Integer) args[0];
 		
 		FindCourseController findCourse = new FindCourseController();

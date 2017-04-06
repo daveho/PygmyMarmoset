@@ -44,7 +44,7 @@ public class ServletUtil {
 	 * <code>getPathInfo()</code> doesn't work for requests to dynamically
 	 * registered servlets.  So we use this instead.
 	 * @param spec argument specification
-	 * @param path pass <code>req.getServletPath()</code> here
+	 * @param path pass <code>req.getRequestURI()</code> here
 	 * @return array of arguments
 	 * @throws ServletException 
 	 */
@@ -54,6 +54,7 @@ public class ServletUtil {
 			path = path.substring(1);
 		}
 		String[] items = path.split("/");
+		System.out.println("Items are: " + String.join(":", items));
 		if (items.length < spec.length()) {
 			throw new ServletException("Too few elements in path " + path + " (need " + spec.length() + " args)");
 		}
