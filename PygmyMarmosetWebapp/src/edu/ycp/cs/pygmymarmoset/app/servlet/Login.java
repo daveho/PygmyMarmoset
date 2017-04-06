@@ -10,6 +10,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.ErrorMessage;
 import edu.ycp.cs.pygmymarmoset.app.model.LoginCredentials;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
+@Route(pattern="/login", view="/_view/login.jsp")
 public class Login extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 

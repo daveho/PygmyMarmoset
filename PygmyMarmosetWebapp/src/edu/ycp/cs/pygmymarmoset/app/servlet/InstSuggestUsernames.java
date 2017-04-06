@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.SuggestUsernamesController;
 
+@Route(pattern="/i/suggestUsernames/*")
 public class InstSuggestUsernames extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

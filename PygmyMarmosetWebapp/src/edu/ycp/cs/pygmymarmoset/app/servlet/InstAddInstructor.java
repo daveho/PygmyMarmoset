@@ -10,6 +10,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
+@Route(pattern="/i/addInst/*", view="/_view/instAddInst.jsp")
 public class InstAddInstructor extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 

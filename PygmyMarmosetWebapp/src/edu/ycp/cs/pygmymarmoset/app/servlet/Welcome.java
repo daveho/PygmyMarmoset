@@ -14,6 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
  * and just redirects to the login page (if the user is not
  * logged in) or the index page (if the user is logged in.)
  */
+@Route(pattern="/welcome")
 public class Welcome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

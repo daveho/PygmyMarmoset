@@ -14,6 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
+@Route(pattern="/a/courses", view="/_view/adminCourses.jsp")
 public class AdminCourses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

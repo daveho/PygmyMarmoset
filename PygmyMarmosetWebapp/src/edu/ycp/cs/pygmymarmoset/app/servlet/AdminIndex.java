@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Route(pattern="/a/index", view="/_view/adminIndex.jsp")
 public class AdminIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
