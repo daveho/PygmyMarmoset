@@ -14,9 +14,11 @@
 			<h1>Courses</h1>
 			<table class="objtable">
 				<thead>
-					<th>Course</th>
-					<th>Term</th>
-					<th>Role</th>
+					<tr>
+						<th>Course</th>
+						<th>Term</th>
+						<th>Role</th>
+					</tr>
 				</thead>
 				<tbody>
 					<!-- items are Triple<Course, Term, RoleType> -->
