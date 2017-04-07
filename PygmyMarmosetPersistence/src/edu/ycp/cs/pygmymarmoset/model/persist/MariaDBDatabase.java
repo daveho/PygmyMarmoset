@@ -11,12 +11,14 @@ import org.slf4j.LoggerFactory;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
+import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
@@ -105,6 +107,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<String> suggestUsernames(String term) {
 		return execute(new SuggestUsernames(term));
+	}
+	
+	@Override
+	public boolean createProject(Course course, Project project) {
+		return execute(new CreateProject(course, project));
 	}
 
 	private Connection createConnection() {

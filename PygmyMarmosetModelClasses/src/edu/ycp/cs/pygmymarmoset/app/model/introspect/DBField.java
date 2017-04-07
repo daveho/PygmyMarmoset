@@ -14,6 +14,7 @@ public class DBField {
 	private int index;
 	private boolean unique;
 	private String uniqueWith;
+	private boolean timestamp;
 	
 	public DBField() {
 		
@@ -99,7 +100,13 @@ public class DBField {
 		this.uniqueWith = uniqueWith;
 	}
 
-
+	public void setTimestamp(boolean timestamp) {
+		this.timestamp = timestamp;
+	}
+	
+	public boolean isTimestamp() {
+		return timestamp;
+	}
 
 	private static Map<Class<?>, String> javaToSqlType = new HashMap<>();
 	static {

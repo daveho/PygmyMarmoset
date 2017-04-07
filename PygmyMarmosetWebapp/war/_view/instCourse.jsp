@@ -40,6 +40,7 @@
 			<h2>Admin</h2>
 			<div class="navgroup">
 				<ul>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/createProject/${course.id}">Create project</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/regStudent/${course.id}">Register student</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/addInst/${course.id}">Add instructor</a></li>
 				</ul>

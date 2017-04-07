@@ -19,6 +19,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.PrimaryKey;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.Timestamp;
 import edu.ycp.cs.pygmymarmoset.app.model.Unique;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -71,6 +72,10 @@ public class Introspect<E> {
 					if (u != null) {
 						dbField.setUnique(true);
 						dbField.setUniqueWith(u.with());
+					}
+					Timestamp ts = f.getAnnotation(Timestamp.class);
+					if (ts != null) {
+						dbField.setTimestamp(true);
 					}
 				}
 				fields.add(dbField);

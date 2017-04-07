@@ -1,6 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.app.tag;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -48,6 +51,27 @@ public class InputTag extends BeanTag {
 		String propVal = BeanUtil.getProperty(bean, field);
 		if (propVal != null) {
 			escapedValue = StringEscapeUtils.escapeHtml4(propVal);
+		}
+		
+		if (dbfield.isTimestamp()) {
+			// Convert timestamp (millis since epoch) to
+			// text date/time.
+			if (escapedValue.equals("0")) {
+				// This is an uninitialized date/time, so just turn it into
+				// a blank.
+				escapedValue = "";
+			} else if (!escapedValue.equals("")) {
+				long tsval;
+				try {
+					tsval = Long.parseLong(escapedValue);
+					Timestamp ts = new Timestamp(tsval);
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					escapedValue = df.format(ts);
+				} catch (Exception e) {
+					// Just leave it blank
+					escapedValue = "";
+				}
+			}
 		}
 		
 		String size = null;
