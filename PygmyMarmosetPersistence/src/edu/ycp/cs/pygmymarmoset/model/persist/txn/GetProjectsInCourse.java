@@ -33,7 +33,7 @@ public class GetProjectsInCourse extends DatabaseRunnable<java.util.List<Project
 		while (resultSet.next()) {
 			Project project = new Project();
 			Query.loadFields(project, resultSet);
-			System.out.printf("Got project %s: %s (visible=%s)\n", project.getName(), project.getDescription(), project.isVisible());
+			//System.out.printf("Got project %s: %s (visible=%s)\n", project.getName(), project.getDescription(), project.isVisible());
 			result.add(project);
 		}
 		return result;
