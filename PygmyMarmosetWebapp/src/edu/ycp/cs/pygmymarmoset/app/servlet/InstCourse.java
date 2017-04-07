@@ -15,7 +15,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
-@Route(pattern="/i/index/*", view="/_view/instCourse.jsp")
+@Route(pattern="/i/course/*", view="/_view/instCourse.jsp")
 @Navigation(parent=Index.class)
 @CrumbSpec(text="%c, %t", items={PathInfoItem.COURSE_ID})
 public class InstCourse extends AbstractServlet {

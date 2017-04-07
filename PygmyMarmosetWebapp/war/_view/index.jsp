@@ -27,7 +27,7 @@
 							<td>
 								<c:if test="${t.third.instructor}">
 									<!-- instructor course link -->
-									<a href="${pageContext.servletContext.contextPath}/i/index/${t.first.id}">${t.first.name}: ${t.first.title}</a>
+									<a href="${pageContext.servletContext.contextPath}/i/course/${t.first.id}">${t.first.name}: ${t.first.title}</a>
 								</c:if>
 								<c:if test="${not t.third.instructor}">
 									<!-- student course link -->
