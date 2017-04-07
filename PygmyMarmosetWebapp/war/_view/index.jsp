@@ -11,7 +11,33 @@
 		<pm:header/>
 		<div id="content">
 			<pm:crumbs/>
-			<p>Welcome to Pygmy Marmoset!</p>
+			<h1>Courses</h1>
+			<table class="objtable">
+				<thead>
+					<th>Course</th>
+					<th>Term</th>
+					<th>Role</th>
+				</thead>
+				<tbody>
+					<!-- items are Triple<Course, Term, RoleType> -->
+					<c:forEach items="${courses}" var="t">
+						<tr>
+							<td>
+								<c:if test="${t.third.instructor}">
+									<!-- instructor course link -->
+									<a href="${pageContext.servletContext.contextPath}/i/index/${t.first.id}">${t.first.name}: ${t.first.title}</a>
+								</c:if>
+								<c:if test="${not t.third.instructor}">
+									<!-- student course link -->
+									<a href="${pageContext.servletContext.contextPath}/u/course/${t.first.id}">${t.first.name}: ${t.first.title}</a>
+								</c:if>
+							</td>
+							<td>${t.second.name} ${t.first.year}</td>
+							<td>${t.third}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</body>
 </html>

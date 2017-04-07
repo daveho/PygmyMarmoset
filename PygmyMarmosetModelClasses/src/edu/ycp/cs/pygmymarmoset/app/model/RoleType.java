@@ -8,4 +8,8 @@ public enum RoleType {
 	public String toString() {
 		return super.toString().toLowerCase();
 	}
+	
+	public boolean isInstructor() {
+		return this == INSTRUCTOR;
+	}
 }

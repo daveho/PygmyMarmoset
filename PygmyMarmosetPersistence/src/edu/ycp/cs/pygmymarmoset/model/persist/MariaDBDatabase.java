@@ -13,8 +13,10 @@ import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
+import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
@@ -23,6 +25,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetCoursesForUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
@@ -118,6 +121,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Project> getProjectsInCourse(Course course) {
 		return execute(new GetProjectsInCourse(course));
+	}
+	
+	@Override
+	public List<Triple<Course, Term, RoleType>> getCoursesForUser(User user) {
+		return execute(new GetCoursesForUser(user));
 	}
 
 	private Connection createConnection() {

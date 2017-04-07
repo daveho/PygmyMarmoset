@@ -6,8 +6,10 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
+import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public interface IDatabase {
@@ -26,4 +28,5 @@ public interface IDatabase {
 	public List<String> suggestUsernames(String term);
 	public boolean createProject(Course course, Project project);
 	public List<Project> getProjectsInCourse(Course course);
+	public List<Triple<Course, Term, RoleType>> getCoursesForUser(User user);
 }
