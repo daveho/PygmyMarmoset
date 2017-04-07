@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
-import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 
 public class CreateProject extends DatabaseRunnable<Boolean> {
@@ -20,6 +19,8 @@ public class CreateProject extends DatabaseRunnable<Boolean> {
 
 	@Override
 	public Boolean execute(Connection conn) throws SQLException {
-		throw new PygmyMarmosetException("TODO - implement");
+		project.setCourseId(course.getId());
+		InsertModelObject<Project> insertProj = new InsertModelObject<Project>(project);
+		return insertProj.execute(conn);
 	}
 }

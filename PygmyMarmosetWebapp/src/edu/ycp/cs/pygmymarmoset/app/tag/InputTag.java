@@ -3,7 +3,6 @@ package edu.ycp.cs.pygmymarmoset.app.tag;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -11,6 +10,7 @@ import javax.servlet.jsp.JspWriter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
+import edu.ycp.cs.pygmymarmoset.app.servlet.Constants;
 import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 
 public class InputTag extends BeanTag {
@@ -65,7 +65,7 @@ public class InputTag extends BeanTag {
 				try {
 					tsval = Long.parseLong(escapedValue);
 					Timestamp ts = new Timestamp(tsval);
-					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat df = new SimpleDateFormat(Constants.DATETIME_FORMAT);
 					escapedValue = df.format(ts);
 				} catch (Exception e) {
 					// Just leave it blank

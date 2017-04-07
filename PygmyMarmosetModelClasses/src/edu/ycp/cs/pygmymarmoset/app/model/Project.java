@@ -6,8 +6,12 @@ public class Project {
 	
 	private int courseId;
 
-	@Desc(size=60)
+	@Unique(with="courseId") // project name must be unique within course
+	@Desc(size=40)
 	private String name;
+	
+	@Desc(size=80)
+	private String description;
 	
 	@Timestamp
 	private long ontime;
@@ -43,6 +47,14 @@ public class Project {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 
 	public long getOntime() {

@@ -26,6 +26,10 @@
 						<td><pm:input obj="project" field="name"/></td>
 					</tr>
 					<tr>
+						<td class="formlabel">Description:</td>
+						<td><pm:input obj="project" field="description"/></td>
+					</tr>
+					<tr>
 						<td class="formlabel">Ontime deadline:</td>
 						<td><pm:input id="proj-ontime" obj="project" field="ontime"/></td>
 					</tr>

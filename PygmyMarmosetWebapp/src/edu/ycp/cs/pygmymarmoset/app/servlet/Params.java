@@ -1,5 +1,7 @@
 package edu.ycp.cs.pygmymarmoset.app.servlet;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +79,12 @@ public class Params {
 						boolean isChecked = (value != null && !value.trim().equals(""));
 						//System.out.println(paramName + "=" + isChecked);
 						PropertyUtils.setProperty(obj, propertyName, isChecked);
+					} else if (f.isTimestamp()) {
+						if (value != null) {
+							SimpleDateFormat df = new SimpleDateFormat(Constants.DATETIME_FORMAT);
+							Date date = df.parse(value);
+							PropertyUtils.setProperty(obj, propertyName, date.getTime());
+						}
 					} else {
 						// Other types of fields can be unmarshaled from the
 						// value of the parameter.

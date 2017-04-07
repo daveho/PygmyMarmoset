@@ -31,6 +31,7 @@ public class InstCreateProject extends AbstractFormServlet {
 		
 		// Success!
 		req.setAttribute("project", new Project()); // blank out form fields
+		req.setAttribute("resultmsg", "Created project " + project.getName() + " successfully");
 		
 		return LogicOutcome.STAY_ON_PAGE;
 	}
