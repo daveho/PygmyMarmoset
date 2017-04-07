@@ -14,7 +14,26 @@
 			<pm:crumbs/>
 			<h1>${courseDisplayName}</h1>
 			<h2>Projects</h2>
-			<p>TODO: projects</p>
+			<table class="objtable">
+				<thead>
+					<tr>
+						<th>Project</th>
+						<th>Ontime</th>
+						<th>Late</th>
+						<th>Visible?</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${projects}" var="proj">
+						<tr>
+							<td><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${proj.id}">${proj.name}: ${proj.description}</a></td>
+							<td><pm:timestamp val="${proj.ontime}"/></td>
+							<td><pm:timestamp val="${proj.late}"/></td>
+							<td>${proj.visible}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			<h2>Members</h2>
 			<table class="objtable">
 				<thead>

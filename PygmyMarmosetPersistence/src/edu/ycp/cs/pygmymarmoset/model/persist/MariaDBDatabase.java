@@ -23,6 +23,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
@@ -112,6 +113,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean createProject(Course course, Project project) {
 		return execute(new CreateProject(course, project));
+	}
+	
+	@Override
+	public List<Project> getProjectsInCourse(Course course) {
+		return execute(new GetProjectsInCourse(course));
 	}
 
 	private Connection createConnection() {

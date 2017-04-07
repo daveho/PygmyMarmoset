@@ -31,7 +31,7 @@ public class ServletUtil {
 			path = path.substring(1);
 		}
 		String[] items = path.split("/");
-		System.out.println("Items are: " + String.join(":", items));
+		//System.out.println("Items are: " + String.join(":", items));
 		if (items.length < spec.length()) {
 			throw new ServletException("Too few elements in path " + path + " (need " + spec.length() + " args)");
 		}

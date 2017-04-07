@@ -25,4 +25,5 @@ public interface IDatabase {
 	public Roles getUserRolesInCourse(User user, Course course);
 	public List<String> suggestUsernames(String term);
 	public boolean createProject(Course course, Project project);
+	public List<Project> getProjectsInCourse(Course course);
 }
