@@ -151,3 +151,13 @@ table.objtable tr td a {
 table.objtable tr td a:hover {
 	text-decoration: underline;
 }
+
+a.crumb {
+	color: black;
+	text-decoration: none;
+}
+
+a.crumb:hover {
+	color: black;
+	text-decoration: underline;
+}

@@ -10,6 +10,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>Create course</h1>
 			<form action="${pageContext.servletContext.contextPath}/a/createCourse" method="post">
 				<table class="formtab">

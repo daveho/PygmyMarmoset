@@ -10,6 +10,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>Admin Home</h1>
 			<div class="navgroup">
 				<ul>

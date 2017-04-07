@@ -9,6 +9,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>All courses</h1>
 			<table class="objtable">
 				<thead>

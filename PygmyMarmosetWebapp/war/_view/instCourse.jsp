@@ -11,6 +11,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>${courseDisplayName}</h1>
 			<h2>Projects</h2>
 			<p>TODO: projects</p>

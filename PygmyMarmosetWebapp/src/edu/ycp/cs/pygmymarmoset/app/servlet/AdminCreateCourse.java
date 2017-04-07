@@ -10,6 +10,8 @@ import edu.ycp.cs.pygmymarmoset.app.controller.ListAllTermsController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 
 @Route(pattern="/a/createCourse", view="/_view/adminCreateCourse.jsp")
+@Navigation(parent=AdminIndex.class)
+@CrumbSpec(text="Create course")
 public class AdminCreateCourse extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 	

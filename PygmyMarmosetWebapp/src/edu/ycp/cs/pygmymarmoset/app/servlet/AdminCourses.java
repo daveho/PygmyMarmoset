@@ -14,6 +14,8 @@ import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
 @Route(pattern="/a/courses", view="/_view/adminCourses.jsp")
+@Navigation(parent=AdminIndex.class)
+@CrumbSpec(text="Courses")
 public class AdminCourses extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 

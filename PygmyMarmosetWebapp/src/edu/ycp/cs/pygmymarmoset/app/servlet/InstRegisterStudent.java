@@ -12,6 +12,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 @Route(pattern="/i/regStudent/*", view="/_view/instRegisterStudent.jsp")
+@Navigation(parent=InstCourse.class)
 public class InstRegisterStudent extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 

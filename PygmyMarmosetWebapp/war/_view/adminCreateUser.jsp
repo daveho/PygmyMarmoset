@@ -10,6 +10,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>Create user</h1>
 			<form action="${pageContext.servletContext.contextPath}/a/createUser" method="post">
 				<table class="formtab">

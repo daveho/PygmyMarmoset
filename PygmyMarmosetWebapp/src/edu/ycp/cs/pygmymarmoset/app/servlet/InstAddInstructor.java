@@ -11,6 +11,8 @@ import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 @Route(pattern="/i/addInst/*", view="/_view/instAddInst.jsp")
+@Navigation(parent=InstCourse.class)
+@CrumbSpec(text="Add instructor", items={PathInfoItem.COURSE_ID})
 public class InstAddInstructor extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 

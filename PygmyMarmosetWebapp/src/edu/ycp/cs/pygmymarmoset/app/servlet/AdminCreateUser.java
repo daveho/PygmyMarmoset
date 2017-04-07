@@ -9,6 +9,8 @@ import edu.ycp.cs.pygmymarmoset.app.controller.CreateUserController;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 @Route(pattern="/a/createUser", view="/_view/adminCreateUser.jsp")
+@Navigation(parent=AdminIndex.class)
+@CrumbSpec(text="Create user")
 public class AdminCreateUser extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -11,6 +11,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>Register student in ${courseDisplayName}</h1>
 			<form action="${pageContext.servletContext.contextPath}/i/regStudent/${course.id}" method="post">
 				<table class="formtab">

@@ -10,6 +10,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<p>Welcome to Pygmy Marmoset!</p>
 		</div>
 	</body>

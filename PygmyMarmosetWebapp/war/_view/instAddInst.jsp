@@ -31,6 +31,7 @@
 	<body>
 		<pm:header/>
 		<div id="content">
+			<pm:crumbs/>
 			<h1>Add instructor in ${courseDisplayName}</h1>
 			<form action="${pageContext.servletContext.contextPath}/i/addInst/${course.id}" method="post">
 				<table class="formtab">
