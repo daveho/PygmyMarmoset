@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.model.User;
-import edu.ycp.cs.pygmymarmoset.app.servlet.ServletUtil;
+import edu.ycp.cs.pygmymarmoset.app.util.ServletUtil;
 
 public class RequireSuperUser extends AbstractLoginFilter implements Filter {
 	@Override

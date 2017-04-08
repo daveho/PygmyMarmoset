@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Access is forbidden</title>
+		<title>${title}</title>
 	</head>
 	<body>
 		<p class="errmsg">${errmsg.text}</p>

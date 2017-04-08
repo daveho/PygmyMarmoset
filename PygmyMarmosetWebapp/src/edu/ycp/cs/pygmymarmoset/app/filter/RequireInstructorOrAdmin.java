@@ -15,7 +15,7 @@ import edu.ycp.cs.pygmymarmoset.app.controller.GetRoleController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
-import edu.ycp.cs.pygmymarmoset.app.servlet.ServletUtil;
+import edu.ycp.cs.pygmymarmoset.app.util.ServletUtil;
 
 /**
  * Filter to require that logged in user is either an
