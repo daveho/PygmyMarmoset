@@ -113,6 +113,10 @@ public abstract class AbstractServlet extends HttpServlet {
 				Course course = (Course) req.getAttribute("course");
 				uri.append(course.getId());
 				break;
+			case PROJECT_ID:
+				uri.append("/");
+				uri.append("999"); // FIXME
+				break;
 			case USER_ID:
 				throw new IllegalStateException(item + " not handled yet");
 			default:
@@ -140,6 +144,8 @@ public abstract class AbstractServlet extends HttpServlet {
 				Term term = (Term) req.getAttribute("term");
 				Course course = (Course) req.getAttribute("course");
 				m.appendReplacement(buf, term.getName() + " " + course.getYear());
+			} else if (placeholder.equals("%p")) {
+				m.appendReplacement(buf, "«TODO project name»"); // FIXME
 			} else {
 				throw new IllegalArgumentException("Unknown placeholder: " + placeholder);
 			}
