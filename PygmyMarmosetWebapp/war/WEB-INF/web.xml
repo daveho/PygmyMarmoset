@@ -87,6 +87,10 @@
 		<filter-name>StudentLoadProject</filter-name>
 		<url-pattern>/u/project/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>StudentLoadProject</filter-name>
+		<url-pattern>/u/submit/*</url-pattern>
+	</filter-mapping>
 	
 	<!--
 		Use the Welcome servlet as the welcome page.
