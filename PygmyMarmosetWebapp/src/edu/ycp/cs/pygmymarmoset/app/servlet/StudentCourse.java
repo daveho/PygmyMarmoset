@@ -26,7 +26,8 @@ public class StudentCourse extends AbstractServlet {
 		
 		// Load projects
 		GetStudentProjectsController getStudentProjects = new GetStudentProjectsController();
-		List<Pair<Project, Integer>> projects = getStudentProjects.getStudentProjects(course, user);
+		List<Pair<Project, Integer>> studentProjects = getStudentProjects.getStudentProjects(course, user);
+		req.setAttribute("studentProjects", studentProjects);
 		
 		delegateToView(req, resp);
 	}
