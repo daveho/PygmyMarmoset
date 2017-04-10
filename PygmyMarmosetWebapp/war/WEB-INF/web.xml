@@ -33,6 +33,10 @@
 		<filter-name>RequireInstructorOrAdmin</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireInstructorOrAdmin</filter-class>
 	</filter>
+	<filter>
+		<filter-name>InstLoadProject</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.InstLoadProject</filter-class>
+	</filter>
 	<filter-mapping>
 		<!--
 			Parses path info args.
@@ -58,6 +62,10 @@
 	<filter-mapping>
 		<filter-name>RequireInstructorOrAdmin</filter-name> <!-- Note: must be *after* LoadCourse -->
 		<url-pattern>/i/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>InstLoadProject</filter-name>
+		<url-pattern>/i/project/*</url-pattern>
 	</filter-mapping>
 	
 	<!--

@@ -5,14 +5,14 @@
 <c:set var="courseDisplayName" value="${course.name}, ${term.name} ${course.year}"/>
 <html>
 	<head>
-		<pm:headStuff title="${courseDisplayName}: Project «TODO project name»"/>
+		<pm:headStuff title="${courseDisplayName}: Project ${project.name}"/>
 	</head>
 	
 	<body>
 		<pm:header/>
 		<div id="content">
 			<pm:crumbs/>
-			<h1>${courseDisplayName}: Project «TODO project name»</h1>
+			<h1>${courseDisplayName}: Project ${project.name}</h1>
 			<p>TODO: content</p>
 		</div>
 	</body>

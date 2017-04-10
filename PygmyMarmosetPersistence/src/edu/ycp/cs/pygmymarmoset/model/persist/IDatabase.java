@@ -29,4 +29,5 @@ public interface IDatabase {
 	public boolean createProject(Course course, Project project);
 	public List<Project> getProjectsInCourse(Course course);
 	public List<Triple<Course, Term, RoleType>> getCoursesForUser(User user);
+	public Project findProjectForProjectId(int projectId);
 }

@@ -34,20 +34,20 @@ public class RequireInstructorOrAdmin extends AbstractLoginFilter implements Fil
 		HttpServletRequest req = (HttpServletRequest) req_;
 		User user = (User) req.getSession().getAttribute("user");
 		
-		if (!user.isSuperUser()) {
-			// User is not a superuser, so check whether user is an instructor in the course
-			Course course = (Course) req.getAttribute("course");
-			if (course == null) {
-				throw new ServletException("No course");
-			}
-			
-			GetRoleController getRole = new GetRoleController();
-			Roles roles = getRole.execute(user, course);
-			
-			if (!roles.isInstructor()) {
-				ServletUtil.sendForbidden(req, (HttpServletResponse)resp_, "Superuser or instructor privileges are required");
-				return;
-			}
+		Course course = (Course) req.getAttribute("course");
+		if (course == null) {
+			throw new ServletException("No course");
+		}
+		
+		// Get Roles, add them to request.
+		// Prevent access if user does not have
+		// instructor privileges in the course.
+		GetRoleController getRole = new GetRoleController();
+		Roles roles = getRole.execute(user, course);
+		req.setAttribute("roles", roles);
+		if (!roles.isInstructor()) {
+			ServletUtil.sendForbidden(req, (HttpServletResponse)resp_, "Superuser or instructor privileges are required");
+			return;
 		}
 		
 		chain.doFilter(req_, resp_);

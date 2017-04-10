@@ -9,7 +9,9 @@ import java.util.List;
  * {@link Course}.  There can be more than one in the case
  * that an instructor is teaching multiple sections.
  * (Students should only ever be registered in a single
- * section.)
+ * section.)  Note that a {@link Roles} object can be
+ * "empty" if the user has no roles in the course.
+ * Use the {@link #isEmpty()} method to check for this.
  */
 public class Roles {
 	private List<Role> roles;
@@ -27,11 +29,10 @@ public class Roles {
 	}
 
 	public boolean isInstructor() {
-		for (Role role : roles) {
-			if (role.getType() == RoleType.INSTRUCTOR) {
-				return true;
-			}
-		}
-		return false;
+		return roles.stream().anyMatch((r) -> r.getType() == RoleType.INSTRUCTOR);
+	}
+	
+	public boolean isEmpty() {
+		return roles.isEmpty();
 	}
 }

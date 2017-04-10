@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 
 public abstract class AbstractServlet extends HttpServlet {
@@ -115,12 +116,11 @@ public abstract class AbstractServlet extends HttpServlet {
 				break;
 			case PROJECT_ID:
 				uri.append("/");
-				uri.append("999"); // FIXME
+				Project project = (Project) req.getAttribute("project");
+				uri.append(project.getId());
 				break;
-			case USER_ID:
-				throw new IllegalStateException(item + " not handled yet");
 			default:
-				throw new IllegalStateException("Unhandled path info item type: " + item);
+				throw new IllegalStateException(item + " not handled yet");
 			}
 		}
 		
@@ -145,7 +145,8 @@ public abstract class AbstractServlet extends HttpServlet {
 				Course course = (Course) req.getAttribute("course");
 				m.appendReplacement(buf, term.getName() + " " + course.getYear());
 			} else if (placeholder.equals("%p")) {
-				m.appendReplacement(buf, "«TODO project name»"); // FIXME
+				Project project = (Project) req.getAttribute("project");
+				m.appendReplacement(buf, project.getName());
 			} else {
 				throw new IllegalArgumentException("Unknown placeholder: " + placeholder);
 			}

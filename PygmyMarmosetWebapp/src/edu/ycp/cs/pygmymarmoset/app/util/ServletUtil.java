@@ -10,12 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs.pygmymarmoset.app.model.ErrorMessage;
 
 public class ServletUtil {
-	public static void sendForbidden(HttpServletRequest req, HttpServletResponse resp, String errmsgText) throws ServletException, IOException {
+	public static void sendForbidden(HttpServletRequest req, HttpServletResponse resp, String errmsgText)
+			throws ServletException, IOException {
 		sendErrorResponse(req, resp, "Access is forbidden", errmsgText, HttpServletResponse.SC_FORBIDDEN);
 	}
 
-	public static void sendBadRequest(HttpServletRequest req, HttpServletResponse resp, String errmsgText) throws ServletException, IOException {
+	public static void sendBadRequest(HttpServletRequest req, HttpServletResponse resp, String errmsgText)
+			throws ServletException, IOException {
 		sendErrorResponse(req, resp, "Bad request", errmsgText, HttpServletResponse.SC_BAD_REQUEST);
+	}
+
+	public static void sendNotFound(HttpServletRequest req, HttpServletResponse resp, String errmsgText)
+			throws ServletException, IOException {
+		sendErrorResponse(req, resp, "Not found", errmsgText, HttpServletResponse.SC_NOT_FOUND);
 	}
 	
 	private static void sendErrorResponse(
