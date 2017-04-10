@@ -16,8 +16,8 @@
 			<table class="objtable">
 				<thead>
 					<tr>
-						<td>Entry</td>
-						<td>Size</td>
+						<th>Entry</th>
+						<th>Size</th>
 					</tr>
 				</thead>
 				<tbody>

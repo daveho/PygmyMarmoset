@@ -42,7 +42,14 @@ public class GetSubmissionIndexController {
 					e.setIndex(index++);
 					e.setName(entry.getName());
 					e.setSize(entry.getSize());
+					entries.add(e);
 				}
+				/*
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				IOUtils.copy(blobIn, out);
+				byte[] arr = out.toByteArray();
+				System.out.printf("Read %d bytes\n", arr.length);
+				*/
 			} catch (IOException e) {
 				// This is probably not a zip file
 				logger.info("Submission {} doesn't appear to be a zip file", submissionId);
