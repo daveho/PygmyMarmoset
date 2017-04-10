@@ -30,4 +30,6 @@ public interface IDatabase {
 	public List<Project> getProjectsInCourse(Course course);
 	public List<Triple<Course, Term, RoleType>> getCoursesForUser(User user);
 	public Project findProjectForProjectId(int projectId);
+	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user);
+	public Pair<User, Roles> findUserInCourse(Course course, int userId);
 }

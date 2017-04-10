@@ -23,6 +23,10 @@ public class Roles {
 	public void addRole(Role role) {
 		roles.add(role);
 	}
+
+	public void addAll(List<Role> roles) {
+		this.roles.addAll(roles);
+	}
 	
 	public List<Role> getRoles() {
 		return Collections.unmodifiableList(roles);

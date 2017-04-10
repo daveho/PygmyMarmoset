@@ -13,7 +13,7 @@
 		<div id="content">
 			<pm:crumbs/>
 			<h1>${courseDisplayName}</h1>
-			<a href="${pageContext.servletContext.contextPath}/u/course/${course.id}">Student page</a>
+			<a href="${pageContext.servletContext.contextPath}/u/course/${course.id}/${user.id}">Student page</a>
 			<h2>Projects</h2>
 			<table class="objtable">
 				<thead>
