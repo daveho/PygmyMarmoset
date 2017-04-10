@@ -34,6 +34,10 @@
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireInstructorOrAdmin</filter-class>
 	</filter>
 	<filter>
+		<filter-name>RequireStudent</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireStudent</filter-class>
+	</filter>
+	<filter>
 		<filter-name>InstLoadProject</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.InstLoadProject</filter-class>
 	</filter>
@@ -49,19 +53,27 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>RequireLogin</filter-name>
-		<url-pattern>/u/*</url-pattern>
+		<url-pattern>/index</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>RequireSuperUser</filter-name>
 		<url-pattern>/a/*</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
+	<filter-mapping> <!-- Load course for all instructor servlets -->
 		<filter-name>LoadCourse</filter-name>
 		<url-pattern>/i/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping> <!-- Load course for all student servlets -->
+		<filter-name>LoadCourse</filter-name>
+		<url-pattern>/u/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>RequireInstructorOrAdmin</filter-name> <!-- Note: must be *after* LoadCourse -->
 		<url-pattern>/i/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RequireStudent</filter-name> <!-- Note: must be *after* LoadCourse -->
+		<url-pattern>/u/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>InstLoadProject</filter-name>

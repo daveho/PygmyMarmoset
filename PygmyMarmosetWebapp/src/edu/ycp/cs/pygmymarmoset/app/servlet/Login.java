@@ -33,7 +33,7 @@ public class Login extends AbstractFormServlet {
 			if (creds.hasGoal()) {
 				target = creds.getGoal();
 			} else {
-				target = req.getContextPath() + "/u/index";
+				target = req.getContextPath() + "/index";
 			}
 			resp.sendRedirect(target);
 

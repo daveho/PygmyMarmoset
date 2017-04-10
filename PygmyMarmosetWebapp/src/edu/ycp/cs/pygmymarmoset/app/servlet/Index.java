@@ -14,7 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
-@Route(pattern="/u/index", view="/_view/index.jsp")
+@Route(pattern="/index", view="/_view/index.jsp")
 @CrumbSpec(text="Home")
 public class Index extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

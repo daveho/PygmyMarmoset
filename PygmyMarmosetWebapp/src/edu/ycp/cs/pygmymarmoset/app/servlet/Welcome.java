@@ -23,7 +23,7 @@ public class Welcome extends AbstractServlet {
 		if (user == null) {
 			resp.sendRedirect(req.getContextPath() + "/login");
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/u/index");
+			resp.sendRedirect(req.getContextPath() + "/index");
 		}
 	}
 }
