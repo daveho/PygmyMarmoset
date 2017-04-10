@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import edu.ycp.cs.pygmymarmoset.app.model.Blob;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Desc;
 import edu.ycp.cs.pygmymarmoset.app.model.PrimaryKey;
@@ -76,6 +77,10 @@ public class Introspect<E> {
 					Timestamp ts = f.getAnnotation(Timestamp.class);
 					if (ts != null) {
 						dbField.setTimestamp(true);
+					}
+					Blob blob = f.getAnnotation(Blob.class);
+					if (blob != null) {
+						dbField.setBlob(true);
 					}
 				}
 				fields.add(dbField);

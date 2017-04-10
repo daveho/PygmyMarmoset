@@ -7,6 +7,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
@@ -29,6 +30,7 @@ public class CreateDatabase {
 		createTable(db, Project.class);
 		createTable(db, Role.class);
 		createTable(db, Submission.class);
+		createTable(db, SubmissionBlob.class);
 		createTable(db, User.class);
 		createTable(db, Term.class);
 		

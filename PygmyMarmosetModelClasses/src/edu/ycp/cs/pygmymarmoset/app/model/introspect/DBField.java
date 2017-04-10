@@ -15,6 +15,7 @@ public class DBField {
 	private boolean unique;
 	private String uniqueWith;
 	private boolean timestamp;
+	private boolean blob;
 	
 	public DBField() {
 		
@@ -107,6 +108,14 @@ public class DBField {
 	public boolean isTimestamp() {
 		return timestamp;
 	}
+	
+	public void setBlob(boolean blob) {
+		this.blob = blob;
+	}
+	
+	public boolean isBlob() {
+		return blob;
+	}
 
 	private static Map<Class<?>, String> javaToSqlType = new HashMap<>();
 	static {
@@ -137,6 +146,12 @@ public class DBField {
 		} else if (Enum.class.isAssignableFrom(javaType)) {
 			// Enums are mapped to intss in the database
 			return "int";
+		} else if (javaType == byte[].class) {
+			// Make sure the @Blob annotation is present
+			if (!blob) {
+				throw new IllegalStateException("byte[] field not annotated with @Blob");
+			}
+			return "mediumblob";
 		} else {
 			String sqlType = javaToSqlType.get(javaType);
 			if (sqlType == null) {
