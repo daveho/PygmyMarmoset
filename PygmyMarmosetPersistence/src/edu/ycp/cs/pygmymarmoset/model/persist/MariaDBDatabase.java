@@ -155,7 +155,9 @@ public class MariaDBDatabase implements IDatabase {
 
 	private Connection createConnection() {
 		try {
-			return DriverManager.getConnection(JDBC_URL);
+			Connection conn = DriverManager.getConnection(JDBC_URL);
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+			return conn;
 		} catch (SQLException e) {
 			throw new PersistenceException("Couldn't create JDBC connection", e);
 		}
