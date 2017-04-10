@@ -81,6 +81,12 @@
 		</attribute>
 	</tag>
 	
+	<tag>
+		<name>viewEntry</name>
+		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.ViewEntryTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
 	<tag-file>
 		<name>headStuff</name>
 		<path>/WEB-INF/tags/headStuff.tag</path>

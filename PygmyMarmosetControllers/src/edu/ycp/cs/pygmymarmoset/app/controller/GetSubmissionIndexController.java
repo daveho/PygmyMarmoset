@@ -10,11 +10,11 @@ import java.util.zip.ZipInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
+import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
-import edu.ycp.cs.pygmymarmoset.model.persist.IReadBlob;
 
 public class GetSubmissionIndexController {
 	private static Logger logger = LoggerFactory.getLogger(GetSubmissionIndexController.class);
@@ -28,7 +28,7 @@ public class GetSubmissionIndexController {
 		}
 		
 		@Override
-		public void readBlob(InputStream blobIn) {
+		public void readBlob(InputStream blobIn, String name) {
 			try {
 				System.out.println("Reading blob input!!!");
 				ZipInputStream zin = new ZipInputStream(blobIn);
@@ -44,12 +44,6 @@ public class GetSubmissionIndexController {
 					e.setSize(entry.getSize());
 					entries.add(e);
 				}
-				/*
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				IOUtils.copy(blobIn, out);
-				byte[] arr = out.toByteArray();
-				System.out.printf("Read %d bytes\n", arr.length);
-				*/
 			} catch (IOException e) {
 				// This is probably not a zip file
 				logger.info("Submission {} doesn't appear to be a zip file", submissionId);

@@ -14,7 +14,7 @@
 			<pm:crumbs/>
 			<h1>${courseDisplayName}: Submission ${submission.submissionNumber} in ${project.name}</h1>
 			<h2>Entry: ${entryIndex}</h2>
-			<p>TODO: content</p>
+			<pm:viewEntry/>
 			<pm:notification/>
 		</div>
 	</body>
