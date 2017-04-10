@@ -100,8 +100,16 @@
 		<url-pattern>/u/submission/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>StudentLoadProject</filter-name>
+		<url-pattern>/u/entry/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>StudentLoadSubmission</filter-name>
 		<url-pattern>/u/submission/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>StudentLoadSubmission</filter-name>
+		<url-pattern>/u/entry/*</url-pattern>
 	</filter-mapping>
 	
 	<!--

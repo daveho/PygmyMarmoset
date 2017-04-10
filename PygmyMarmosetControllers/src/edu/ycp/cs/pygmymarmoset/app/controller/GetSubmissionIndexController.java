@@ -10,7 +10,7 @@ import java.util.zip.ZipInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.ycp.cs.pygmymarmoset.app.model.IndexEntry;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
@@ -21,7 +21,7 @@ public class GetSubmissionIndexController {
 	
 	private static class IndexReader implements IReadBlob {
 		final int submissionId;
-		final List<IndexEntry> entries = new ArrayList<>();
+		final List<SubmissionEntry> entries = new ArrayList<>();
 		
 		public IndexReader(int submissionId) {
 			this.submissionId = submissionId;
@@ -38,7 +38,7 @@ public class GetSubmissionIndexController {
 					if (entry == null) {
 						break;
 					}
-					IndexEntry e = new IndexEntry();
+					SubmissionEntry e = new SubmissionEntry();
 					e.setIndex(index++);
 					e.setName(entry.getName());
 					e.setSize(entry.getSize());
@@ -57,7 +57,7 @@ public class GetSubmissionIndexController {
 		}
 	}
 	
-	public List<IndexEntry> execute(Submission submission) {
+	public List<SubmissionEntry> execute(Submission submission) {
 		IDatabase db = DatabaseProvider.getInstance();
 		IndexReader reader = new IndexReader(submission.getId());
 		db.readSubmissionBlob(submission, reader);

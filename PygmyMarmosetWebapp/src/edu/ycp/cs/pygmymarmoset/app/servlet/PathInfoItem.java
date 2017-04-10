@@ -11,4 +11,6 @@ public enum PathInfoItem {
 	PROJECT_ID,
 	/** Path info specifies a {@link Submission} id. */
 	SUBMISSION_ID,
+	/** Path info specifies the index of an {@link IndexEntry} in a submission. */
+	ENTRY_INDEX,
 }

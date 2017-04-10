@@ -13,22 +13,8 @@
 		<div id="content">
 			<pm:crumbs/>
 			<h1>${courseDisplayName}: Submission ${submission.submissionNumber} in ${project.name}</h1>
-			<table class="objtable">
-				<thead>
-					<tr>
-						<th>Entry</th>
-						<th>Size</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${entries}" var="e">
-						<tr>
-							<td><a href="${pageContext.servletContext.contextPath}/u/entry/${course.id}/${student.id}/${project.id}/${submission.id}/${e.index}">${e.name}</a></td>
-							<td style="text-align: right;">${e.size}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+			<h2>Entry: ${entryIndex}</h2>
+			<p>TODO: content</p>
 			<pm:notification/>
 		</div>
 	</body>

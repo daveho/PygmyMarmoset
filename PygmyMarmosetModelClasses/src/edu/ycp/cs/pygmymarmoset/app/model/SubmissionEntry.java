@@ -1,11 +1,14 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
-public class IndexEntry {
+/**
+ * Used to represent an entry in a submission zipfile.
+ */
+public class SubmissionEntry {
 	private String name;
 	private long size;
 	private int index;
 	
-	public IndexEntry() {
+	public SubmissionEntry() {
 		
 	}
 

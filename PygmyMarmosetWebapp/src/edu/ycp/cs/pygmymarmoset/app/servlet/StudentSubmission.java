@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.GetSubmissionIndexController;
-import edu.ycp.cs.pygmymarmoset.app.model.IndexEntry;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 
 @Route(pattern="/u/submission/*", view="/_view/studentSubmission.jsp")
@@ -24,7 +24,7 @@ public class StudentSubmission extends AbstractServlet {
 		Submission submission = (Submission) req.getAttribute("submission");
 		
 		GetSubmissionIndexController getIndex = new GetSubmissionIndexController();
-		List<IndexEntry> entries = getIndex.execute(submission);
+		List<SubmissionEntry> entries = getIndex.execute(submission);
 		
 		req.setAttribute("entries", entries);
 		System.out.printf("Found %d entries in submission\n", entries.size());

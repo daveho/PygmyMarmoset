@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -128,6 +129,10 @@ public abstract class AbstractServlet extends HttpServlet {
 				Submission submission = (Submission) req.getAttribute("submission");
 				uri.append(submission.getId());
 				break;
+			case ENTRY_INDEX:
+				Integer entryIndex = (Integer) req.getAttribute("entryIndex");
+				uri.append(entryIndex);
+				break;
 			default:
 				throw new IllegalStateException(item + " not handled yet");
 			}
@@ -159,6 +164,9 @@ public abstract class AbstractServlet extends HttpServlet {
 			} else if (placeholder.equals("%s")) {
 				Submission submission = (Submission) req.getAttribute("submission");
 				m.appendReplacement(buf, String.valueOf(submission.getSubmissionNumber()));
+			} else if (placeholder.equals("%e")) {
+				Integer entryIndex = (Integer) req.getAttribute("entryIndex");
+				m.appendReplacement(buf, entryIndex.toString());
 			} else {
 				throw new IllegalArgumentException("Unknown placeholder: " + placeholder);
 			}
