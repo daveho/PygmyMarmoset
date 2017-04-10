@@ -12,6 +12,10 @@ import edu.ycp.cs.pygmymarmoset.app.model.IndexEntry;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 
 @Route(pattern="/u/submission/*", view="/_view/studentSubmission.jsp")
+@Navigation(parent=StudentProject.class)
+@CrumbSpec(
+		text="Submission %s",
+		items={PathInfoItem.COURSE_ID, PathInfoItem.STUDENT_ID, PathInfoItem.PROJECT_ID, PathInfoItem.SUBMISSION_ID})
 public class StudentSubmission extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,6 +27,7 @@ public class StudentSubmission extends AbstractServlet {
 		List<IndexEntry> entries = getIndex.execute(submission);
 		
 		req.setAttribute("entries", entries);
+		System.out.printf("Found %d entries in submission\n", entries.size());
 		
 		delegateToView(req, resp);
 	}

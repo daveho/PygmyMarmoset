@@ -9,4 +9,6 @@ public enum PathInfoItem {
 	STUDENT_ID,
 	/** Path info specifies a {@link Project} id. */
 	PROJECT_ID,
+	/** Path info specifies a {@link Submission} id. */
+	SUBMISSION_ID,
 }

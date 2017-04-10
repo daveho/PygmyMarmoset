@@ -61,6 +61,8 @@ public class StudentLoadSubmission implements Filter {
 		
 		// Add to request
 		req.setAttribute("submission", submission);
+		
+		chain.doFilter(req_, resp_);
 	}
 
 	@Override

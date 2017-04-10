@@ -30,6 +30,7 @@ public class GetSubmissionIndexController {
 		@Override
 		public void readBlob(InputStream blobIn) {
 			try {
+				System.out.println("Reading blob input!!!");
 				ZipInputStream zin = new ZipInputStream(blobIn);
 				int index = 0;
 				for (;;) {
