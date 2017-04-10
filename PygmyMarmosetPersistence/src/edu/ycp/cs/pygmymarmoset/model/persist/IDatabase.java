@@ -1,5 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.model.persist;
 
+import java.io.InputStream;
 import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
@@ -34,4 +35,5 @@ public interface IDatabase {
 	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user);
 	public Pair<User, Roles> findUserInCourse(Course course, int userId);
 	public List<Submission> getSubmissions(Project project, User student);
+	public Submission createSubmission(Project project, User student, InputStream uploadData);
 }

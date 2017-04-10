@@ -13,7 +13,8 @@
 		<div id="content">
 			<pm:crumbs/>
 			<h1>${courseDisplayName}: Upload submission for ${project.name}</h1>
-			<form action="${pageContext.servletContext.contextPath}/u/submit/${course.id}/${student.id}/${project.id}" method="post">
+			<form action="${pageContext.servletContext.contextPath}/u/submit/${course.id}/${student.id}/${project.id}"
+				enctype="multipart/form-data" method="post">
 				<table class="formtab">
 					<tr>
 						<td class="formlabel">Select file:</td>

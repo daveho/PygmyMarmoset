@@ -13,7 +13,6 @@
 		<div id="content">
 			<pm:crumbs/>
 			<h1>${courseDisplayName}</h1>
-			<a href="${pageContext.servletContext.contextPath}/u/course/${course.id}/${user.id}">Student page</a>
 			<h2>Projects</h2>
 			<table class="objtable">
 				<thead>
@@ -57,9 +56,10 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<h2>Admin</h2>
+			<h2>Options</h2>
 			<div class="navgroup">
 				<ul>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/u/course/${course.id}/${user.id}">Student view</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/createProject/${course.id}">Create project</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/regStudent/${course.id}">Register student</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/addInst/${course.id}">Add instructor</a></li>

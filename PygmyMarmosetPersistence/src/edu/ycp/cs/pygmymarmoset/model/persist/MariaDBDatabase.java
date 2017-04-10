@@ -1,5 +1,6 @@
 package edu.ycp.cs.pygmymarmoset.model.persist;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateProject;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateSubmission;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindProjectForProjectId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
@@ -152,6 +154,11 @@ public class MariaDBDatabase implements IDatabase {
 	public List<Submission> getSubmissions(Project project, User student) {
 		return execute(new GetSubmissions(project, student));
 	}
+	
+	@Override
+	public Submission createSubmission(Project project, User student, InputStream uploadData) {
+		return execute(new CreateSubmission(project, student, uploadData));
+	}
 
 	private Connection createConnection() {
 		try {
@@ -192,7 +199,7 @@ public class MariaDBDatabase implements IDatabase {
 				if (isDeadlock(e)) {
 					logger.warn("Deadlock detected, retrying transaction " + txn.getName(), e);
 					attempts++;
-				} else if (e.getSQLState().equals("23000")) {
+				} else if (e.getSQLState() != null && e.getSQLState().equals("23000")) {
 					throw new PersistenceException("Integrity constraint violation (duplicate field value detected)");
 				} else {
 					throw new PersistenceException("Transaction " + txn.getName() + " failed", e);
