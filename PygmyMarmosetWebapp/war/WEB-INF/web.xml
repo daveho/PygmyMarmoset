@@ -41,6 +41,10 @@
 		<filter-name>InstLoadProject</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.InstLoadProject</filter-class>
 	</filter>
+	<filter>
+		<filter-name>StudentLoadProject</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.StudentLoadProject</filter-class>
+	</filter>
 	<filter-mapping>
 		<!--
 			Parses path info args.
@@ -78,6 +82,10 @@
 	<filter-mapping>
 		<filter-name>InstLoadProject</filter-name>
 		<url-pattern>/i/project/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>StudentLoadProject</filter-name>
+		<url-pattern>/u/project/*</url-pattern>
 	</filter-mapping>
 	
 	<!--

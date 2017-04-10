@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
+import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public abstract class AbstractServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -108,14 +109,17 @@ public abstract class AbstractServlet extends HttpServlet {
 		}
 		uri.append(pattern.substring(0, pattern.length() - 2));
 		for (PathInfoItem item : items) {
+			uri.append("/");
 			switch (item) {
 			case COURSE_ID:
-				uri.append("/");
 				Course course = (Course) req.getAttribute("course");
 				uri.append(course.getId());
 				break;
+			case STUDENT_ID:
+				User student = (User) req.getAttribute("student");
+				uri.append(student.getId());
+				break;
 			case PROJECT_ID:
-				uri.append("/");
 				Project project = (Project) req.getAttribute("project");
 				uri.append(project.getId());
 				break;

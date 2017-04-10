@@ -15,7 +15,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 @Route(pattern="/u/course/*", view="/_view/studentCourse.jsp")
 @Navigation(parent=Index.class)
-@CrumbSpec(text="%c, %t", items={PathInfoItem.COURSE_ID})
+@CrumbSpec(text="%c, %t", items={PathInfoItem.COURSE_ID, PathInfoItem.STUDENT_ID})
 public class StudentCourse extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
