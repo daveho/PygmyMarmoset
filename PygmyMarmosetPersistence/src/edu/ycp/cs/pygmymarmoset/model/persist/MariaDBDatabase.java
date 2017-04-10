@@ -156,8 +156,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public Submission createSubmission(Project project, User student, InputStream uploadData) {
-		return execute(new CreateSubmission(project, student, uploadData));
+	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData) {
+		return execute(new CreateSubmission(project, student, fileName, uploadData));
 	}
 
 	private Connection createConnection() {

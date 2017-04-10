@@ -49,7 +49,7 @@ public class StudentSubmit extends AbstractFormServlet {
 		CreateSubmissionController createSubmission = new CreateSubmissionController();
 		InputStream uploadData = filePart.getInputStream();
 		try {
-			Submission submission = createSubmission.execute(project, student, uploadData);
+			Submission submission = createSubmission.execute(project, student, filePart.getSubmittedFileName(), uploadData);
 			// Success!
 			req.setAttribute("resultmsg", "Successfully uploaded submission " + submission.getSubmissionNumber());
 			return LogicOutcome.STAY_ON_PAGE;

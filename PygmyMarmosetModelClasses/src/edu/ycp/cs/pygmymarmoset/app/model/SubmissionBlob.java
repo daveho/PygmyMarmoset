@@ -6,6 +6,9 @@ public class SubmissionBlob {
 	
 	private int submissionId;
 	
+	@Desc(size=100)
+	private String fileName;
+	
 	@Blob
 	private byte[] data;
 	
@@ -27,6 +30,14 @@ public class SubmissionBlob {
 
 	public void setSubmissionId(int submissionId) {
 		this.submissionId = submissionId;
+	}
+	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	public String getFileName() {
+		return fileName;
 	}
 
 	public byte[] getData() {

@@ -35,5 +35,5 @@ public interface IDatabase {
 	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user);
 	public Pair<User, Roles> findUserInCourse(Course course, int userId);
 	public List<Submission> getSubmissions(Project project, User student);
-	public Submission createSubmission(Project project, User student, InputStream uploadData);
+	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);
 }

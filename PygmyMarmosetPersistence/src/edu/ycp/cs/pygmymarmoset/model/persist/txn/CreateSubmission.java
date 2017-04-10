@@ -19,12 +19,14 @@ import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 public class CreateSubmission extends DatabaseRunnable<Submission> {
 	private Project project;
 	private User student;
+	private String fileName;
 	private InputStream uploadData;
 
-	public CreateSubmission(Project project, User student, InputStream uploadData) {
+	public CreateSubmission(Project project, User student, String fileName, InputStream uploadData) {
 		super("create submission");
 		this.project = project;
 		this.student = student;
+		this.fileName = fileName;
 		this.uploadData = uploadData;
 	}
 	
@@ -55,8 +57,9 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		InsertModelObject<Submission> insertSubmission = new InsertModelObject<Submission>(submission);
 		insertSubmission.execute(conn);
 		
-		PreparedStatement stmt = prepareStatement(conn, "insert into submissionblobs (submissionid, data) values (?, ?)");
+		PreparedStatement stmt = prepareStatement(conn, "insert into submissionblobs (submissionid, filename, data) values (?, ?, ?)");
 		stmt.setInt(1, submission.getId());
+		stmt.setString(2, fileName);
 		Blob blob = conn.createBlob();
 		OutputStream os = blob.setBinaryStream(1);
 		try {
@@ -68,7 +71,7 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		} catch (IOException e) {
 			throw new SQLException("Error uploading file data to database", e);
 		}
-		stmt.setBlob(2, blob);
+		stmt.setBlob(3, blob);
 		stmt.executeUpdate();
 		
 		return submission;
