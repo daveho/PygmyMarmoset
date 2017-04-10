@@ -36,4 +36,6 @@ public interface IDatabase {
 	public Pair<User, Roles> findUserInCourse(Course course, int userId);
 	public List<Submission> getSubmissions(Project project, User student);
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);
+	public Submission findSubmissionForSubmissionId(int submissionId);
+	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
 }

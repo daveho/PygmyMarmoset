@@ -26,6 +26,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateSubmission;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindProjectForProjectId;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindSubmissionForSubmissionId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
@@ -36,6 +37,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjects;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
 
@@ -158,6 +160,16 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData) {
 		return execute(new CreateSubmission(project, student, fileName, uploadData));
+	}
+	
+	@Override
+	public Submission findSubmissionForSubmissionId(int submissionId) {
+		return execute(new FindSubmissionForSubmissionId(submissionId));
+	}
+	
+	@Override
+	public boolean readSubmissionBlob(Submission submission, IReadBlob reader) {
+		return execute(new ReadSubmissionBlob(submission, reader));
 	}
 
 	private Connection createConnection() {
