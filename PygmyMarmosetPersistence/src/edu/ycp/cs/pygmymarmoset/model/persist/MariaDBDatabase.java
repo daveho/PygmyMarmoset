@@ -15,6 +15,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
+import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
@@ -31,6 +32,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetCoursesForUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjects;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
@@ -144,6 +146,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user) {
 		return execute(new GetStudentProjects(course, user));
+	}
+	
+	@Override
+	public List<Submission> getSubmissions(Project project, User student) {
+		return execute(new GetSubmissions(project, student));
 	}
 
 	private Connection createConnection() {
