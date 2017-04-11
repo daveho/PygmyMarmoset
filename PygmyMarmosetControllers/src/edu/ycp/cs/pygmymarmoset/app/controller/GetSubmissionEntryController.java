@@ -28,7 +28,7 @@ public class GetSubmissionEntryController {
 		@Override
 		public void readBlob(InputStream blobIn, String name) {
 			try {
-				int index = 0;
+				int index = 1;
 				ZipInputStream zin = new ZipInputStream(blobIn);
 				String entryName = null;
 				for (;;) {

@@ -32,7 +32,7 @@ public class GetSubmissionIndexController {
 			try {
 				System.out.println("Reading blob input!!!");
 				ZipInputStream zin = new ZipInputStream(blobIn);
-				int index = 0;
+				int index = 1;
 				for (;;) {
 					ZipEntry entry = zin.getNextEntry();
 					if (entry == null) {

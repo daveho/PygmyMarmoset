@@ -39,4 +39,5 @@ public interface IDatabase {
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);
 	public Submission findSubmissionForSubmissionId(int submissionId);
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
+	public List<Pair<User, Integer>> getStudentProjectActivity(Project project);
 }
