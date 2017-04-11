@@ -40,7 +40,8 @@
   margin: 1em 0 1em 0 !important;
   position: relative !important;
   overflow: auto !important;
-  font-size: 1em !important; }
+  /*font-size: 1em !important;*/
+  font-size: 90% !important; }
   .syntaxhighlighter .container:before, .syntaxhighlighter .container:after {
     content: none !important; }
   .syntaxhighlighter.source {

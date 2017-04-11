@@ -7,7 +7,7 @@
 	<head>
 		<pm:headStuff title="${courseDisplayName}: Submission ${submission.submissionNumber} in ${project.name}"/>
 		<!-- Include syntaxhighlighter js/css -->
-		<script src="${pageContext.servletContext.contextPath}/js/syntaxhighlighter.js"></script>
+		<script src="${pageContext.servletContext.contextPath}/js/syntaxhighlighter.min.js"></script>
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.css">
 	</head>
 	
