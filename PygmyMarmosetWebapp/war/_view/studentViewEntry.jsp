@@ -6,6 +6,9 @@
 <html>
 	<head>
 		<pm:headStuff title="${courseDisplayName}: Submission ${submission.submissionNumber} in ${project.name}"/>
+		<!-- Include syntaxhighlighter js/css -->
+		<script src="${pageContext.servletContext.contextPath}/js/syntaxhighlighter.js"></script>
+		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.css">
 	</head>
 	
 	<body>
@@ -13,7 +16,6 @@
 		<div id="content">
 			<pm:crumbs/>
 			<h1>${courseDisplayName}: Submission ${submission.submissionNumber} in ${project.name}</h1>
-			<h2>Entry: ${entryIndex}</h2>
 			<pm:viewEntry/>
 			<pm:notification/>
 		</div>

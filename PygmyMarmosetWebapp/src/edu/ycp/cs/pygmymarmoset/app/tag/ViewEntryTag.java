@@ -3,6 +3,8 @@ package edu.ycp.cs.pygmymarmoset.app.tag;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -15,6 +17,27 @@ import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 
 public class ViewEntryTag extends SimpleTagSupport {
+	private static final Map<String, String> HIGHLIGHTER_MAP = new HashMap<>();
+	static {
+		HIGHLIGHTER_MAP.put(".pl", "perl");
+		HIGHLIGHTER_MAP.put(".c", "cpp");
+		HIGHLIGHTER_MAP.put(".cpp", "cpp");
+		HIGHLIGHTER_MAP.put(".cxx", "cpp");
+		HIGHLIGHTER_MAP.put(".java", "java");
+		HIGHLIGHTER_MAP.put(".rb", "ruby");
+		HIGHLIGHTER_MAP.put(".py", "python");
+		HIGHLIGHTER_MAP.put(".js", "js");
+	}
+	
+	protected static String findBrush(String fileName) {
+		int extPos = fileName.lastIndexOf('.');
+		if (extPos < 0) {
+			return null;
+		}
+		String ext = fileName.substring(extPos);
+		return HIGHLIGHTER_MAP.get(ext);
+	}
+	
 	@Override
 	public void doTag() throws JspException, IOException {
 		PageContext pageCtx = (PageContext) getJspContext();
@@ -28,8 +51,6 @@ public class ViewEntryTag extends SimpleTagSupport {
 		
 		JspWriter out = getJspContext().getOut();
 		
-		out.print("<pre id=\"viewentry\">");
-		
 		// Normally, we wouldn't do a database operation as part of rendering
 		// a view.  However, this avoids loading the entire zip entry (which
 		// could be large) into memory.
@@ -38,6 +59,15 @@ public class ViewEntryTag extends SimpleTagSupport {
 			@Override
 			public void readBlob(InputStream blobIn, String name) {
 				try {
+					out.print("<h2>Entry ");
+					out.print(name);
+					out.print("</h2>");
+					out.print("<pre id=\"viewentry\"");
+					String brush = findBrush(name);
+					out.print(" class=\"brush: ");
+					out.print(brush != null ? brush : "plain");
+					out.print("\"");
+					out.print(">");
 					InputStreamReader reader = new InputStreamReader(blobIn, "UTF-8");
 					for (;;) {
 						int c = reader.read();
@@ -52,13 +82,12 @@ public class ViewEntryTag extends SimpleTagSupport {
 							out.write(c);
 						}
 					}
+					out.print("</pre>");
 				} catch (IOException e) {
 					throw new RuntimeException("Error reading submission entry data", e);
 				}
 			}
 		};
 		getSubmissionEntry.execute(submission, entryIndex, entryReader);
-		
-		out.print("</pre>");
 	}
 }

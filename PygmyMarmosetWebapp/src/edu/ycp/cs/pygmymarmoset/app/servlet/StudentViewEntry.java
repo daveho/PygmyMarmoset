@@ -29,7 +29,6 @@ public class StudentViewEntry extends AbstractServlet {
 		
 		Integer entryIndex = args.get(4);
 		req.setAttribute("entryIndex", entryIndex);
-		System.out.printf("Entry index=%d", entryIndex);
 		
 		delegateToView(req, resp);
 	}
