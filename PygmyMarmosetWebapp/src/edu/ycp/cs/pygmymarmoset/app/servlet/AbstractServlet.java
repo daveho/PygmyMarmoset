@@ -165,8 +165,6 @@ public abstract class AbstractServlet extends HttpServlet {
 				m.appendReplacement(buf, String.valueOf(submission.getSubmissionNumber()));
 			} else if (placeholder.equals("%e")) {
 				Integer entryIndex = (Integer) req.getAttribute("entryIndex");
-				// Convert from 0-based to 1-based
-				entryIndex = entryIndex + 1;
 				m.appendReplacement(buf, entryIndex.toString());
 			} else {
 				throw new IllegalArgumentException("Unknown placeholder: " + placeholder);
