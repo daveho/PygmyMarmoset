@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
-import edu.ycp.cs.pygmymarmoset.app.model.SubmissionEntry;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 

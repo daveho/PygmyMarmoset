@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.FindUserInCourseController;
-import edu.ycp.cs.pygmymarmoset.app.controller.FindUserController;
 import edu.ycp.cs.pygmymarmoset.app.controller.GetRoleController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
