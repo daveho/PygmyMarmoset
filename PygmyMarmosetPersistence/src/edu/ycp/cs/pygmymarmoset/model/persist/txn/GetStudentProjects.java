@@ -31,7 +31,7 @@ public class GetStudentProjects extends DatabaseRunnable<List<Pair<Project, Inte
 				"select p.*, max(s.submissionnumber)" +
 				" from (select * from projects where courseid = ? and visible = 1) as p" +
 				" left join submissions as s" +
-				"   on p.id = s.userid" +
+				"   on p.id = s.projectid" +
 				" where s.userid is null or s.userid = ?" +
 				" group by p.id" +
 				" order by p.ontime desc, p.late desc, p.name asc, p.id asc"
