@@ -143,7 +143,7 @@ public abstract class AbstractServlet extends HttpServlet {
 		return new Crumb(uri.toString(), text);
 	}
 	
-	private static final Pattern PLACEHOLDER = Pattern.compile("%[a-z]");
+	private static final Pattern PLACEHOLDER = Pattern.compile("%[A-Za-z]");
 
 	private String expandPlaceholders(String text, HttpServletRequest req) {
 		StringBuffer buf = new StringBuffer();
@@ -166,6 +166,9 @@ public abstract class AbstractServlet extends HttpServlet {
 			} else if (placeholder.equals("%e")) {
 				Integer entryIndex = (Integer) req.getAttribute("entryIndex");
 				m.appendReplacement(buf, entryIndex.toString());
+			} else if (placeholder.equals("%S")) {
+				User student = (User) req.getAttribute("student");
+				m.appendReplacement(buf, student.getUsername());
 			} else {
 				throw new IllegalArgumentException("Unknown placeholder: " + placeholder);
 			}

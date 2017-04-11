@@ -1,6 +1,7 @@
 package edu.ycp.cs.pygmymarmoset.app.filter;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,8 +12,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs.pygmymarmoset.app.controller.FindUserInCourseController;
 import edu.ycp.cs.pygmymarmoset.app.controller.GetRoleController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.util.ServletUtil;
@@ -32,6 +35,7 @@ public class RequireInstructorOrAdmin extends AbstractLoginFilter implements Fil
 			return;
 		}
 		HttpServletRequest req = (HttpServletRequest) req_;
+		HttpServletResponse resp = (HttpServletResponse) resp_;
 		User user = (User) req.getSession().getAttribute("user");
 		
 		Course course = (Course) req.getAttribute("course");
@@ -46,8 +50,22 @@ public class RequireInstructorOrAdmin extends AbstractLoginFilter implements Fil
 		Roles roles = getRole.execute(user, course);
 		req.setAttribute("roles", roles);
 		if (!roles.isInstructor()) {
-			ServletUtil.sendForbidden(req, (HttpServletResponse)resp_, "Superuser or instructor privileges are required");
+			ServletUtil.sendForbidden(req, resp, "Superuser or instructor privileges are required");
 			return;
+		}
+		
+		// If a student id was specified, load student User and Roles
+		List<Integer> args = ServletUtil.getRequestArgs(req);
+		if (args.size() >= 3) {
+			Integer studentId = args.get(2);
+			FindUserInCourseController findUser = new FindUserInCourseController();
+			Pair<User, Roles> studentInfo = findUser.execute(course, studentId);
+			if (studentInfo == null) {
+				ServletUtil.sendNotFound(req, resp, "No such student");
+				return;
+			}
+			req.setAttribute("student", studentInfo.getFirst());
+			req.setAttribute("studentRoles", studentInfo.getSecond());
 		}
 		
 		chain.doFilter(req_, resp_);
