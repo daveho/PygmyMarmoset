@@ -12,6 +12,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
 import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
@@ -55,6 +56,32 @@ public class Params {
 		return this;
 	}
 	
+	/**
+	 * Add a model object already present in the request
+	 * to the parameters.  This is useful for editing
+	 * a model object that is automatically loaded by a
+	 * filter (i.e., editing the {@link Project} that was
+	 * loaded by one of the load course filters.)
+	 * 
+	 * @param name name of the request attribute
+	 * @param modelCls expected class of existing request object
+	 * @return this object, for method chaining
+	 */
+	public Params addFromRequest(String name, Class<?> modelCls) {
+		Object obj = req.getAttribute(name);
+		if (obj == null) {
+			throw new IllegalArgumentException("No such request attribute: " + name);
+		}
+		if (obj.getClass() != modelCls) {
+			throw new IllegalArgumentException("Request attribute " + name +
+					" has type " + obj.getClass().getSimpleName() +
+					" but we expected " + modelCls.getSimpleName());
+		}
+		System.out.println("Adding object of type " + obj.getClass().getSimpleName() + " to Params as " + name);
+		modelObjects.put(name, obj);
+		return this;
+	}
+	
 	public void unmarshal() {
 		// TODO: handle missing fields
 		for (Map.Entry<String, Object> entry : modelObjects.entrySet()) {
@@ -68,6 +95,9 @@ public class Params {
 				String propertyName = f.getPropertyName();
 				String paramName = name + "." + propertyName;
 				String value = req.getParameter(paramName);
+				
+				//System.out.println("Looking for parameter " + paramName);
+				//System.out.println("value=" + value);
 				
 				try {
 					if (f.isBoolean()) {
