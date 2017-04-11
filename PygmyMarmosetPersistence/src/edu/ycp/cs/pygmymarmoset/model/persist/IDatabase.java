@@ -40,4 +40,5 @@ public interface IDatabase {
 	public Submission findSubmissionForSubmissionId(int submissionId);
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
 	public List<Pair<User, Integer>> getStudentProjectActivity(Project project);
+	public boolean updateProject(Project project);
 }

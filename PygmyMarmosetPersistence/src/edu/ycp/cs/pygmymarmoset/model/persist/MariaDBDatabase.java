@@ -42,6 +42,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateProject;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -177,6 +178,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Pair<User, Integer>> getStudentProjectActivity(Project project) {
 		return execute(new GetStudentProjectActivity(project));
+	}
+	
+	@Override
+	public boolean updateProject(Project project) {
+		return execute(new UpdateProject(project));
 	}
 
 	private Connection createConnection() {

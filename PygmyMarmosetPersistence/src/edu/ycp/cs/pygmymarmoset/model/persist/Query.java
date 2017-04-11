@@ -1,7 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.model.persist;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,37 @@ public class Query {
 		
 		return buf.toString();
 	}
+
+	public static<E> String getUpdateStatement(Class<E> modelCls) {
+		Introspect<E> info = Introspect.getIntrospect(modelCls);
+		StringBuilder buf = new StringBuilder();
+
+		buf.append("update ");
+		buf.append(info.getTableName());
+		buf.append(" set ");
+		int count = 0;
+		DBField pk = null;
+		for (DBField field : info.getFields()) {
+			if (field.isPrimaryKey()) {
+				pk = field;
+				continue; // will be used to identify object 
+			}
+			if (count > 0) {
+				buf.append(", ");
+			}
+			buf.append(field.getName());
+			buf.append(" = ?");
+			count++;
+		}
+		if (pk == null) {
+			throw new IllegalStateException("No primary key field found for " + modelCls.getSimpleName());
+		}
+		buf.append(" where ");
+		buf.append(pk.getName());
+		buf.append(" = ?");
+		
+		return buf.toString();
+	}
 	
 	public static void main(String[] args) {
 		System.out.println(getCreateTableStatement(User.class));
@@ -151,14 +184,51 @@ public class Query {
 			if (field.isPrimaryKey()) {
 				continue; // skip id
 			}
-			Object value = PropertyUtils.getProperty(modelObj, field.getPropertyName());
-			if (field.isEnum()) {
-				// Enum values are persisted as the integer ordinal value
-				value = ((Enum<?>)value).ordinal();
-			}
-			stmt.setObject(index, value);
+			storeFieldValue(modelObj, stmt, index, field);
 			//System.out.println("Set field at index " + index);
 			index++;
 		}
+	}
+	
+	public static<E> void storeFieldsForUpdate(E modelObj, PreparedStatement stmt) {
+		try {
+			doStoreFieldsForUpdate(modelObj, stmt);
+		} catch (Exception e) {
+			throw new PersistenceException("Could not store model object field values in prepared statement", e);
+		}
+	}
+
+	private static <E> void doStoreFieldsForUpdate(E modelObj, PreparedStatement stmt)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException {
+		@SuppressWarnings("unchecked")
+		Class<E> cls = (Class<E>) modelObj.getClass();
+		Introspect<E> info = Introspect.getIntrospect(cls);
+		DBField pk = null;
+		// store non-primary key values
+		int index = 1;
+		for (DBField field : info.getFields()) {
+			if (field.isPrimaryKey()) {
+				pk = field;
+				continue;
+			}
+			//System.out.println(" store " + field.getName() + " as " + BeanUtils.getProperty(modelObj, field.getPropertyName()));
+			storeFieldValue(modelObj, stmt, index, field);
+			index++;
+		}
+		// store primary key value
+		//System.out.println(" store " + pk.getName() + " as " + BeanUtils.getProperty(modelObj, pk.getPropertyName()));
+		storeFieldValue(modelObj, stmt, index, pk);
+	}
+
+	private static <E> void storeFieldValue(E modelObj, PreparedStatement stmt, int index, DBField field)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException {
+		Object value = PropertyUtils.getProperty(modelObj, field.getPropertyName());
+		if (field.isEnum()) {
+			// Enum values are persisted as the integer ordinal value
+			value = ((Enum<?>)value).ordinal();
+		} else if (field.isBoolean()) {
+			value = ((Boolean)value) ? 1 : 0;
+		}
+		stmt.setObject(index, value);
 	}
 }
