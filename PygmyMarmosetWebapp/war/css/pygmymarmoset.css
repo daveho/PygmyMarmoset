@@ -161,3 +161,8 @@ a.crumb:hover {
 	color: black;
 	text-decoration: underline;
 }
+
+/* Make jquery-ui widgets use a smaller font. */
+.ui-widget {
+    font-size:80% !important;
+}
