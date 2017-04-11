@@ -34,7 +34,8 @@ public class GetCoursesForUser extends DatabaseRunnable<List<Triple<Course, Term
 				" where c.id = r.courseid" +
 				"  and r.userid = ?" +
 				"  and t.id = c.termid" +
-				" group by r.courseid");
+				" group by r.courseid" +
+				" order by c.year desc, t.seq desc, c.name asc, c.title asc, c.id asc");
 		stmt.setInt(1, user.getId());
 		ResultSet resultSet = executeQuery(stmt);
 		RoleType[] roleTypes = RoleType.values();
