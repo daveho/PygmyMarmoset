@@ -38,6 +38,10 @@
 						<td><pm:input id="proj-late" obj="project" field="late"/></td>
 					</tr>
 					<tr>
+						<td class="formlabel">Visible:</td>
+						<td><pm:input obj="project" field="visible"/></td>
+					</tr>
+					<tr>
 						<td class="formlabel"></td>
 						<td><input type="submit" name="submit" value="Create project"></td>
 					</tr>
