@@ -19,6 +19,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 public class ViewEntryTag extends SimpleTagSupport {
 	private static final Map<String, String> HIGHLIGHTER_MAP = new HashMap<>();
 	static {
+		// These are brush names for syntaxhighlighter.js
 		HIGHLIGHTER_MAP.put(".pl", "perl");
 		HIGHLIGHTER_MAP.put(".c", "cpp");
 		HIGHLIGHTER_MAP.put(".cpp", "cpp");
@@ -32,10 +33,11 @@ public class ViewEntryTag extends SimpleTagSupport {
 	protected static String findBrush(String fileName) {
 		int extPos = fileName.lastIndexOf('.');
 		if (extPos < 0) {
-			return null;
+			return "plain";
 		}
 		String ext = fileName.substring(extPos);
-		return HIGHLIGHTER_MAP.get(ext);
+		String brush = HIGHLIGHTER_MAP.get(ext);
+		return brush != null ? brush : "plain";
 	}
 	
 	@Override
@@ -63,9 +65,8 @@ public class ViewEntryTag extends SimpleTagSupport {
 					out.print(name);
 					out.print("</h2>");
 					out.print("<pre id=\"viewentry\"");
-					String brush = findBrush(name);
 					out.print(" class=\"brush: ");
-					out.print(brush != null ? brush : "plain");
+					out.print(findBrush(name));
 					out.print("\"");
 					out.print(">");
 					InputStreamReader reader = new InputStreamReader(blobIn, "UTF-8");
