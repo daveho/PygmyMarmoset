@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import edu.ycp.cs.pygmymarmoset.app.model.Blob;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Desc;
+import edu.ycp.cs.pygmymarmoset.app.model.NonUnique;
 import edu.ycp.cs.pygmymarmoset.app.model.PrimaryKey;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
@@ -72,7 +73,12 @@ public class Introspect<E> {
 					Unique u = f.getAnnotation(Unique.class);
 					if (u != null) {
 						dbField.setUnique(true);
-						dbField.setUniqueWith(u.with());
+						dbField.setWith(u.with());
+					}
+					NonUnique nu = f.getAnnotation(NonUnique.class);
+					if (nu != null) {
+						dbField.setNonUnique(true);
+						dbField.setWith(nu.with());
 					}
 					Timestamp ts = f.getAnnotation(Timestamp.class);
 					if (ts != null) {

@@ -49,22 +49,25 @@ public class Query {
 			buf.append(")");
 		}
 		
-		// Create other keys
+		// Create other indexes (unique and non-unique)
 		for (DBField f : info.getFields()) {
-			if (f.isUnique()) {
+			if (f.isUnique() || f.isNonUnique()) {
 				List<String> combo = new ArrayList<>();
 				combo.add(f.getName());
-				if (!f.getUniqueWith().equals("")) {
-					for (String other : f.getUniqueWith().split(",")) {
+				if (!f.getWith().equals("")) {
+					for (String other : f.getWith().split(",")) {
 						DBField otherField = info.getFieldForPropertyName(other.trim());
 						combo.add(otherField.getName());
 					}
 				}
-				buf.append(", unique key (");
+				buf.append(", ");
+				if (f.isUnique()) {
+					buf.append("unique ");
+				}
+				buf.append("index (");
 				buf.append(String.join(", ", combo));
 				buf.append(")");
 			}
-			// TODO: allow non-unique index
 		}
 		
 		buf.append(")");

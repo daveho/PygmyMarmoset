@@ -4,6 +4,7 @@ public class Project {
 	@PrimaryKey
 	private int id;
 	
+	@NonUnique
 	private int courseId;
 
 	@Unique(with="courseId") // project name must be unique within course

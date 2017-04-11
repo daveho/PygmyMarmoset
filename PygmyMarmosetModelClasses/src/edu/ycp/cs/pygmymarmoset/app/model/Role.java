@@ -4,9 +4,10 @@ public class Role {
 	@PrimaryKey
 	private int id;
 	
-	@Unique(with="courseId,section")
+	@NonUnique
 	private int userId;
 	
+	@Unique(with="userId,section")
 	private int courseId;
 	
 	private RoleType type;

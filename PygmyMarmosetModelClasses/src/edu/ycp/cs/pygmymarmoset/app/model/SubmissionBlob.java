@@ -4,6 +4,7 @@ public class SubmissionBlob {
 	@PrimaryKey
 	private int id;
 	
+	@Unique
 	private int submissionId;
 	
 	@Desc(size=100)

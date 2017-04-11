@@ -4,6 +4,7 @@ public class Course {
 	@PrimaryKey
 	private int id;
 	
+	@NonUnique
 	@Desc(size=40)
 	private String name;
 	

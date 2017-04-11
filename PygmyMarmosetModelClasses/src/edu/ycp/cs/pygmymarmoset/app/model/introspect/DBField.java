@@ -13,7 +13,8 @@ public class DBField {
 	private String propertyName;
 	private int index;
 	private boolean unique;
-	private String uniqueWith;
+	private boolean nonUnique;
+	private String with;
 	private boolean timestamp;
 	private boolean blob;
 	
@@ -85,6 +86,10 @@ public class DBField {
 		this.index = index;
 	}
 
+	/**
+	 * @return true if this field has a unique index, possibly in combination
+	 *         with other fields
+	 */
 	public boolean isUnique() {
 		return unique;
 	}
@@ -92,13 +97,29 @@ public class DBField {
 	public void setUnique(boolean unique) {
 		this.unique = unique;
 	}
-
-	public String getUniqueWith() {
-		return uniqueWith;
+	
+	/**
+	 * @return true if this field has a non-unique index, possibly in combination
+	 *         with other fields
+	 */
+	public boolean isNonUnique() {
+		return nonUnique;
+	}
+	
+	public void setNonUnique(boolean nonUnique) {
+		this.nonUnique = nonUnique;
 	}
 
-	public void setUniqueWith(String uniqueWith) {
-		this.uniqueWith = uniqueWith;
+	/**
+	 * @return comma-separated list of property names of fields
+	 *         with which this field is part of an index (unique or non-unique)
+	 */
+	public String getWith() {
+		return with;
+	}
+
+	public void setWith(String with) {
+		this.with = with;
 	}
 
 	public void setTimestamp(boolean timestamp) {

@@ -4,8 +4,10 @@ public class Submission {
 	@PrimaryKey
 	private int id;
 	
+	@NonUnique
 	private int projectId;
 	
+	@NonUnique
 	private int userId;
 	
 	private int submissionNumber;
