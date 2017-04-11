@@ -45,7 +45,7 @@
 					</tr>
 					<tr>
 						<td class="formlabel"></td>
-						<td><input type="submit" name="submit" value="Add instructor"></input></td>
+						<td><input type="submit" name="submit" value="Add instructor"></td>
 					</tr>
 				</table>
 				

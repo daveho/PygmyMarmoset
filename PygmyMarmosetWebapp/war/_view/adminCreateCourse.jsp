@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<td class="formlabel"></td>
-						<td><input type="submit" name="submit" value="Create course"></input></td>
+						<td><input type="submit" name="submit" value="Create course"></td>
 					</tr>
 				</table>
 			</form>

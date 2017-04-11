@@ -37,7 +37,7 @@
 					</tr>
 					<tr>
 						<td class="formlabel"></td>
-						<td><input type="submit" name="submit" value="Register user"></input></td>
+						<td><input type="submit" name="submit" value="Register user"></td>
 					</tr>
 				</table>
 				

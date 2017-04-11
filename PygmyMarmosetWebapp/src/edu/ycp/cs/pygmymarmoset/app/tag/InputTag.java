@@ -120,6 +120,5 @@ public class InputTag extends BeanTag {
 			}
 		}
 		out.print(">");
-		out.print("</input>");
 	}
 }
