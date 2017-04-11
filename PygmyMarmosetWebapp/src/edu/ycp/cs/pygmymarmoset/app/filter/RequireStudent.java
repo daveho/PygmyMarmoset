@@ -30,6 +30,7 @@ public class RequireStudent extends AbstractLoginFilter implements Filter {
 		}
 		
 		HttpServletRequest req = (HttpServletRequest) req_;
+		HttpServletResponse resp = (HttpServletResponse)resp_;
 		
 		User user = (User) req.getSession().getAttribute("user");
 		Course course = (Course) req.getAttribute("course"); // assumes LoadCourse has run
@@ -41,14 +42,14 @@ public class RequireStudent extends AbstractLoginFilter implements Filter {
 		// the course.
 		List<Integer> args = ServletUtil.getRequestArgs(req);
 		if (args.size() < 2) {
-			ServletUtil.sendBadRequest(req, (HttpServletResponse)resp_, "A user id argument is required to identify student");
+			ServletUtil.sendBadRequest(req, resp, "A user id argument is required to identify student");
 			return;
 		}
 		Integer studentId = args.get(1);
 		FindUserInCourseController findUser = new FindUserInCourseController();
 		Pair<User, Roles> studentInfo = findUser.execute(course, studentId);
 		if (studentInfo == null) {
-			ServletUtil.sendNotFound(req, (HttpServletResponse)resp_, "Student " + studentId + " is not registered in the course");
+			ServletUtil.sendNotFound(req, resp, "Student " + studentId + " is not registered in the course");
 		}
 		User student = studentInfo.getFirst();
 		Roles studentRoles = studentInfo.getSecond();
@@ -61,10 +62,13 @@ public class RequireStudent extends AbstractLoginFilter implements Filter {
 			GetRoleController getRole = new GetRoleController();
 			Roles roles = getRole.execute(user, course);
 			if (!roles.isInstructor()) {
-				ServletUtil.sendForbidden(req, (HttpServletResponse)resp_, "Instructor or superuser privilege is required");
+				ServletUtil.sendForbidden(req, resp, "Instructor or superuser privilege is required");
 				return;
 			}
 		}
+		
+		System.out.printf("User id=%d, student id=%d\n", user.getId(), student.getId());
+		
 		req.setAttribute("student", student);
 		req.setAttribute("studentRoles", studentRoles);
 		

@@ -10,8 +10,16 @@ import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
 public class GetStudentProjectsController {
-	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user) {
+	/**
+	 * Get pairs of ({@link Project}, submission count) for specified
+	 * student in specified {@link Course}.
+	 * 
+	 * @param course the {@link Course}
+	 * @param student the student
+	 * @return list of pairs of ({@link Project}, submission count)
+	 */
+	public List<Pair<Project, Integer>> getStudentProjects(Course course, User student) {
 		IDatabase db = DatabaseProvider.getInstance();
-		return db.getStudentProjects(course, user);
+		return db.getStudentProjects(course, student);
 	}
 }

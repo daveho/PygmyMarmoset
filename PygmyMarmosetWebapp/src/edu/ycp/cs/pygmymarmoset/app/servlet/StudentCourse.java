@@ -21,12 +21,12 @@ public class StudentCourse extends AbstractServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
+		User stdudent = (User) req.getAttribute("student");
 		Course course = (Course) req.getAttribute("course");
 		
 		// Load projects
 		GetStudentProjectsController getStudentProjects = new GetStudentProjectsController();
-		List<Pair<Project, Integer>> studentProjects = getStudentProjects.getStudentProjects(course, user);
+		List<Pair<Project, Integer>> studentProjects = getStudentProjects.getStudentProjects(course, stdudent);
 		req.setAttribute("studentProjects", studentProjects);
 		
 		delegateToView(req, resp);

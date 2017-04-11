@@ -149,8 +149,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user) {
-		return execute(new GetStudentProjects(course, user));
+	public List<Pair<Project, Integer>> getStudentProjects(Course course, User student) {
+		return execute(new GetStudentProjects(course, student));
 	}
 	
 	@Override

@@ -33,7 +33,7 @@ public interface IDatabase {
 	public List<Project> getProjectsInCourse(Course course);
 	public List<Triple<Course, Term, RoleType>> getCoursesForUser(User user);
 	public Project findProjectForProjectId(int projectId);
-	public List<Pair<Project, Integer>> getStudentProjects(Course course, User user);
+	public List<Pair<Project, Integer>> getStudentProjects(Course course, User student);
 	public Pair<User, Roles> findUserInCourse(Course course, int userId);
 	public List<Submission> getSubmissions(Project project, User student);
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);

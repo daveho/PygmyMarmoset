@@ -16,12 +16,12 @@ import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
 public class GetStudentProjects extends DatabaseRunnable<List<Pair<Project, Integer>>> {
 	private Course course;
-	private User user;
+	private User student;
 
-	public GetStudentProjects(Course course, User user) {
+	public GetStudentProjects(Course course, User student) {
 		super("get projects for student");
 		this.course = course;
-		this.user = user;
+		this.student = student;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class GetStudentProjects extends DatabaseRunnable<List<Pair<Project, Inte
 				" order by p.ontime desc, p.late desc, p.name asc, p.id asc"
 				);
 		stmt.setInt(1, course.getId());
-		stmt.setInt(2, user.getId());
+		stmt.setInt(2, student.getId());
 		ResultSet resultSet = executeQuery(stmt);
 		List<Pair<Project, Integer>> result = new ArrayList<>();
 		while (resultSet.next()) {
