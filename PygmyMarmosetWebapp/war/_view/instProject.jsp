@@ -25,7 +25,7 @@
 					<c:forEach items="${studentActivity}" var="p">
 						<tr>
 							<td><a href="${pageContext.servletContext.contextPath}/i/submission/${course.id}/${project.id}/${p.first.id}">${p.first.lastName}, ${p.first.firstName}</a></td>
-							<td>${p.second}</td>
+							<td style="text-align: right;">${p.second}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
