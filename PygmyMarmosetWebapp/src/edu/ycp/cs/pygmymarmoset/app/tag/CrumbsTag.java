@@ -32,7 +32,7 @@ public class CrumbsTag extends SimpleTagSupport {
 		for (int i = 0; i < trail.size(); i++) {
 			Crumb crumb = trail.get(i);
 			if (i > 0) {
-				out.print(" &raquo; ");
+				out.print(" &rarr; ");
 			}
 			boolean generateLink = i != trail.size() - 1; // don't print last crumb as a link
 			if (generateLink) {
