@@ -49,6 +49,10 @@
 		<filter-name>StudentLoadSubmission</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.StudentLoadSubmission</filter-class>
 	</filter>
+	<filter>
+		<filter-name>InstLoadSubmission</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.InstLoadSubmission</filter-class>
+	</filter>
 	<filter-mapping>
 		<!--
 			Parses path info args.
@@ -110,6 +114,10 @@
 	<filter-mapping>
 		<filter-name>StudentLoadSubmission</filter-name>
 		<url-pattern>/u/submission/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>InstLoadSubmission</filter-name>
+		<url-pattern>/i/submission/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>StudentLoadSubmission</filter-name>
