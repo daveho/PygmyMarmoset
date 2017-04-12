@@ -33,6 +33,9 @@ public class GetSubmissionEntryController {
 				String entryName = null;
 				for (;;) {
 					ZipEntry entry = zin.getNextEntry();
+					if (entry == null) {
+						break;
+					}
 					if (index == entryIndex) {
 						entryName = entry.getName();
 						break;
@@ -54,9 +57,12 @@ public class GetSubmissionEntryController {
 	private static final Logger logger = LoggerFactory.getLogger(GetSubmissionEntryController.class);
 	
 	public boolean execute(Submission submission, int entryIndex, IReadBlob entryReader) {
-		IReadBlob outer = new ReadEntry(submission, entryIndex, entryReader);
+		if (entryIndex > 0) {
+			// Reading one entry rather than the entire blob
+			entryReader = new ReadEntry(submission, entryIndex, entryReader);
+		}
 		IDatabase db = DatabaseProvider.getInstance();
-		db.readSubmissionBlob(submission, outer);
+		db.readSubmissionBlob(submission, entryReader);
 		return true;
 	}
 }
