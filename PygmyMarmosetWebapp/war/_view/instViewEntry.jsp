@@ -5,10 +5,10 @@
 <c:set var="courseDisplayName" value="${course.name}, ${term.name} ${course.year}"/>
 <html>
 	<head>
-		<pm:headStuff title="${courseDisplayName}: Project ${project.name} submission ${submission.submissionNumber} for ${student.username}"/>
-		<!-- Include syntaxhighlighter js/css -->
-		<script src="${pageContext.servletContext.contextPath}/js/syntaxhighlighter.min.js"></script>
-		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.css">
+		<pm:headStuff
+			title="${courseDisplayName}: Project ${project.name} submission ${submission.submissionNumber} for ${student.username}"
+			syntaxhighlight="true"
+			/>
 	</head>
 	
 	<body>

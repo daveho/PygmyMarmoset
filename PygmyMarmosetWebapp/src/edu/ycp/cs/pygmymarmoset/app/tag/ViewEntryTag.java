@@ -28,9 +28,19 @@ public class ViewEntryTag extends SimpleTagSupport {
 		HIGHLIGHTER_MAP.put(".rb", "ruby");
 		HIGHLIGHTER_MAP.put(".py", "python");
 		HIGHLIGHTER_MAP.put(".js", "js");
+		HIGHLIGHTER_MAP.put(".clj", "clojure");
+		HIGHLIGHTER_MAP.put(".cljc", "clojure");
+		HIGHLIGHTER_MAP.put(".cljs", "clojure");
+		HIGHLIGHTER_MAP.put(".cljx", "clojure");
+		HIGHLIGHTER_MAP.put(".mak", "Makefile");
 	}
 	
 	protected static String findBrush(String fileName) {
+		if (fileName.toLowerCase().equals("makefile")) {
+			// Special case for Makefiles, which normally don't have
+			// a file extension.
+			return "Makefile";
+		}
 		int extPos = fileName.lastIndexOf('.');
 		if (extPos < 0) {
 			return "plain";
