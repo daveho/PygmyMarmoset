@@ -18,6 +18,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
@@ -156,7 +157,7 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public List<Submission> getSubmissions(Project project, User student) {
+	public List<Pair<Submission, SubmissionStatus>> getSubmissions(Project project, User student) {
 		return execute(new GetSubmissions(project, student));
 	}
 	

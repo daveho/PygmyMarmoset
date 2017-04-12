@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.GetSubmissionsController;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public abstract class AbstractSubmissionsServlet extends AbstractServlet {
@@ -22,7 +24,7 @@ public abstract class AbstractSubmissionsServlet extends AbstractServlet {
 		
 		// Get submissions for student
 		GetSubmissionsController getSubmissions = new GetSubmissionsController();
-		List<Submission> submissions = getSubmissions.execute(project, student);
+		List<Pair<Submission, SubmissionStatus>> submissions = getSubmissions.execute(project, student);
 		req.setAttribute("submissions", submissions);
 
 		delegateToView(req, resp);

@@ -19,13 +19,15 @@
 					<tr>
 						<th>Submission</th>
 						<th>Date/time</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${submissions}" var="sub">
+					<c:forEach items="${submissions}" var="p">
 						<tr>
-							<td><a href="${pageContext.servletContext.contextPath}/i/submission/${course.id}/${project.id}/${student.id}/${sub.id}">Submission ${sub.submissionNumber}</a></td>
-							<td><pm:timestamp val="${sub.timestamp}"/></td>
+							<td><a href="${pageContext.servletContext.contextPath}/i/submission/${course.id}/${project.id}/${student.id}/${p.first.id}">Submission ${p.first.submissionNumber}</a></td>
+							<td><pm:timestamp val="${p.first.timestamp}"/></td>
+							<td>${p.second}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

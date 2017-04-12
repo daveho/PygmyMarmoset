@@ -11,6 +11,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
+import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
@@ -35,7 +36,7 @@ public interface IDatabase {
 	public Project findProjectForProjectId(int projectId);
 	public List<Pair<Project, Integer>> getStudentProjects(Course course, User student);
 	public Pair<User, Roles> findUserInCourse(Course course, int userId);
-	public List<Submission> getSubmissions(Project project, User student);
+	public List<Pair<Submission, SubmissionStatus>> getSubmissions(Project project, User student);
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);
 	public Submission findSubmissionForSubmissionId(int submissionId);
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
