@@ -42,4 +42,5 @@ public interface IDatabase {
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
 	public List<Pair<User, Integer[]>> getStudentProjectActivity(Project project);
 	public boolean updateProject(Project project);
+	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
 }

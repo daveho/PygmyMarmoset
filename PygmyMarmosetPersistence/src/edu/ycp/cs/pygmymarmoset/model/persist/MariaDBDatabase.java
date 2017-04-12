@@ -26,6 +26,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateSubmission;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseAndProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindCourseForCourseId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindProjectForProjectId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindSubmissionForSubmissionId;
@@ -184,6 +185,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean updateProject(Project project) {
 		return execute(new UpdateProject(project));
+	}
+	
+	@Override
+	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName) {
+		return execute(new FindCourseAndProject(courseName, termName, year, projectName));
 	}
 
 	private Connection createConnection() {
