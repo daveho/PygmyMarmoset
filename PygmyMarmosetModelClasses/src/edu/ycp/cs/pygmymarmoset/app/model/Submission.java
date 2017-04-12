@@ -15,7 +15,8 @@ public class Submission {
 	@Timestamp
 	private long timestamp;
 	
-	private boolean zip;
+	@Desc(size=100)
+	private String fileName;
 	
 	public Submission() {
 		
@@ -60,12 +61,12 @@ public class Submission {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
-
-	public boolean isZip() {
-		return zip;
+	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-
-	public void setZip(boolean zip) {
-		this.zip = zip;
+	
+	public String getFileName() {
+		return fileName;
 	}
 }

@@ -26,18 +26,17 @@ public class ReadSubmissionBlob extends DatabaseRunnable<Boolean> {
 
 	@Override
 	public Boolean execute(Connection conn) throws SQLException {
-		PreparedStatement stmt = prepareStatement(conn, "select sb.filename, sb.data from submissionblobs as sb where sb.submissionid = ?");
+		PreparedStatement stmt = prepareStatement(conn, "select sb.data from submissionblobs as sb where sb.submissionid = ?");
 		stmt.setInt(1, submission.getId());
 		ResultSet resultSet = executeQuery(stmt);
 		if (!resultSet.next()) {
 			throw new PersistenceException("No blob data for submission " + submission.getId());
 		}
-		String fileName = resultSet.getString(1);
-		Blob blob = resultSet.getBlob(2);
+		Blob blob = resultSet.getBlob(1);
 		InputStream blobIn = blob.getBinaryStream();
 		try {
 			// Read the blob data!
-			reader.readBlob(blobIn, fileName);
+			reader.readBlob(blobIn, submission.getFileName());
 			return true;
 		} finally {
 			IOUtils.closeQuietly(blobIn);

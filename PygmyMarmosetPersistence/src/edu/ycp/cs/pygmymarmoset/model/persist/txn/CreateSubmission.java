@@ -53,13 +53,13 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		submission.setUserId(student.getId());
 		submission.setSubmissionNumber(maxSub + 1);
 		submission.setTimestamp(System.currentTimeMillis());
-		submission.setZip(false); // FIXME
+		submission.setFileName(fileName);
 		InsertModelObject<Submission> insertSubmission = new InsertModelObject<Submission>(submission);
 		insertSubmission.execute(conn);
 		
-		PreparedStatement stmt = prepareStatement(conn, "insert into submissionblobs (submissionid, filename, data) values (?, ?, ?)");
+		// Insert new SubmissionBlob record
+		PreparedStatement stmt = prepareStatement(conn, "insert into submissionblobs (submissionid, data) values (?, ?)");
 		stmt.setInt(1, submission.getId());
-		stmt.setString(2, fileName);
 		Blob blob = conn.createBlob();
 		OutputStream os = blob.setBinaryStream(1);
 		try {
@@ -71,7 +71,7 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		} catch (IOException e) {
 			throw new SQLException("Error uploading file data to database", e);
 		}
-		stmt.setBlob(3, blob);
+		stmt.setBlob(2, blob);
 		stmt.executeUpdate();
 		
 		return submission;
