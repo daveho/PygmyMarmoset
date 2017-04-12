@@ -33,16 +33,19 @@ public class GetSubmissionEntryController {
 				String entryName = null;
 				for (;;) {
 					ZipEntry entry = zin.getNextEntry();
+					// Did we find another entry
 					if (entry == null) {
 						break;
 					}
+					// Did we find the entry we're looking for?
 					if (index == entryIndex) {
 						entryName = entry.getName();
 						break;
 					}
+					// Try next entry
 					index++;
 				}
-				if (index == entryIndex) {
+				if (entryName != null) {
 					// Let the entry reader read the entry data
 					entryReader.readBlob(zin, entryName);
 				} else {
