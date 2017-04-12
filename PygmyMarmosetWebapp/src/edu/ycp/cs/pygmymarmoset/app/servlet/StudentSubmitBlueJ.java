@@ -28,13 +28,13 @@ import edu.ycp.cs.pygmymarmoset.app.model.ValidationException;
 import edu.ycp.cs.pygmymarmoset.app.util.ServletUtil;
 
 /**
- * Submit project via BlueJ submitter.
+ * Receive a submission from a BlueJ submitter.
  * All of the automated submission tools used at YCP
  * use this uploader.
  */
 @Route(pattern="/bluej/SubmitProjectViaBlueJSubmitter", view="")
 @MultipartConfig(location="/tmp", fileSizeThreshold=1024*1024, maxFileSize=16*1024*1024)
-public class StudentSubmitProjectBlueJ extends AbstractServlet {
+public class StudentSubmitBlueJ extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final Pattern SEMESTER_PAT =
