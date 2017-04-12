@@ -8,22 +8,7 @@
 		<pm:headStuff title="${courseDisplayName}: Add Instructor" ui="true"/>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("#inst-username").autocomplete({
-				source: function(req, resp) {
-					$.post(
-							// URL
-							"${pageContext.servletContext.contextPath}/i/suggestUsernames/${course.id}",
-							// Data to send
-							{ term: req.term },
-							// Success function
-							function(data) {
-								resp(data);
-							},
-							// Data type expected from server
-							'json'
-					);
-				}
-			});
+			pm.autocompleteOn("#inst-username", "${pageContext.servletContext.contextPath}/i/suggestUsernames/${course.id}");
 		});
 		</script>
 	</head>
