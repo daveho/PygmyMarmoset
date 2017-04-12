@@ -18,6 +18,8 @@ public class Submission {
 	@Desc(size=100)
 	private String fileName;
 	
+	private long size;
+	
 	public Submission() {
 		
 	}
@@ -68,5 +70,13 @@ public class Submission {
 	
 	public String getFileName() {
 		return fileName;
+	}
+	
+	public void setSize(long size) {
+		this.size = size;
+	}
+	
+	public long getSize() {
+		return size;
 	}
 }

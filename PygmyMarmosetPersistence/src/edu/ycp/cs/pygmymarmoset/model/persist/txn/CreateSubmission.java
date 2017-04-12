@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.CountingInputStream;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
@@ -62,9 +63,10 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		stmt.setInt(1, submission.getId());
 		Blob blob = conn.createBlob();
 		OutputStream os = blob.setBinaryStream(1);
+		CountingInputStream cin = new CountingInputStream(uploadData);
 		try {
 			try {
-				IOUtils.copy(uploadData, os);
+				IOUtils.copy(cin, os);
 			} finally {
 				IOUtils.closeQuietly(os);
 			}
@@ -73,6 +75,13 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		}
 		stmt.setBlob(2, blob);
 		stmt.executeUpdate();
+		
+		// Now that we know how many bytes the blob contains,
+		// update the size
+		PreparedStatement updateSize = prepareStatement(conn, "update submissions set size = ? where id = ?");
+		updateSize.setLong(1, cin.getByteCount());
+		updateSize.setInt(2, submission.getId());
+		updateSize.executeUpdate();
 		
 		return submission;
 	}
