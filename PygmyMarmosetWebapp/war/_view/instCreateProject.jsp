@@ -5,7 +5,7 @@
 <c:set var="courseDisplayName" value="${course.name}, ${term.name} ${course.year}" scope="request"/>
 <html>
 	<head>
-		<pm:headStuff title="${courseDisplayName}: Create Project"/>
+		<pm:headStuff title="${courseDisplayName}: Create Project" ui="true"/>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#proj-ontime").datetimepicker(pm.dateTimeOptions);

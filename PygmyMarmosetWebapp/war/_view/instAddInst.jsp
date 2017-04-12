@@ -5,7 +5,7 @@
 <c:set var="courseDisplayName" value="${course.name}, ${term.name} ${course.year}" scope="request"/>
 <html>
 	<head>
-		<pm:headStuff title="${courseDisplayName}: Add Instructor"/>
+		<pm:headStuff title="${courseDisplayName}: Add Instructor" ui="true"/>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#inst-username").autocomplete({
