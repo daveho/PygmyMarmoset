@@ -28,10 +28,10 @@ public class ViewEntryTag extends SimpleTagSupport {
 		HIGHLIGHTER_MAP.put(".rb", "ruby");
 		HIGHLIGHTER_MAP.put(".py", "python");
 		HIGHLIGHTER_MAP.put(".js", "js");
-//		HIGHLIGHTER_MAP.put(".clj", "clojure");
-//		HIGHLIGHTER_MAP.put(".cljc", "clojure");
-//		HIGHLIGHTER_MAP.put(".cljs", "clojure");
-//		HIGHLIGHTER_MAP.put(".cljx", "clojure");
+		HIGHLIGHTER_MAP.put(".clj", "clojure");
+		HIGHLIGHTER_MAP.put(".cljc", "clojure");
+		HIGHLIGHTER_MAP.put(".cljs", "clojure");
+		HIGHLIGHTER_MAP.put(".cljx", "clojure");
 		HIGHLIGHTER_MAP.put(".mak", "Makefile");
 	}
 	
