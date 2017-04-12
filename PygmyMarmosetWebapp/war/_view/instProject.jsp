@@ -21,14 +21,18 @@
 				<thead>
 					<tr>
 						<th>Student</th>
-						<th>Submissions</th>
+						<th>Ontime</th>
+						<th>Late</th>
+						<th>Very late</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${studentActivity}" var="p">
 						<tr>
 							<td><a href="${pageContext.servletContext.contextPath}/i/submissions/${course.id}/${project.id}/${p.first.id}">${p.first.lastName}, ${p.first.firstName}</a></td>
-							<td style="text-align: right;">${p.second}</td>
+							<td style="text-align: right;">${p.second[0]}</td>
+							<td style="text-align: right;">${p.second[1]}</td>
+							<td style="text-align: right;">${p.second[2]}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

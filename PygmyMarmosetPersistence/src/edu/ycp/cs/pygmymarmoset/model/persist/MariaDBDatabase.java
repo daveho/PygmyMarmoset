@@ -177,7 +177,7 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public List<Pair<User, Integer>> getStudentProjectActivity(Project project) {
+	public List<Pair<User, Integer[]>> getStudentProjectActivity(Project project) {
 		return execute(new GetStudentProjectActivity(project));
 	}
 	

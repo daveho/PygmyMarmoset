@@ -45,7 +45,7 @@ public class InstProject extends AbstractServlet {
 		GetStudentProjectActivityController getStudentProjectActivity =
 				new GetStudentProjectActivityController();
 		
-		List<Pair<User, Integer>> studentActivity = getStudentProjectActivity.execute(	project);
+		List<Pair<User, Integer[]>> studentActivity = getStudentProjectActivity.execute(project);
 		req.setAttribute("studentActivity", studentActivity);
 	}
 }

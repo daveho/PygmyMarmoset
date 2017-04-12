@@ -9,7 +9,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
 public class GetStudentProjectActivityController {
-	public List<Pair<User, Integer>> execute(Project project) {
+	public List<Pair<User, Integer[]>> execute(Project project) {
 		IDatabase db = DatabaseProvider.getInstance();
 		return db.getStudentProjectActivity(project);
 	}
