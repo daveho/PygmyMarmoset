@@ -85,23 +85,24 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		try {
 			try {
 				try {
-					// Read the entire zip file.
-					readZip(zis);
+					// Attempt to read the entire zip file.
+					int numEntries = readZip(zis);
 					
 					// Drain any remaining input, just to be safe
 					// (i.e., don't assume that ZipInputStream read every
 					// byte in the file.)
 					drain(tis);
 					
-					// The entire zip file was read, so we can safely
-					// assume that it is a zip file.
-					isZip = true;
+					// Assume that any valid zipfile will have at least one
+					// entry.
+					isZip = (numEntries > 0);
 				} catch (ZipException e) {
 					// Input does not appear to be a zipfile.
 					// Drain all of the remaining data (to ensure it gets
 					// copied to the Blob.)
 					drain(tis);
 				}
+				//System.out.println("Upload " + (isZip ? "is" : "is not") + " a zip file");
 			} finally {
 				IOUtils.closeQuietly(uploadData);
 				IOUtils.closeQuietly(os);
@@ -126,15 +127,20 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 		return submission;
 	}
 	
-	public static void readZip(ZipInputStream zis) throws IOException {
+	public static int readZip(ZipInputStream zis) throws IOException {
+		int count = 0;
+		//System.out.println("Reading zip data...");;
 		for (;;) {
 			ZipEntry entry = zis.getNextEntry();
 			if (entry == null) {
 				break;
 			}
+			count++;
+			//System.out.println("Saw entry " + entry.getName());
 			// Read the entry's data.
 			drain(zis);
 		}
+		return count;
 	}
 	
 	public static void drain(InputStream is) throws IOException {
