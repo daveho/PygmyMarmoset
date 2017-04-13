@@ -14,24 +14,8 @@
 			<pm:crumbs/>
 			<h1>${courseDisplayName}: Project ${project.name} submissions for ${student.username}</h1>
 			<h2>Submissions</h2>
-			<table class="objtable">
-				<thead>
-					<tr>
-						<th>Submission</th>
-						<th>Date/time</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${submissions}" var="p">
-						<tr>
-							<td><a href="${pageContext.servletContext.contextPath}/i/submission/${course.id}/${project.id}/${student.id}/${p.first.id}">Submission ${p.first.submissionNumber}</a></td>
-							<td><pm:timestamp val="${p.first.timestamp}"/></td>
-							<td>${p.second}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+			<pm:submissionTable
+				linkpfx="${pageContext.servletContext.contextPath}/i/submission/${course.id}/${project.id}/${student.id}"/>
 		</div>
 	</body>
 </html>
