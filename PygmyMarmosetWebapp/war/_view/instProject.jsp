@@ -16,6 +16,7 @@
 			<!--
 			id=${project.id} courseId=${project.courseId} name=${project.name} description=${project.description} visible=${project.visible}
 			-->
+			<p><strong>Deadlines</strong>: Ontime <pm:timestamp val="${project.ontime}"/>, Late <pm:timestamp val="${project.late}"/>
 			<h2>Activity</h2>
 			<table class="objtable">
 				<thead>
