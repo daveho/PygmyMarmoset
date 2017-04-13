@@ -41,6 +41,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjectActivity;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjects;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSubmissionData;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
@@ -197,6 +198,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector) {
 		return execute(new GetOntimeAndLateSubmissions(project, collector));
+	}
+	
+	@Override
+	public boolean getSubmissionData(Submission submission, ISubmissionCollector collector) {
+		return execute(new GetSubmissionData(submission, collector));
 	}
 
 	private Connection createConnection() {

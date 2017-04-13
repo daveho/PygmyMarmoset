@@ -45,4 +45,5 @@ public interface IDatabase {
 	public boolean updateProject(Project project);
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
+	public boolean getSubmissionData(Submission submission, ISubmissionCollector collector);
 }

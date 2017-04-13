@@ -2,8 +2,6 @@ package edu.ycp.cs.pygmymarmoset.app.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -20,9 +18,6 @@ import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
 public class GetOntimeAndLateSubmissionsController {
-	private static final Pattern DRIVE_LETTER = Pattern.compile("^[A-Za-z]:");
-	private static final Pattern LEADING_SLASH = Pattern.compile("^/+");
-
 	private static class SubmissionArchiveCollector implements ISubmissionCollector {
 		private ZipOutputStream zout;
 
@@ -67,30 +62,12 @@ public class GetOntimeAndLateSubmissionsController {
 		}
 		
 		public void copyEntry(String baseDir, String name, InputStream data) throws IOException {
-			name = sanitizeName(name);
+			name = ZipUtil.sanitizeName(name);
 			String fullName = baseDir + "/" + name;
-			System.out.println("Copying entry " + name + " as " + fullName);
+			//System.out.println("Copying entry " + name + " as " + fullName);
 			ZipEntry entry = new ZipEntry(fullName);
 			zout.putNextEntry(entry);
 			IOUtils.copy(data, zout);
-		}
-
-		private String sanitizeName(String name) {
-			// Get rid of drive letter, if there is one
-			Matcher m = DRIVE_LETTER.matcher(name);
-			if (m.find()) {
-				name = name.substring(2);
-			}
-			name = name.replace('\\', '/');
-
-			// Get rid of leading slashes, if any
-			Matcher m2 = LEADING_SLASH.matcher(name);
-			if (m2.find()) {
-				String s = m.group(0);
-				name = name.substring(s.length());
-			}
-			
-			return name;
 		}
 	}
 
