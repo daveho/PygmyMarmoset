@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
+import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
@@ -43,4 +44,5 @@ public interface IDatabase {
 	public List<Pair<User, Integer[]>> getStudentProjectActivity(Project project);
 	public boolean updateProject(Project project);
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
+	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
 }

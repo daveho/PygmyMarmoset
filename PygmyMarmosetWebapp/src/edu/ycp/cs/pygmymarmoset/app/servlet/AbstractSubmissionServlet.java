@@ -21,18 +21,6 @@ public abstract class AbstractSubmissionServlet extends AbstractServlet {
 		GetSubmissionIndexController getIndex = new GetSubmissionIndexController();
 		List<SubmissionEntry> entries = getIndex.execute(submission);
 		
-		if (entries.isEmpty()) {
-			// Either this was a zipfile with no entries (unlikely),
-			// or it is a single file that isn't a zipfile (very likely).
-			// Make it available as a single "entry".  Index 0 is
-			// used to mean the entire contents of the submission blob.
-			SubmissionEntry entry = new SubmissionEntry();
-			entry.setIndex(0);
-			entry.setName(submission.getFileName());
-			entry.setSize(submission.getSize());
-			entries.add(entry);
-		}
-		
 		req.setAttribute("entries", entries);
 		//System.out.printf("Found %d entries in submission\n", entries.size());
 		

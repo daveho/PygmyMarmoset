@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
+import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
@@ -35,6 +36,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetCoursesForUser;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetOntimeAndLateSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjectActivity;
@@ -190,6 +192,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName) {
 		return execute(new FindCourseAndProject(courseName, termName, year, projectName));
+	}
+	
+	@Override
+	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector) {
+		return execute(new GetOntimeAndLateSubmissions(project, collector));
 	}
 
 	private Connection createConnection() {

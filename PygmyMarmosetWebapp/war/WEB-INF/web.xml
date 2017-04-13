@@ -104,6 +104,10 @@
 		<url-pattern>/i/editProject/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>InstLoadProject</filter-name>
+		<url-pattern>/i/downloadOntime/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>StudentLoadProject</filter-name>
 		<url-pattern>/u/project/*</url-pattern>
 	</filter-mapping>
