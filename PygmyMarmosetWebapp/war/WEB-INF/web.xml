@@ -14,6 +14,10 @@
 	
 	<!-- Filters and filter mappings -->
 	<filter>
+		<filter-name>HideViews</filter-name>
+		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.HideViews</filter-class>
+	</filter>
+	<filter>
 		<filter-name>RequireLogin</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.RequireLogin</filter-class>
 	</filter>
@@ -53,6 +57,10 @@
 		<filter-name>InstLoadSubmission</filter-name>
 		<filter-class>edu.ycp.cs.pygmymarmoset.app.filter.InstLoadSubmission</filter-class>
 	</filter>
+	<filter-mapping> <!-- Views should not be accessed directly -->
+		<filter-name>HideViews</filter-name>
+		<url-pattern>/_view/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<!--
 			Parses path info args.

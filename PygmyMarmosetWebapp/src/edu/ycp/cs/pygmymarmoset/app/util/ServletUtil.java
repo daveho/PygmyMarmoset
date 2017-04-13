@@ -33,6 +33,7 @@ public class ServletUtil {
 		errmsg.setText(errmsgText);
 		req.setAttribute("title", title);
 		req.setAttribute("errmsg", errmsg);
+		req.setAttribute("httpStatus", statusCode);
 		req.getRequestDispatcher("/_view/errorResponse.jsp").forward(req, resp);
 	}
 
