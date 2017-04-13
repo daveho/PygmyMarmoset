@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://cs.ycp.edu/pygmymarmoset" prefix="pm" %>
 <%@ attribute name="linkpfx" required="true" %>
+<%@ attribute name="downloadpfx" required="true" %>
 <table class="objtable">
 	<thead>
 		<tr>
@@ -13,7 +14,10 @@
 	<tbody>
 		<c:forEach items="${submissions}" var="p">
 			<tr>
-				<td><a href="${linkpfx}/${p.first.id}">Submission ${p.first.submissionNumber}</a></td>
+				<td>
+					<a href="${linkpfx}/${p.first.id}">Submission ${p.first.submissionNumber}</a>
+					(<a href="${downloadpfx}/${p.first.id}">Download</a>)
+				</td>
 				<td><pm:timestamp val="${p.first.timestamp}"/></td>
 				<td>${p.second}</td>
 			</tr>

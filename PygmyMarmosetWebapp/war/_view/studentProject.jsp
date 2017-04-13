@@ -15,7 +15,9 @@
 			<h1>${courseDisplayName}: Project ${project.name}</h1>
 			<h2>Submissions</h2>
 			<pm:submissionTable
-				linkpfx="${pageContext.servletContext.contextPath}/u/submission/${course.id}/${student.id}/${project.id}/"/>
+				linkpfx="${pageContext.servletContext.contextPath}/u/submission/${course.id}/${student.id}/${project.id}"
+				downloadpfx="${pageContext.servletContext.contextPath}/u/download/${course.id}/${student.id}/${project.id}"
+				/>
 			<h2>Options</h2>
 			<div class="navgroup">
 				<ul>
