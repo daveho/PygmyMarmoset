@@ -1,5 +1,9 @@
 package edu.ycp.cs.pygmymarmoset.app.model;
 
+/**
+ * Note that this class exists only for introspection.
+ * It may not be instantiated.
+ */
 public class SubmissionBlob {
 	@PrimaryKey
 	private int id;
@@ -11,7 +15,7 @@ public class SubmissionBlob {
 	private byte[] data;
 	
 	public SubmissionBlob() {
-		
+		throw new IllegalStateException(SubmissionBlob.class.getSimpleName() + " is not instantiable");
 	}
 
 	public int getId() {

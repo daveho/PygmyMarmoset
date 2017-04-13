@@ -18,6 +18,8 @@ public class Submission {
 	@Desc(size=100)
 	private String fileName;
 	
+	private boolean zip;
+	
 	private long size;
 	
 	public Submission() {
@@ -70,6 +72,14 @@ public class Submission {
 	
 	public String getFileName() {
 		return fileName;
+	}
+	
+	public void setZip(boolean zip) {
+		this.zip = zip;
+	}
+	
+	public boolean isZip() {
+		return zip;
 	}
 	
 	public void setSize(long size) {
