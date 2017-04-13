@@ -98,7 +98,8 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 					isZip = true;
 				} catch (ZipException e) {
 					// Input does not appear to be a zipfile.
-					// Drain all of the 
+					// Drain all of the remaining data (to ensure it gets
+					// copied to the Blob.)
 					drain(tis);
 				}
 			} finally {
