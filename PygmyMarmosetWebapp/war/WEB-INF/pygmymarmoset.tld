@@ -50,18 +50,6 @@
 		</attribute>
 	</tag>
 	
-	<!-- displays term/year for course -->
-	<tag>
-		<name>displayTerm</name>
-		<tag-class>edu.ycp.cs.pygmymarmoset.app.tag.DisplayTermTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<name>course</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	
 	<!-- displays navigation breadcrumbs -->
 	<tag>
 		<name>crumbs</name>
