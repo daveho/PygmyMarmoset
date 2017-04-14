@@ -24,6 +24,14 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${studentActivity}" var="p">
+						<tr>
+							<td><a href="${pageContext.servletContext.contextPath}/i/submissions/${course.id}/${p.first.id}/${student.id}">${p.first.name}</a></td>
+							<td>${p.second[0]}</td>
+							<td>${p.second[1]}</td>
+							<td>${p.second[2]}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

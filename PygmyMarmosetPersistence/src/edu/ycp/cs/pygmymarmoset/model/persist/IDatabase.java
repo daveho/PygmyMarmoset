@@ -46,4 +46,5 @@ public interface IDatabase {
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
 	public boolean getSubmissionData(Submission submission, ISubmissionCollector collector);
+	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student);
 }
