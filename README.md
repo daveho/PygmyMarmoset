@@ -40,4 +40,4 @@ The code is distributed under the terms of the [AGPL v3](https://www.gnu.org/lic
 
 ## Contact
 
-Email <mailto:david.hovemeyer@gmail.com> with feedback.
+Email <david.hovemeyer@gmail.com> with feedback.
