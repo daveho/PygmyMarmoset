@@ -20,11 +20,10 @@ import org.apache.commons.io.IOUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.GetSubmissionDataController;
 import edu.ycp.cs.pygmymarmoset.app.controller.ZipUtil;
-import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
+import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
-import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public abstract class AbstractDownloadServlet extends AbstractServlet {
@@ -54,11 +53,11 @@ public abstract class AbstractDownloadServlet extends AbstractServlet {
 		
 		GetSubmissionDataController getSubmissionData = new GetSubmissionDataController();
 
-		getSubmissionData.execute(submission, new ISubmissionCollector() {
+		getSubmissionData.execute(submission, new IReadBlob() {
 			@Override
-			public void collect(User user, Submission submission, SubmissionStatus status, InputStream data) {
+			public void readBlob(InputStream blobIn, String name) {
 				try {
-					IOUtils.copy(data, out);
+					IOUtils.copy(blobIn, out);
 				} catch (IOException e) {
 					throw new PersistenceException("Error sending submission data", e);
 				}

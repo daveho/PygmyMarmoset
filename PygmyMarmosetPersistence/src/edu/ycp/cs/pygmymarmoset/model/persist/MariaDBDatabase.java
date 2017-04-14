@@ -208,8 +208,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean getSubmissionData(Submission submission, ISubmissionCollector collector) {
-		return execute(new GetSubmissionData(submission, collector));
+	public boolean getSubmissionData(Submission submission, IReadBlob reader) {
+		return execute(new GetSubmissionData(submission, reader));
 	}
 	
 	@Override
