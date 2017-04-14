@@ -7,7 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs.pygmymarmoset.app.controller.FindUserInCourseController;
+import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.ErrorMessage;
+import edu.ycp.cs.pygmymarmoset.app.model.Pair;
+import edu.ycp.cs.pygmymarmoset.app.model.Roles;
+import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 public class ServletUtil {
 	public static void sendForbidden(HttpServletRequest req, HttpServletResponse resp, String errmsgText)
@@ -48,5 +53,22 @@ public class ServletUtil {
 		@SuppressWarnings("unchecked")
 		List<Integer> args = (List<Integer>) req.getAttribute("args");
 		return args;
+	}
+
+	public static boolean loadStudent(HttpServletRequest req, HttpServletResponse resp, Course course, int studentIdArg)
+			throws ServletException, IOException {
+		List<Integer> args = getRequestArgs(req);
+		if (args.size() >= studentIdArg + 1) {
+			Integer studentId = args.get(studentIdArg);
+			FindUserInCourseController findUser = new FindUserInCourseController();
+			Pair<User, Roles> studentInfo = findUser.execute(course, studentId);
+			if (studentInfo == null) {
+				sendNotFound(req, resp, "No such student");
+				return false;
+			}
+			req.setAttribute("student", studentInfo.getFirst());
+			req.setAttribute("studentRoles", studentInfo.getSecond());
+		}
+		return true;
 	}
 }

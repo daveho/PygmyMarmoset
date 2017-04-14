@@ -11,48 +11,31 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs.pygmymarmoset.app.controller.GetRoleController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.app.servlet.InstStudent;
 import edu.ycp.cs.pygmymarmoset.app.util.ServletUtil;
 
 /**
- * Filter to require that logged in user is either an
- * instructor in the course (assumes that a {@link Course}
- * has been added to the session by {@link LoadCourse})
- * or is a superuser.
+ * Normally, {@link RequireInstructorOrAdmin} loads the student {@link User}
+ * and student {@link Roles}.  However, the {@link InstStudent} violates
+ * the usual argument ordering convention that instructor URIs have
+ * the form courseId/projectId/studentId, because there is no {@link Project} id.
+ * This filter loads the student user and roles from the second argument
+ * rather than the third.
  */
-public class RequireInstructorOrAdmin extends AbstractLoginFilter implements Filter {
+public class InstLoadStudent implements Filter {
 	@Override
 	public void doFilter(ServletRequest req_, ServletResponse resp_, FilterChain chain)
 			throws IOException, ServletException {
-		// Make sure user is logged in
-		if (!checkLogin(req_, resp_)) {
-			return;
-		}
 		HttpServletRequest req = (HttpServletRequest) req_;
 		HttpServletResponse resp = (HttpServletResponse) resp_;
-		User user = (User) req.getSession().getAttribute("user");
 		
 		Course course = (Course) req.getAttribute("course");
-		if (course == null) {
-			throw new ServletException("No course");
-		}
 		
-		// Get Roles, add them to request.
-		// Prevent access if user does not have
-		// instructor privileges in the course.
-		GetRoleController getRole = new GetRoleController();
-		Roles roles = getRole.execute(user, course);
-		req.setAttribute("roles", roles);
-		if (!roles.isInstructor()) {
-			ServletUtil.sendForbidden(req, resp, "Superuser or instructor privileges are required");
-			return;
-		}
-		
-		// If a student id was specified, load student User and Roles
-		if (!ServletUtil.loadStudent(req, resp, course, 2)) {
+		if (!ServletUtil.loadStudent(req, resp, course, 1)) {
 			return;
 		}
 		
