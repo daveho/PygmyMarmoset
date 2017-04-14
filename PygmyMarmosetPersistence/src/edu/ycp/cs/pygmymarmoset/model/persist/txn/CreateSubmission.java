@@ -104,7 +104,6 @@ public class CreateSubmission extends DatabaseRunnable<Submission> {
 				}
 				//System.out.println("Upload " + (isZip ? "is" : "is not") + " a zip file");
 			} finally {
-				IOUtils.closeQuietly(uploadData);
 				IOUtils.closeQuietly(os);
 			}
 		} catch (IOException e) {
