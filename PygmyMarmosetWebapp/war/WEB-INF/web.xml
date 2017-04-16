@@ -80,6 +80,10 @@
 		<url-pattern>/index</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>RequireLogin</filter-name>
+		<url-pattern>/passwd</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>RequireSuperUser</filter-name>
 		<url-pattern>/a/*</url-pattern>
 	</filter-mapping>

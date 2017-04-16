@@ -55,6 +55,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateProject;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateUserPasswordHash;
 
 public class MariaDBDatabase implements IDatabase {
 	public static final String JDBC_DRIVER_CLASS = "org.mariadb.jdbc.Driver";
@@ -215,6 +216,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student) {
 		return execute(new GetSingleStudentProjectActivity(course, student));
+	}
+	
+	@Override
+	public boolean updateUserPasswordHash(User user, String passwordHash) {
+		return execute(new UpdateUserPasswordHash(user, passwordHash));
 	}
 
 	private Connection createConnection() {

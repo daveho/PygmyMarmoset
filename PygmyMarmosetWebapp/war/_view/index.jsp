@@ -11,7 +11,8 @@
 		<pm:header/>
 		<div id="content">
 			<pm:crumbs/>
-			<h1>Courses</h1>
+			<h1>Welcome to Pygmy Marmoset!</h1>
+			<h2>Your courses</h2>
 			<table class="objtable">
 				<thead>
 					<tr>
@@ -40,6 +41,12 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<h2>Options</h2>
+			<div class="navgroup">
+				<ul>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/passwd">Change password</a></li>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>

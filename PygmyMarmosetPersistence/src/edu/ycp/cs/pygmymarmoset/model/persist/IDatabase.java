@@ -53,4 +53,5 @@ public interface IDatabase {
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
 	public boolean getSubmissionData(Submission submission, IReadBlob reader);
 	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student);
+	public boolean updateUserPasswordHash(User user, String passwordHash);
 }

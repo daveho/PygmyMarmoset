@@ -27,6 +27,13 @@ public class LoginController {
 			return null;
 		}
 		
+		// There's not really any danger of returning the User
+		// object with the password hash intact, but it's also not
+		// necessary, and if the user changes his/her password
+		// during the session, it might not be accurate.  The
+		// data in the database is the only authoritative password hash.
+		user.setPasswordHash("");
+		
 		return user;
 	}
 }
