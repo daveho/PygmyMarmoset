@@ -23,3 +23,7 @@ task checkDeps {
 		println "deps: " + eclipseClasspath(project).join(',')
 	}
 }
+
+dependencies {
+	compile files(eclipseClasspath(project))
+}
