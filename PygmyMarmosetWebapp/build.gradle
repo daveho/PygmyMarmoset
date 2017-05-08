@@ -1,0 +1,29 @@
+plugins {
+	id 'java'
+}
+
+allprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}
+
+sourceSets {
+	main {
+		output.classesDir = 'war/WEB-INF/classes'
+		output.resourcesDir = 'war/WEB-INF/classes'
+		java {
+			srcDir 'src'
+		}
+	}
+}
+
+task checkDeps {
+	doLast {
+		println "projectName=${project.name}"
+		println "deps: " + eclipseClasspath(project).join(',')
+	}
+}
+
+dependencies {
+	compile files(eclipseClasspath(project))
+}

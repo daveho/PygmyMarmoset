@@ -1,2 +1,5 @@
 include 'PygmyMarmosetModelClasses'
 include 'PygmyMarmosetPersistence'
+include 'PygmyMarmosetWebapp'
+include 'PygmyMarmosetControllers'
+include 'PygmyMarmosetLauncher'
