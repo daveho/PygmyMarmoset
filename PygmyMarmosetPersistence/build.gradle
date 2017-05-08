@@ -17,13 +17,6 @@ sourceSets {
 	}
 }
 
-task checkDeps {
-	doLast {
-		println "projectName=${project.name}"
-		println "deps: " + eclipseClasspath(project).join(',')
-	}
-}
-
 dependencies {
 	compile files(eclipseClasspath(project))
 }
