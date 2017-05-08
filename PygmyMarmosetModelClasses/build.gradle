@@ -2,6 +2,11 @@ plugins {
 	id 'java'
 }
 
+allprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}
+
 sourceSets {
 	main {
 		java {
