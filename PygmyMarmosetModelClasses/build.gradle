@@ -9,6 +9,8 @@ allprojects {
 
 sourceSets {
 	main {
+		output.classesDir = 'bin'
+		output.resourcesDir = 'bin'
 		java {
 			srcDir 'src'
 		}
