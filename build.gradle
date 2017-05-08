@@ -7,9 +7,11 @@
 // are added to the classpath correctly.
 
 def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
-	println "classpathFile=${classpathFile}"
+	//println "classpathFile=${classpathFile}"
 	def cpXml = new XmlParser().parse(classpathFile)
 	def libPaths = []
+	def addOutput = false
+	def outputDir
 	cpXml.classpathentry.each {
 		if ('lib' == it.@kind) {
 			// reference to jarfile
@@ -18,7 +20,7 @@ def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
 				// Jar file from another project: is referenced relative
 				// to parent directory
 				def parentDir = new File(baseDir).parentFile.absolutePath
-				libPaths.add(parentDir + '/' + libPath)
+				libPaths.add(parentDir + libPath)
 			} else {
 				// Jar file is internal to this project
 				def isExport = it.@exported == 'true'
@@ -28,23 +30,31 @@ def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
 			}
 		} else if ('src' == it.@kind && !it.@path.startsWith('/') && exportsOnly) {
 			// reference to source directory of depended-on project:
-			// add the output 'bin' directory
-			libPaths.add(baseDir + '/bin') // FIXME: could wait until we see the "output" classpathentry then add that
+			// make a note to add the output directory
+			addOutput = true
 		} else if ('src' == it.@kind && it.@path.startsWith('/')) {
 			// reference to project
-			println "Adding recursive dependencies from ${it.@path}"
+			//println "Adding recursive dependencies from ${it.@path}"
 			def refProjBase = new File(baseDir + '/..' + it.@path).canonicalPath
-			println "refProjBase=${refProjBase}"
+			//println "refProjBase=${refProjBase}"
 			def refLibPaths = parseEclipseClasspath(refProjBase + '/.classpath', refProjBase, true)
 			libPaths.addAll(refLibPaths)
+		} else if ('output' == it.@kind) {
+			outputDir = baseDir + '/' + it.@path
 		}
 	}
+	
+	if (addOutput) {
+		// Add the output directory (i.e., compiled classfiles for this project)
+		libPaths.add(outputDir)
+	}
+	
 	return libPaths
 }
 
 def eclipseClasspath(p) {
 	def baseDir = p.projectDir.absolutePath
 	def classpathFile = new File(baseDir, '.classpath')
-	println "baseDir=${baseDir}"
+	//println "baseDir=${baseDir}"
 	return parseEclipseClasspath(classpathFile, baseDir, false)
 }
