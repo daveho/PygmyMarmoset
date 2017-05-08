@@ -1,0 +1,50 @@
+// PygmyMarmoset gradle build script
+
+// Read an Eclipse classpath and return a list of jarfiles
+// and directories.  See:
+//   http://stackoverflow.com/questions/31653796
+// I improved the basic technique so that referenced projects
+// are added to the classpath correctly.
+
+def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
+	println "classpathFile=${classpathFile}"
+	def cpXml = new XmlParser().parse(classpathFile)
+	def libPaths = []
+	cpXml.classpathentry.each {
+		if ('lib' == it.@kind) {
+			// reference to jarfile
+			def libPath = it.@path
+			if (libPath.startsWith("/") && !exportsOnly) {
+				// Jar file from another project: is referenced relative
+				// to parent directory
+				def parentDir = new File(baseDir).parentFile.absolutePath
+				libPaths.add(parentDir + '/' + libPath)
+			} else {
+				// Jar file is internal to this project
+				def isExport = it.@exported == 'true'
+				if (isExport || !exportsOnly) {
+					libPaths.add(baseDir + '/' + libPath)
+				}
+			}
+		} else if ('src' == it.@kind && !it.@path.startsWith('/') && exportsOnly) {
+			// reference to source directory of depended-on project:
+			// add the output 'bin' directory
+			libPaths.add(baseDir + '/bin') // FIXME: could wait until we see the "output" classpathentry then add that
+		} else if ('src' == it.@kind && it.@path.startsWith('/')) {
+			// reference to project
+			println "Adding recursive dependencies from ${it.@path}"
+			def refProjBase = new File(baseDir + '/..' + it.@path).canonicalPath
+			println "refProjBase=${refProjBase}"
+			def refLibPaths = parseEclipseClasspath(refProjBase + '/.classpath', refProjBase, true)
+			libPaths.addAll(refLibPaths)
+		}
+	}
+	return libPaths
+}
+
+def eclipseClasspath(p) {
+	def baseDir = p.projectDir.absolutePath
+	def classpathFile = new File(baseDir, '.classpath')
+	println "baseDir=${baseDir}"
+	return parseEclipseClasspath(classpathFile, baseDir, false)
+}

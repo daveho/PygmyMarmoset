@@ -17,8 +17,9 @@ sourceSets {
 	}
 }
 
-task foobar {
+task checkDeps {
 	doLast {
-		foobar()
+		println "projectName=${project.name}"
+		println "deps: " + eclipseClasspath(project).join(',')
 	}
 }
