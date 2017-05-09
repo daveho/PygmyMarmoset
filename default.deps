@@ -87,3 +87,6 @@ http://central.maven.org/maven2/com/google/guava/guava/21.0/guava-21.0.jar
 
 http://central.maven.org/maven2/javassist/javassist/3.12.1.GA/javassist-3.12.1.GA.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/javassist-3.12.1.GA.jar
+
+https://s3.amazonaws.com/org.cloudcoder.daemon.binaries/daemon-0.7.jar
+  PygmyMarmosetLauncher/lib/daemon-0.7.jar

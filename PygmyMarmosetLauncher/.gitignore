@@ -3,3 +3,4 @@
 /logs/*
 /.gradle
 /build
+/lib
