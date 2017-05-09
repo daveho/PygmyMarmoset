@@ -6,11 +6,12 @@
 
 task uberJar(
 	type: Jar,
-	dependsOn: [':copyWebappFiles', ':copyWebappJars', ':copyJettyDeps']) {
+	dependsOn: [':copyWebappFiles', ':copyWebappJars', ':copyLauncherFiles', ':copyJettyDeps']) {
 	manifest {
 		attributes 'Main-Class' : 'edu.ycp.cs.pygmymarmoset.main.UberjarMain'
 	}
 	baseName 'build/pygmyMarmosetApp'
+	from 'build/uberJarStaging'
 }
 
 // Copy all web app classes and resources, as well as classes and resources
@@ -34,6 +35,12 @@ task copyWebappFiles(
 task copyWebappJars(type: Copy) {
 	from 'PygmyMarmosetWebapp/war/WEB-INF/lib'
 	into 'build/uberJarStaging/war/WEB-INF/lib'
+}
+
+// Copy the launcher program classfiles into the uberjar staging area.
+task copyLauncherFiles(type: Copy) {
+	from 'PygmyMarmosetLauncher/bin'
+	into 'build/uberJarStaging'
 }
 
 // Copy all of the contents of the Jetty jarfiles into the uberjar staging area.

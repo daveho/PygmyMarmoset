@@ -2,3 +2,5 @@
 /deps
 /.gradle
 /build
+/instance.pid
+/log.txt
