@@ -6,13 +6,15 @@
 
 task uberJar(
 	type: Jar,
-	dependsOn: [':copyWebappFiles', ':copyWebappJars']) {
+	dependsOn: [':copyWebappFiles', ':copyWebappJars', ':copyJettyDeps']) {
 	manifest {
-		attributes 'Main-Class' : 'edu.ycp.cs.pygmymarmoset.main.Main'
+		attributes 'Main-Class' : 'edu.ycp.cs.pygmymarmoset.main.UberjarMain'
 	}
 	baseName 'build/pygmyMarmosetApp'
 }
 
+// Copy all web app classes and resources, as well as classes and resources
+// from depended-on projects into the uberjar staging area.
 task copyWebappFiles(
 	type: Copy,
 	dependsOn: [
@@ -27,9 +29,18 @@ task copyWebappFiles(
 	into 'build/uberJarStaging/war/WEB-INF/classes'
 }
 
+// Copy all of the webapp's runtime jar files
+// into the uberjar staging area.
 task copyWebappJars(type: Copy) {
 	from 'PygmyMarmosetWebapp/war/WEB-INF/lib'
 	into 'build/uberJarStaging/war/WEB-INF/lib'
+}
+
+// Copy all of the contents of the Jetty jarfiles into the uberjar staging area.
+task copyJettyDeps(type: Copy) {
+	from requiredJars(project(':PygmyMarmosetLauncher')).collect { zipTree(it) }
+	into 'build/uberJarStaging'
+	exclude 'META-INF/**'
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -93,4 +104,11 @@ def eclipseClasspath(p) {
 	def classpathFile = new File(baseDir, '.classpath')
 	//println "baseDir=${baseDir}"
 	return parseEclipseClasspath(classpathFile, baseDir, false)
+}
+
+// Get just the required jars for a project
+def requiredJars(p) {
+	return eclipseClasspath(p).findAll {
+		it.endsWith('.jar')
+	}
 }
