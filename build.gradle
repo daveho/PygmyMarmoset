@@ -6,7 +6,7 @@
 
 task uberJar(
 	type: Jar,
-	dependsOn: [':copyWebappFiles']) {
+	dependsOn: [':copyWebappFiles', ':copyWebappJars']) {
 	manifest {
 		attributes 'Main-Class' : 'edu.ycp.cs.pygmymarmoset.main.Main'
 	}
@@ -25,6 +25,11 @@ task copyWebappFiles(
 					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin',
 					'PygmyMarmosetWebapp/war/WEB-INF/classes'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
+}
+
+task copyWebappJars(type: Copy) {
+	from 'PygmyMarmosetWebapp/war/WEB-INF/lib'
+	into 'build/uberJarStaging/war/WEB-INF/lib'
 }
 
 ///////////////////////////////////////////////////////////////////////
