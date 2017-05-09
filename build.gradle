@@ -38,7 +38,7 @@ task copyWebappJars(type: Copy) {
 }
 
 // Copy the launcher program classfiles into the uberjar staging area.
-task copyLauncherFiles(type: Copy) {
+task copyLauncherFiles(type: Copy, dependsOn: [':PygmyMarmosetLauncher:compileJava']) {
 	from 'PygmyMarmosetLauncher/bin'
 	into 'build/uberJarStaging'
 }
