@@ -22,8 +22,8 @@ task copyWebappFiles(
 		':PygmyMarmosetWebapp:compileJava'
 	]){
 	from 'PygmyMarmosetModelClasses/bin',
-					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin'
-					'PygmyMarmosetWebapp/war/WEB'
+					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin',
+					'PygmyMarmosetWebapp/war/WEB-INF/classes'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
 }
 
