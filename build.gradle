@@ -46,7 +46,7 @@ task copyWebappWebinf(type: Copy) {
 
 // Copy all other webapp files, such as JSPs, images, js, css, etc.
 // into the uberjar staging area.
-task copyWebappFiles(type: Copy) {
+task copyWebappFiles(type: Copy, dependsOn: [':copyJstlTldFiles', ':copyJstlClassFiles']) {
 	from 'PygmyMarmosetWebapp/war'
 	into 'build/uberJarStaging/war'
 	exclude 'WEB-INF/**'
@@ -70,6 +70,26 @@ task copyJettyDeps(type: Copy) {
 	from requiredJars(project(':PygmyMarmosetLauncher')).collect { zipTree(it) }
 	into 'build/uberJarStaging'
 	exclude 'META-INF/**'
+}
+
+// FIXME: grotesque hack
+task explodeJstl(type: Copy) {
+	from zipTree('Jetty9/lib/apache-jstl/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar')
+	into 'build/apache-jstl'
+}
+
+// FIXME: grotesque hack
+task copyJstlTldFiles(type: Copy, dependsOn: [':explodeJstl']) {
+	from 'build/apache-jstl/META-INF'
+	into 'build/uberJarStaging/war/WEB-INF'
+	include '*.tld'
+}
+
+// FIXME: grotesque hack
+task copyJstlClassFiles(type: Copy, dependsOn: [':explodeJstl']) {
+	from 'build/apache-jstl'
+	into 'build/uberJarStaging/war/WEB-INF/classes'
+	include 'org/**'
 }
 
 ///////////////////////////////////////////////////////////////////////
