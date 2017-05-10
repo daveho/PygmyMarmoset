@@ -14,17 +14,26 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Launcher {
-	// This is adapted from the Embedded Jetty example from Jetty 9.4.x:
-	//	    https://www.eclipse.org/jetty/documentation/9.4.x/embedded-examples.html#embedded-webapp-jsp
-	public static Server launch(boolean fromEclipse, int port, String warUrl) throws Exception {
+	/**
+	 * Create a {@link Server}, but do not start it.
+	 * 
+	 * @param fromEclipse true if launching interactively (rather than from uberjar)
+	 * @param port which port to listen on
+	 * @param warUrl the URL of the webapp war directory
+	 */
+	public Server launch(boolean fromEclipse, int port, String warUrl) throws Exception {
+		// This is adapted from the Embedded Jetty example from Jetty 9.4.x:
+		//	    https://www.eclipse.org/jetty/documentation/9.4.x/embedded-examples.html#embedded-webapp-jsp
 		Server server = new Server(port);
-
+		
 		MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
 		server.addBean(mbContainer);
 
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/marmoset");
 		webapp.setWar(warUrl);
+		
+		onCreateWebAppContext(webapp);
 
 		Configuration.ClassList classList = Configuration.ClassList.setServerDefault(server);
 		classList.addBefore(
@@ -49,10 +58,11 @@ public class Launcher {
 		}
 		
 		server.setHandler(webapp);
-
-		server.start();
 		
 		return server;
 	}
 
+	protected void onCreateWebAppContext(WebAppContext webapp) {
+		// Does nothing by default, subclasses may override
+	}
 }

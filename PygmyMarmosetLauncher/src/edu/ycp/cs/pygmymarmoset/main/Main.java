@@ -17,7 +17,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		String webappCodeBase = "../PygmyMarmosetWebapp/war";
 		File warFile = new File(webappCodeBase); // FIXME
-		Server server = Launcher.launch(true, PORT, warFile.getAbsolutePath());
+		Launcher launcher = new Launcher();
+		Server server = launcher.launch(true, PORT, warFile.getAbsolutePath());
+		server.start();
 		server.dumpStdErr();
 		server.join();
 	}
