@@ -6,7 +6,13 @@
 
 task uberJar(
 	type: Jar,
-	dependsOn: [':copyWebappFiles', ':copyWebappJars', ':copyLauncherFiles', ':copyJettyDeps']) {
+	dependsOn: [
+		':copyWebappClasses',
+		':copyWebappWebinf',
+		':copyWebappFiles',
+		':copyWebappJars',
+		':copyLauncherFiles',
+		':copyJettyDeps']) {
 	manifest {
 		attributes 'Main-Class' : 'edu.ycp.cs.pygmymarmoset.main.UberjarMain'
 	}
@@ -16,7 +22,7 @@ task uberJar(
 
 // Copy all web app classes and resources, as well as classes and resources
 // from depended-on projects into the uberjar staging area.
-task copyWebappFiles(
+task copyWebappClasses(
 	type: Copy,
 	dependsOn: [
 		':PygmyMarmosetModelClasses:compileJava',
@@ -28,6 +34,22 @@ task copyWebappFiles(
 					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin',
 					'PygmyMarmosetWebapp/war/WEB-INF/classes'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
+}
+
+// Copy the non-class and non-jar files in the webapp's WEB-INF
+// into the uberjar staging area.
+task copyWebappWebinf(type: Copy) {
+	from 'PygmyMarmosetWebapp/war/WEB-INF'
+	into 'build/uberJarStaging/war/WEB-INF'
+	exclude 'classes/**', 'lib/**'
+}
+
+// Copy all other webapp files, such as JSPs, images, js, css, etc.
+// into the uberjar staging area.
+task copyWebappFiles(type: Copy) {
+	from 'PygmyMarmosetWebapp/war'
+	into 'build/uberJarStaging/war'
+	exclude 'WEB-INF/**'
 }
 
 // Copy all of the webapp's runtime jar files
