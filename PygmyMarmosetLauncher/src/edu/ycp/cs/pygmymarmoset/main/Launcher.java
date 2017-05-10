@@ -6,7 +6,6 @@
 
 package edu.ycp.cs.pygmymarmoset.main;
 
-import java.io.File;
 import java.lang.management.ManagementFactory;
 
 import org.eclipse.jetty.jmx.MBeanContainer;
