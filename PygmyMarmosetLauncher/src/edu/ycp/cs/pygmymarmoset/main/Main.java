@@ -6,6 +6,8 @@
 
 package edu.ycp.cs.pygmymarmoset.main;
 
+import java.io.File;
+
 import org.eclipse.jetty.server.Server;
 
 // Run interactively from Eclipse.
@@ -13,7 +15,9 @@ public class Main {
 	private static final int PORT = 8080;
 
 	public static void main(String[] args) throws Exception {
-		Server server = Launcher.launch(true, PORT, "../PygmyMarmosetWebapp/war");
+		String webappCodeBase = "../PygmyMarmosetWebapp/war";
+		File warFile = new File(webappCodeBase); // FIXME
+		Server server = Launcher.launch(true, PORT, warFile.getAbsolutePath());
 		server.dumpStdErr();
 		server.join();
 	}

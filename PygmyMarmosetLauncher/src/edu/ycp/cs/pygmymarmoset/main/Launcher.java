@@ -17,7 +17,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class Launcher {
 	// This is adapted from the Embedded Jetty example from Jetty 9.4.x:
 	//	    https://www.eclipse.org/jetty/documentation/9.4.x/embedded-examples.html#embedded-webapp-jsp
-	public static Server launch(boolean fromEclipse, int port, String webappCodeBase) throws Exception {
+	public static Server launch(boolean fromEclipse, int port, String warUrl) throws Exception {
 		Server server = new Server(port);
 
 		MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
@@ -25,8 +25,7 @@ public class Launcher {
 
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/marmoset");
-		File warFile = new File(webappCodeBase); // FIXME
-		webapp.setWar(warFile.getAbsolutePath());
+		webapp.setWar(warUrl);
 
 		Configuration.ClassList classList = Configuration.ClassList.setServerDefault(server);
 		classList.addBefore(
