@@ -72,20 +72,23 @@ task copyJettyDeps(type: Copy) {
 	exclude 'META-INF/**'
 }
 
-// FIXME: grotesque hack
+// Note: the following targets copy the .tld files and classfiles
+// for Apache JSTL into the webapp.  Getting them to resolve
+// correctly when running from the uberjar is complicated and
+// would involve classloader hacks.  This solution is easy
+// and works.
+
 task explodeJstl(type: Copy) {
 	from zipTree('Jetty9/lib/apache-jstl/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar')
 	into 'build/apache-jstl'
 }
 
-// FIXME: grotesque hack
 task copyJstlTldFiles(type: Copy, dependsOn: [':explodeJstl']) {
 	from 'build/apache-jstl/META-INF'
 	into 'build/uberJarStaging/war/WEB-INF'
 	include '*.tld'
 }
 
-// FIXME: grotesque hack
 task copyJstlClassFiles(type: Copy, dependsOn: [':explodeJstl']) {
 	from 'build/apache-jstl'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
@@ -101,8 +104,11 @@ task copyJstlClassFiles(type: Copy, dependsOn: [':explodeJstl']) {
 //   http://stackoverflow.com/questions/31653796
 // I improved the basic technique so that referenced projects
 // are added to the classpath correctly.
-
-def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
+// WARNING: if there are projects with circular dependencies
+// this method will execute an infinite recursion.
+def parseEclipseClasspath(classpathFile, exportsOnly) {
+	def baseDir = classpathFile.parentFile
+	
 	//println "classpathFile=${classpathFile}"
 	def cpXml = new XmlParser().parse(classpathFile)
 	def libPaths = []
@@ -115,13 +121,13 @@ def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
 			if (libPath.startsWith("/") && !exportsOnly) {
 				// Jar file from another project: is referenced relative
 				// to parent directory
-				def parentDir = new File(baseDir).parentFile.absolutePath
+				def parentDir = baseDir.parentFile.absolutePath
 				libPaths.add(parentDir + libPath)
 			} else {
 				// Jar file is internal to this project
 				def isExport = it.@exported == 'true'
 				if (isExport || !exportsOnly) {
-					libPaths.add(baseDir + '/' + libPath)
+					libPaths.add(baseDir.path + '/' + libPath)
 				}
 			}
 		} else if ('src' == it.@kind && !it.@path.startsWith('/') && exportsOnly) {
@@ -131,12 +137,12 @@ def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
 		} else if ('src' == it.@kind && it.@path.startsWith('/')) {
 			// reference to project
 			//println "Adding recursive dependencies from ${it.@path}"
-			def refProjBase = new File(baseDir + '/..' + it.@path).canonicalPath
+			def refProjBase = new File(baseDir.path + '/..' + it.@path).canonicalPath
 			//println "refProjBase=${refProjBase}"
-			def refLibPaths = parseEclipseClasspath(refProjBase + '/.classpath', refProjBase, true)
+			def refLibPaths = parseEclipseClasspath(new File(refProjBase + '/.classpath'), true)
 			libPaths.addAll(refLibPaths)
 		} else if ('output' == it.@kind) {
-			outputDir = baseDir + '/' + it.@path
+			outputDir = baseDir.path + '/' + it.@path
 		}
 	}
 	
@@ -148,11 +154,12 @@ def parseEclipseClasspath(classpathFile, baseDir, exportsOnly) {
 	return libPaths
 }
 
+// Get compile-time dependencies for specified project
 def eclipseClasspath(p) {
 	def baseDir = p.projectDir.absolutePath
 	def classpathFile = new File(baseDir, '.classpath')
 	//println "baseDir=${baseDir}"
-	return parseEclipseClasspath(classpathFile, baseDir, false)
+	return parseEclipseClasspath(classpathFile, false)
 }
 
 // Get just the required jars for a project

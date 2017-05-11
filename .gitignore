@@ -5,3 +5,4 @@
 /instance.pid
 /log.txt
 /*.fifo
+/logs
