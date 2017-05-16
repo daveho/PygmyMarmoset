@@ -21,21 +21,31 @@ task uberJar(
 	from 'build/uberJarStaging'
 }
 
-// Copy all web app classes and resources, as well as classes and resources
-// from depended-on projects into the uberjar staging area.
+// Copy all web app classes and resources into the uberjar staging area.
 task copyWebappClasses(
 	type: Copy,
 	dependsOn: [
-		':PygmyMarmosetModelClasses:compileJava',
-		':PygmyMarmosetPersistence:compileJava',
-		':PygmyMarmosetControllers:compileJava',
+		':copyWebappProjectJars', // ensures depended-on classes are available
 		':PygmyMarmosetWebapp:compileJava'
 	]){
-	from 'PygmyMarmosetModelClasses/bin',
-					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin',
-					'PygmyMarmosetWebapp/war/WEB-INF/classes'
+	from 'PygmyMarmosetWebapp/war/WEB-INF/classes'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
 	exclude "pygmymarmoset.properties"
+}
+
+// Copy jars of projects depended on by the webapp into the uberjar
+// staging area.
+task copyWebappProjectJars(
+	type: Copy,
+	dependsOn: [
+		':PygmyMarmosetModelClasses:jar',
+		':PygmyMarmosetPersistence:jar',
+		':PygmyMarmosetControllers:jar'
+	]) {
+	from 'PygmyMarmosetModelClasses/build/libs', 'PygmyMarmosetPersistence/build/libs',
+					'PygmyMarmosetControllers/build/libs'
+	into 'build/uberJarStaging/war/WEB-INF/lib'
+	include '*.jar'
 }
 
 // Copy the configuration properties
