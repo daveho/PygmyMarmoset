@@ -32,7 +32,7 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, 
 		PreparedStatement stmt = prepareStatement(
 				conn,
 				"select u.*, y.num_ontime, y.num_late, y.num_verylate" +
-				"  from users as u" +
+				"  from (select uu.* from users as uu, roles as r where uu.id = r.userid and r.courseid = ?) as u" +
 				"       left join" +
 				"       (select x.userid, sum(x.ontime) as num_ontime, sum(x.late) as num_late, sum(x.verylate) as num_verylate" +
 				"          from (select s.userid," +
@@ -42,13 +42,15 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, 
 				"                  from submissions as s" +
 				"                 where s.projectid = ?) as x" +
 				"           group by x.userid) as y" +
-				"         on u.id = y.userid"
+				"         on u.id = y.userid" +
+				""
 				);
-		stmt.setLong(1, project.getOntime());
+		stmt.setInt(1, project.getCourseId());
 		stmt.setLong(2, project.getOntime());
-		stmt.setLong(3, project.getLate());
+		stmt.setLong(3, project.getOntime());
 		stmt.setLong(4, project.getLate());
-		stmt.setInt(5, project.getId());
+		stmt.setLong(5, project.getLate());
+		stmt.setInt(6, project.getId());
 		
 		ResultSet resultSet = executeQuery(stmt);
 		List<Pair<User, Integer[]>> result = new ArrayList<>();
