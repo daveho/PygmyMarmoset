@@ -17,6 +17,11 @@ sourceSets {
 	}
 }
 
+jar {
+	duplicatesStrategy= DuplicatesStrategy.EXCLUDE
+	exclude 'pygmymarmoset.properties'
+}
+
 dependencies {
 	compile files(eclipseClasspath(project))
 }

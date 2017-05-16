@@ -16,6 +16,9 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Configuration properties object.
+ */
 public class PMConfig {
 	// Keys
 	public static final String DB_HOST = "pm.db.host";
@@ -27,16 +30,31 @@ public class PMConfig {
 	
 	private static final PMConfig instance = new PMConfig();
 	static {
+		if (!loadPropertiesFromResource("pygmymarmoset.properties")) {
+			// If we're running from the NestedJarClassLoader, e.g. when
+			// running the "createdb" from the command line, then we need
+			// to specify the location of the config properties file
+			// within the uberjar.
+			if (!loadPropertiesFromResource("war/WEB-INF/classes/pygmymarmoset.properties")) {
+				logger.error("Could not find pygmymarmoset.properties");
+			}
+		}
+	}
+	
+	private static boolean loadPropertiesFromResource(String resName) {
 		InputStream in =
-				PMConfig.class.getClassLoader().getResourceAsStream("pygmymarmoset.properties");
+				PMConfig.class.getClassLoader().getResourceAsStream(resName);
 		if (in == null) {
-			logger.error("pygmymarmoset.properties doesn't exist");
+			logger.warn("Resource {} doesn't exist", resName);
+			return false;
 		} else {
 			InputStreamReader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
 			try {
 				instance.load(reader);
+				return true;
 			} catch (IOException e) {
 				logger.error("Error reading pygmymarmoset.properties", e);
+				return false;
 			}
 		}
 	}
