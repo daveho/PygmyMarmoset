@@ -29,6 +29,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
+import edu.ycp.cs.pygmymarmoset.config.PMConfig;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.AddInstructor;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateModelClassTable;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.CreateProject;
@@ -70,8 +71,22 @@ public class MariaDBDatabase implements IDatabase {
 	private static Logger logger = LoggerFactory.getLogger(MariaDBDatabase.class);
 	
 	// TODO: don't hard-code
-	public static final String JDBC_URL =
-			"jdbc:mysql://localhost/pygmymarmoset?user=root&password=root";
+	// jdbc:mysql://localhost/pygmymarmoset?user=root&password=root
+	public static String JDBC_URL;
+	static {
+		PMConfig config = PMConfig.getInstance();
+		StringBuilder buf = new StringBuilder();
+		buf.append("jdbc:mysql://");
+		buf.append(config.getProperty(PMConfig.DB_HOST));
+		buf.append("/");
+		buf.append(config.getProperty(PMConfig.DB_NAME));
+		buf.append("?user=");
+		buf.append(config.getProperty(PMConfig.DB_USER));
+		buf.append("&password=");
+		buf.append(config.getProperty(PMConfig.DB_PASSWD));
+		JDBC_URL = buf.toString();
+		//System.out.println("JDBC_URL=" + JDBC_URL);
+	}
 
 	@Override
 	public void createModelClassTable(Class<?> modelCls) {
