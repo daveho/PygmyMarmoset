@@ -13,4 +13,14 @@ public class UberjarDaemonController extends DaemonController {
 	public Class<? extends IDaemon> getDaemonClass() {
 		return UberjarDaemon.class;
 	}
+	
+	@Override
+	protected Options createOptions() {
+		return new Options() {
+			@Override
+			public String getStdoutLogFileName() {
+				return "logs/stdout.log";
+			}
+		};
+	}
 }

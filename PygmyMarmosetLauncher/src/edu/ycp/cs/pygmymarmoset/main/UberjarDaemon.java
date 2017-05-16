@@ -6,16 +6,22 @@ import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.InstanceManager;
 import org.apache.tomcat.SimpleInstanceManager;
 import org.cloudcoder.daemon.IDaemon;
+import org.cloudcoder.daemon.Util;
 import org.eclipse.jetty.annotations.ServletContainerInitializersStarter;
 import org.eclipse.jetty.apache.jsp.JettyJasperInitializer;
 import org.eclipse.jetty.plus.annotation.ContainerInitializer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UberjarDaemon implements IDaemon {
+	private static final Logger logger = LoggerFactory.getLogger(UberjarDaemon.class);
+	
 	// Version of Launcher that sets things up to allow JSPs
 	// to work.
 	private final class UberjarLauncher extends Launcher {
@@ -37,9 +43,35 @@ public class UberjarDaemon implements IDaemon {
 	private static final int PORT = 8081; // TODO: make configurable
 	
 	private Server server;
+	private File tmpdir;
 
 	@Override
 	public void start(String instanceName) {
+		// We take this opportunity to set the java.io.tmpdir
+		// system property to an instance-specific directory.
+		// /tmp (the default value) is not a good place
+		// for long-running apps to store files.
+		// CentOS 7, for example, appears to delete or change
+		// the permissions of files stored in /tmp periodically.
+		// If Jetty creates its temporary webapp directory in
+		// /tmp, bad stuff happens if static resources or code
+		// get modified.
+		try {
+			String path = "./" + instanceName + "-tmp-" + Util.getPid();
+			File tmpdir = new File(path);
+			if (!tmpdir.mkdirs()) {
+				throw new IOException("Could not create directory " + path);
+			}
+			System.setProperty("java.io.tmpdir", tmpdir.getAbsolutePath());
+			this.tmpdir = tmpdir;
+		} catch (Exception e) {
+			// This situation isn't ideal, but we'll keep running
+			// anyway (with the webapp files in the system temp dir)
+			logger.warn("Error creating instance-specific temp dir: {}", e.getMessage());
+			logger.warn("Webapp files will be placed in default temp dir {}", System.getProperty("java.io.tmpdir"));
+		}
+		
+		// Launch the webapp!
 		ProtectionDomain domain = getClass().getProtectionDomain();
 		String codeBase = domain.getCodeSource().getLocation().toExternalForm();
 		if (!codeBase.endsWith(".jar")) {
@@ -55,6 +87,7 @@ public class UberjarDaemon implements IDaemon {
 		}
 	}
 	
+	// See: http://bengreen.eu/fancyhtml/quickreference/jettyjsp9error.html
 	private static List<ContainerInitializer> jspInitializers() {
 		JettyJasperInitializer sci = new JettyJasperInitializer();
 		ContainerInitializer initializer = new ContainerInitializer(sci, null);
@@ -63,6 +96,7 @@ public class UberjarDaemon implements IDaemon {
 		return initializers;
 	}
 
+	// See: http://bengreen.eu/fancyhtml/quickreference/jettyjsp9error.html
 	private static File getScratchDir() throws IOException {
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
 		File scratchDir = new File(tempDir.toString(), "embedded-jetty-jsp");
@@ -83,11 +117,21 @@ public class UberjarDaemon implements IDaemon {
 
 	@Override
 	public void shutdown() {
+		// Shut down Jetty and wait for it to exit
 		try {
 			server.stop();
 			server.join();
 		} catch (Exception e) {
 			throw new IllegalStateException("Exception shutting down Jetty", e);
+		}
+		
+		// Clean up temp dir
+		if (tmpdir != null) {
+			try {
+				FileUtils.deleteDirectory(tmpdir);
+			} catch (IOException e) {
+				logger.error("Error deleting temp directory", e);
+			}
 		}
 	}
 }

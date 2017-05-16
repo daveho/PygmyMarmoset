@@ -67,10 +67,12 @@ http://repo2.maven.org/maven2/org/slf4j/slf4j-log4j12/${slf4j_version}/slf4j-log
 
 http://central.maven.org/maven2/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/commons-lang3-3.5.jar
+  PygmyMarmosetLauncher/lib/commons-lang3-3.5.jar
 http://central.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/commons-beanutils-1.9.3.jar
 http://central.maven.org/maven2/commons-io/commons-io/2.5/commons-io-2.5.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/commons-io-2.5.jar
+  PygmyMarmosetLauncher/lib/commons-io-2.5.jar
 
 http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.7/jackson-annotations-2.8.7.jar
   PygmyMarmosetWebapp/war/WEB-INF/lib/jackson-annotations-2.8.7.jar
