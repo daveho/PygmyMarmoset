@@ -15,11 +15,11 @@
 				<table class="formtab">
 					<tr>
 						<td class="formlabel">New password:</td>
-						<td><pm:input obj="updatedPasswd" field="password" type="password"/></td>
+						<td><pm:input obj="updatedPasswd" field="password" type="password" autocomplete="false"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel">Confirm new password:</td>
-						<td><pm:input obj="updatedPasswd" field="confirm" type="password"/></td>
+						<td><pm:input obj="updatedPasswd" field="confirm" type="password" autocomplete="false"/></td>
 					</tr>
 					<tr>
 						<td></td>

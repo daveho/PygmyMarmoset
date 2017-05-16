@@ -22,6 +22,7 @@ import edu.ycp.cs.pygmymarmoset.app.util.BeanUtil;
 public class InputTag extends BeanTag {
 	private String type;
 	private String id;
+	private String autocomplete = "true"; // by default, allow autocompletion of password fields
 	
 	public void setType(String type) {
 		this.type = type;
@@ -29,6 +30,10 @@ public class InputTag extends BeanTag {
 	
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public void setAutocomplete(String autocomplete) {
+		this.autocomplete = autocomplete;
 	}
 	
 	@Override
@@ -124,6 +129,9 @@ public class InputTag extends BeanTag {
 			if (propVal.equals("true")) {
 				out.print(" checked");
 			}
+		}
+		if (type.equals("password") && !Boolean.valueOf(autocomplete)) {
+			out.print(" autocomplete=\"new-password\"");
 		}
 		out.print(">");
 	}

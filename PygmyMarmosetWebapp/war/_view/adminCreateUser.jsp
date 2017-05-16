@@ -28,7 +28,7 @@
 					</tr>
 					<tr>
 						<td class="formlabel">Password:</td>
-						<td><pm:input obj="newUser" field="passwordHash" type="password"/></td>
+						<td><pm:input obj="newUser" field="passwordHash" type="password" autocomplete="false"/></td>
 					</tr>
 					<tr>
 						<td class="formlabel">Superuser:</td>
