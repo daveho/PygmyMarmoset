@@ -40,7 +40,7 @@ public class UberjarDaemon implements IDaemon {
 		}
 	}
 
-	private static final int PORT = 8081; // TODO: make configurable
+	private static final int PORT = 8080; // TODO: make configurable
 	
 	private Server server;
 	private File tmpdir;
