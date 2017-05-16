@@ -8,6 +8,7 @@ task uberJar(
 	type: Jar,
 	dependsOn: [
 		':copyWebappClasses',
+		':copyConfigProperties',
 		':copyWebappWebinf',
 		':copyWebappFiles',
 		':copyWebappJars',
@@ -34,6 +35,17 @@ task copyWebappClasses(
 					'PygmyMarmosetPersistence/bin', 'PygmyMarmosetControllers/bin',
 					'PygmyMarmosetWebapp/war/WEB-INF/classes'
 	into 'build/uberJarStaging/war/WEB-INF/classes'
+	exclude "pygmymarmoset.properties"
+}
+
+// Copy the configuration properties
+task copyConfigProperties(type: Copy) {
+	from project.projectDir
+	into 'build/uberJarStaging/war/WEB-INF/classes'
+	include 'pygmymarmoset.properties'
+	
+	// make sure there actually was a configuration properties file to copy
+	inputs.sourceFiles.stopExecutionIfEmpty()
 }
 
 // Copy the non-class and non-jar files in the webapp's WEB-INF
