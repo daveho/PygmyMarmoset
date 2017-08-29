@@ -55,7 +55,7 @@ public class InstBulkRegistration extends AbstractFormServlet {
 		
 		// Do the bulk registration!
 		// TODO: bulk registration outcomes (e.g., generated passwords for new accounts)
-		bulkReg.execute(course, in);
+		bulkReg.execute(course, in, secNum);
 		
 		// Clear form data
 		secNum.setSection(0);
