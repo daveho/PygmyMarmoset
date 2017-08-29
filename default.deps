@@ -92,3 +92,6 @@ http://central.maven.org/maven2/javassist/javassist/3.12.1.GA/javassist-3.12.1.G
 
 https://s3.amazonaws.com/org.cloudcoder.daemon.binaries/daemon-0.7.jar
   PygmyMarmosetLauncher/lib/daemon-0.7.jar
+
+http://central.maven.org/maven2/org/apache/commons/commons-csv/1.4/commons-csv-1.4.jar
+  PygmyMarmosetWebapp/war/WEB-INF/lib/commons-csv-1.4.jar
