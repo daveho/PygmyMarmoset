@@ -62,6 +62,7 @@
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/u/course/${course.id}/${user.id}">Student view</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/createProject/${course.id}">Create project</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/regStudent/${course.id}">Register student</a></li>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/bulkReg/${course.id}">Bulk registration from YCP roster</a>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/addInst/${course.id}">Add instructor</a></li>
 				</ul>
 			</div>
