@@ -31,12 +31,10 @@
 				</table>
 			</form>
 			<pm:notification/>
-			<c:if test="${outcomes}">
+			<c:if test="${hasOutcomes}">
 			<p>Bulk registration outcomes are as follows (tuples are username, new user, generated password):</p>
 <pre>
-<c:forEach items="${outcomes}" var="o">
-${o.username},${o.newUser},${o.generatedPassword}
-</c:forEach>
+<c:forEach items="${outcomes}" var="o">${o.username},${o.newUser},${o.generatedPassword}<br></c:forEach>
 </pre>
 			</c:if>
 		</div>
