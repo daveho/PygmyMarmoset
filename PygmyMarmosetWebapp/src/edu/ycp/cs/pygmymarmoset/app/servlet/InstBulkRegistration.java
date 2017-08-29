@@ -7,11 +7,17 @@
 package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import edu.ycp.cs.pygmymarmoset.app.controller.BulkRegistrationController;
+import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.SectionNumber;
 
 @Route(pattern="/i/bulkReg/*", view="/_view/instBulkRegistration.jsp")
@@ -32,8 +38,27 @@ public class InstBulkRegistration extends AbstractFormServlet {
 		// TODO: logic
 		
 		SectionNumber secNum = params.get("sectionNumber");
+		Course course = (Course) req.getAttribute("course");
 		
 		req.setAttribute("resultmsg", "Need to register students in section " + secNum.getSection());
+
+		// Read the roster CSV
+		Part filePart;
+		try {
+			filePart = req.getPart("uploadData");
+		} catch (ServletException e) {
+			throw new PygmyMarmosetException("Could not retrieve file upload data", e);
+		}
+		
+		BulkRegistrationController bulkReg = new BulkRegistrationController();
+		InputStream in = filePart.getInputStream();
+		
+		// Do the bulk registration!
+		// TODO: bulk registration outcomes (e.g., generated passwords for new accounts)
+		bulkReg.execute(course, in);
+		
+		// Clear form data
+		secNum.setSection(0);
 		
 		return LogicOutcome.STAY_ON_PAGE;
 	}
