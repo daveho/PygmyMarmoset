@@ -59,6 +59,8 @@ public class InstBulkRegistration extends AbstractFormServlet {
 		List<BulkRegistrationOutcome> outcomes = bulkReg.execute(course, in, secNum);
 		req.setAttribute("outcomes", outcomes);
 		
+		req.setAttribute("resultmsg", "Registered " + outcomes.size() + " student(s)");
+		
 		// Clear form data
 		secNum.setSection(0);
 		
