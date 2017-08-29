@@ -8,6 +8,7 @@ package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.BulkRegistrationController;
+import edu.ycp.cs.pygmymarmoset.app.model.BulkRegistrationOutcome;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.PygmyMarmosetException;
 import edu.ycp.cs.pygmymarmoset.app.model.SectionNumber;
@@ -54,8 +56,8 @@ public class InstBulkRegistration extends AbstractFormServlet {
 		InputStream in = filePart.getInputStream();
 		
 		// Do the bulk registration!
-		// TODO: bulk registration outcomes (e.g., generated passwords for new accounts)
-		bulkReg.execute(course, in, secNum);
+		List<BulkRegistrationOutcome> outcomes = bulkReg.execute(course, in, secNum);
+		req.setAttribute("outcomes", outcomes);
 		
 		// Clear form data
 		secNum.setSection(0);
