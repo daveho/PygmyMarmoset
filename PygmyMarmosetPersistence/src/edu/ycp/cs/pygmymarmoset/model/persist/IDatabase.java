@@ -17,6 +17,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
+import edu.ycp.cs.pygmymarmoset.app.model.RosterField;
 import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 import edu.ycp.cs.pygmymarmoset.app.model.SubmissionStatus;
 import edu.ycp.cs.pygmymarmoset.app.model.Term;
@@ -33,7 +34,7 @@ public interface IDatabase {
 	public List<Term> getAllTerms();
 	public Pair<Course,Term> findCourseForCourseId(int courseId);
 	public boolean registerStudent(User student, Course course, Role role);
-	public List<Pair<User, Role>> getRoster(Course course);
+	public List<Pair<User, Role>> getRoster(Course course, RosterField[] sortOrder);
 	public boolean addInstructor(Course course, String username, int section);
 	public Roles getUserRolesInCourse(User user, Course course);
 	public List<String> suggestUsernames(String term);

@@ -19,6 +19,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RosterField;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
 @Route(pattern="/i/course/*", view="/_view/instCourse.jsp")
@@ -32,7 +33,7 @@ public class InstCourse extends AbstractServlet {
 		// Get the roster
 		Course course = (Course) req.getAttribute("course");
 		GetRosterController getRoster = new GetRosterController();
-		List<Pair<User, Role>> roster = getRoster.execute(course);
+		List<Pair<User, Role>> roster = getRoster.execute(course, RosterField.getDefaultSortOrder());
 		req.setAttribute("roster", roster);
 		// Get the projects
 		GetProjectsController getProjects = new GetProjectsController();

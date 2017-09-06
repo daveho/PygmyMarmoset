@@ -11,21 +11,46 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RosterField;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
 public class GetRoster extends DatabaseRunnable<List<Pair<User, Role>>> {
 	private Course course;
+	private RosterField[] sortOrder;
 
-	public GetRoster(Course course) {
+	public GetRoster(Course course, RosterField[] sortOrder) {
 		super("get course roster");
 		this.course = course;
+		this.sortOrder = sortOrder;
+	}
+	
+	private static final Map<RosterField, String> SORT_MAP = new HashMap<>();
+	static {
+		SORT_MAP.put(RosterField.ROLE_TYPE, "r.type desc");
+		SORT_MAP.put(RosterField.LAST_NAME, "u.lastname asc");
+		SORT_MAP.put(RosterField.FIRST_NAME, "u.firstname asc");
+		SORT_MAP.put(RosterField.SECTION, "r.section asc");
+		SORT_MAP.put(RosterField.USERNAME, "u.username asc");
+	}
+	
+	private String getOrderBy() {
+		StringBuilder buf = new StringBuilder();
+		for (RosterField f : sortOrder) {
+			if (buf.length() > 0) {
+				buf.append(", ");
+			}
+			buf.append(SORT_MAP.get(f));
+		}
+		return buf.toString();
 	}
 	
 	@Override
@@ -35,7 +60,7 @@ public class GetRoster extends DatabaseRunnable<List<Pair<User, Role>>> {
 				"select u.*, r.* from users as u, roles as r" +
 				" where u.id = r.userid" +
 				"   and r.courseid = ?" +
-				" order by r.type desc, u.lastname asc, u.firstname asc, r.section asc, u.username asc");
+				" order by " + getOrderBy());
 		stmt.setInt(1, course.getId());
 		ResultSet resultSet = executeQuery(stmt);
 		List<Pair<User, Role>> result = new ArrayList<>();

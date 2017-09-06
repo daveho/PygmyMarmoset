@@ -11,13 +11,14 @@ import java.util.List;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
+import edu.ycp.cs.pygmymarmoset.app.model.RosterField;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
 public class GetRosterController {
-	public List<Pair<User, Role>> execute(Course course) {
+	public List<Pair<User, Role>> execute(Course course, RosterField[] sortOrder) {
 		IDatabase db = DatabaseProvider.getInstance();
-		return db.getRoster(course);
+		return db.getRoster(course, sortOrder);
 	}
 }
