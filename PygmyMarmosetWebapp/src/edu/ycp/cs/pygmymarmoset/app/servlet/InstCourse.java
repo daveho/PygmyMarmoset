@@ -30,10 +30,28 @@ public class InstCourse extends AbstractServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// See if a sort order was specified
+		String sort = req.getParameter("sort");
+		RosterField[] sortOrder = null;
+		if (sort != null) {
+			try {
+				RosterField primary = RosterField.find(sort.trim());
+				sortOrder = RosterField.sortBy(primary);
+				req.setAttribute("sort", sort);
+			} catch (IllegalArgumentException e) {
+				// invalid sort order was specified
+			}
+		}
+
+		// Use default sort order if none was specified
+		if (sortOrder == null) {
+			sortOrder = RosterField.getDefaultSortOrder();
+		}
+		
 		// Get the roster
 		Course course = (Course) req.getAttribute("course");
 		GetRosterController getRoster = new GetRosterController();
-		List<Pair<User, Role>> roster = getRoster.execute(course, RosterField.getDefaultSortOrder());
+		List<Pair<User, Role>> roster = getRoster.execute(course, sortOrder);
 		req.setAttribute("roster", roster);
 		// Get the projects
 		GetProjectsController getProjects = new GetProjectsController();

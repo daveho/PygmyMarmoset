@@ -139,6 +139,14 @@ table.objtable th, table.objtable td {
 	padding: 6px 12px;
 }
 
+table.objtable th a {
+	color: black;
+}
+
+table.objtable th a:visited {
+	color: black;
+}
+
 table.objtable tr:nth-child(even) {
 	background: #ddd;
 }
