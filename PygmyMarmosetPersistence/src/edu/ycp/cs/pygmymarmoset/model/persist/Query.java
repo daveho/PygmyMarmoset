@@ -17,6 +17,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
@@ -239,5 +240,36 @@ public class Query {
 			value = ((Boolean)value) ? 1 : 0;
 		}
 		stmt.setObject(index, value);
+	}
+
+	/**
+	 * Create a select alias for all database fields corresponding to
+	 * given model class.  This is a work around for situations when
+	 * two model classes with some field names in common (e.g., "id")
+	 * need to be selected, and an ambiguous column name is used
+	 * the WHERE clause.
+	 * 
+	 * @param modelCls          the model class (e.g. Role)
+	 * @param tableAlias        the alias by which the model class's table
+	 *                          is referred in the query (e.g., "r" for Role)
+	 * @param fieldAliasPrefix  the desired prefix to use to alias the
+	 *                          table's columns (e.g. "role_")
+	 * @return the selected fields with the desired aliases
+	 */
+	public static<E> String selectAlias(Class<E> modelCls, String tableAlias, String fieldAliasPrefix) {
+		StringBuilder buf = new StringBuilder();
+		Introspect<E> introspect = Introspect.getIntrospect(modelCls);
+		for (DBField dbField : introspect.getFields()) {
+			if (buf.length() > 0) {
+				buf.append(", ");
+			}
+			buf.append(tableAlias);
+			buf.append(".");
+			buf.append(dbField.getName());
+			buf.append(" as ");
+			buf.append(fieldAliasPrefix);
+			buf.append(dbField.getName());
+		}
+		return buf.toString();
 	}
 }

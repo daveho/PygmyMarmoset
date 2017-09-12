@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.GetStudentProjectActivityController;
 import edu.ycp.cs.pygmymarmoset.app.controller.UpdateProjectController;
-import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
-import edu.ycp.cs.pygmymarmoset.app.model.SectionNumber;
+import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 
@@ -53,8 +52,7 @@ public class InstProject extends AbstractServlet {
 		GetStudentProjectActivityController getStudentProjectActivity =
 				new GetStudentProjectActivityController();
 		
-		//List<Pair<User, Integer[]>> studentActivity = getStudentProjectActivity.execute(project);
-		List<Triple<User, Integer[], SectionNumber>> studentActivity = getStudentProjectActivity.execute(project);
+		List<Triple<User, Integer[], Role>> studentActivity = getStudentProjectActivity.execute(project);
 		req.setAttribute("studentActivity", studentActivity);
 	}
 }
