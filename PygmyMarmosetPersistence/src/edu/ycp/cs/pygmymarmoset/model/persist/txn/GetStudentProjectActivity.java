@@ -42,7 +42,8 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Triple<User
 				"                  from submissions as s" +
 				"                 where s.projectid = ?) as x" +
 				"           group by x.userid) as y" +
-				"         on u.id = y.userid";
+				"         on u.id = y.userid" +
+				"   order by u.lastname asc, u.firstname asc, u.role_type, u.role_section";
 		System.out.println("Query: " + query);
 		PreparedStatement stmt = prepareStatement(
 				conn,
