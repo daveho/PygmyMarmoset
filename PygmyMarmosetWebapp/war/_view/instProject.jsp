@@ -25,6 +25,7 @@
 						<th>Ontime</th>
 						<th>Late</th>
 						<th>Very late</th>
+						<th>Section</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,6 +35,7 @@
 							<td style="text-align: right;">${p.second[0]}</td>
 							<td style="text-align: right;">${p.second[1]}</td>
 							<td style="text-align: right;">${p.second[2]}</td>
+							<td style="text-align: right;">${p.third.section}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

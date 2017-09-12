@@ -13,13 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
+import edu.ycp.cs.pygmymarmoset.app.model.SectionNumber;
+import edu.ycp.cs.pygmymarmoset.app.model.Triple;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseRunnable;
 import edu.ycp.cs.pygmymarmoset.model.persist.Query;
 
-public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, Integer[]>>> {
+public class GetStudentProjectActivity extends DatabaseRunnable<List<Triple<User, Integer[], SectionNumber>>> {
 	private Project project;
 	
 	public GetStudentProjectActivity(Project project) {
@@ -28,11 +29,11 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, 
 	}
 
 	@Override
-	public List<Pair<User, Integer[]>> execute(Connection conn) throws SQLException {
+	public List<Triple<User, Integer[], SectionNumber>> execute(Connection conn) throws SQLException {
 		PreparedStatement stmt = prepareStatement(
 				conn,
 				"select u.*, y.num_ontime, y.num_late, y.num_verylate" +
-				"  from (select uu.* from users as uu, roles as r where uu.id = r.userid and r.courseid = ?) as u" +
+				"  from (select uu.*, r.section from users as uu, roles as r where uu.id = r.userid and r.courseid = ?) as u" +
 				"       left join" +
 				"       (select x.userid, sum(x.ontime) as num_ontime, sum(x.late) as num_late, sum(x.verylate) as num_verylate" +
 				"          from (select s.userid," +
@@ -53,10 +54,15 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, 
 		stmt.setInt(6, project.getId());
 		
 		ResultSet resultSet = executeQuery(stmt);
-		List<Pair<User, Integer[]>> result = new ArrayList<>();
+		List<Triple<User, Integer[], SectionNumber>> result = new ArrayList<>();
 		while (resultSet.next()) {
+			// Load user fields
 			User user = new User();
 			int index = Query.loadFields(user, resultSet);
+			// Section number appears just after the User fields
+			SectionNumber secNum = new SectionNumber();
+			secNum.setSection(resultSet.getInt(index++));
+			// Load number of ontime/late/verylate submissions
 			Integer[] triple;
 			Number numOntime = (Number) resultSet.getObject(index);
 			if (numOntime == null) {
@@ -69,7 +75,7 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Pair<User, 
 					triple[i] = ((Number)resultSet.getObject(index+i)).intValue();
 				}
 			}
-			result.add(new Pair<>(user, triple));
+			result.add(new Triple<>(user, triple, secNum));
 		}
 		
 		return result;
