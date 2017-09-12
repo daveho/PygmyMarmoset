@@ -49,15 +49,25 @@ public class InstProject extends AbstractServlet {
 
 	private void getStudentActivity(HttpServletRequest req) {
 		Project project = (Project) req.getAttribute("project");
-		
-		GetStudentProjectActivityController getStudentProjectActivity =
-				new GetStudentProjectActivityController();
-		
+
+		// See if a sort order was specified
 		ProjectActivityField[] sortOrder = null;
+		String sort = req.getParameter("sort");
+		if (sort != null) {
+			try {
+				ProjectActivityField primary = ProjectActivityField.find(sort.trim());
+				sortOrder = ProjectActivityField.sortBy(primary);
+			} catch (IllegalArgumentException e) {
+				// unknown sort order
+			}
+		}
 		
 		if (sortOrder == null) {
 			sortOrder = ProjectActivityField.getDefaultSortOrder();
 		}
+		
+		GetStudentProjectActivityController getStudentProjectActivity =
+				new GetStudentProjectActivityController();
 		
 		List<Triple<User, Integer[], Role>> studentActivity = getStudentProjectActivity.execute(project, sortOrder);
 		req.setAttribute("studentActivity", studentActivity);

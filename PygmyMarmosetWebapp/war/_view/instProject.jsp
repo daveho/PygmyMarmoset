@@ -21,12 +21,12 @@
 			<table class="objtable">
 				<thead>
 					<tr>
-						<th>Student</th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=last_name">Student</a></th>
 						<th>Ontime</th>
 						<th>Late</th>
 						<th>Very late</th>
-						<th>Section</th>
-						<th>Role</th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=section">Section</th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=role_type">Role</th>
 					</tr>
 				</thead>
 				<tbody>
