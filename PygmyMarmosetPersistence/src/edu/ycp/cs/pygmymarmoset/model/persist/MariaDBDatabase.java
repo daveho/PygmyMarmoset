@@ -21,6 +21,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
+import edu.ycp.cs.pygmymarmoset.app.model.ProjectActivityField;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
@@ -205,8 +206,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project) {
-		return execute(new GetStudentProjectActivity(project));
+	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project, ProjectActivityField[] sortOrder) {
+		return execute(new GetStudentProjectActivity(project, sortOrder));
 	}
 	
 	@Override

@@ -43,14 +43,7 @@ public class GetRoster extends DatabaseRunnable<List<Pair<User, Role>>> {
 	}
 	
 	private String getOrderBy() {
-		StringBuilder buf = new StringBuilder();
-		for (RosterField f : sortOrder) {
-			if (buf.length() > 0) {
-				buf.append(", ");
-			}
-			buf.append(SORT_MAP.get(f));
-		}
-		return buf.toString();
+		return Query.getOrderBy(sortOrder, SORT_MAP);
 	}
 	
 	@Override

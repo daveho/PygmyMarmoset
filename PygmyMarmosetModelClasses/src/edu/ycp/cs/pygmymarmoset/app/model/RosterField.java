@@ -24,14 +24,7 @@ public enum RosterField {
 	 * @throws IllegalArgumentException if the name is not known
 	 */
 	public static RosterField find(String name) {
-		RosterField[] fields = values();
-		String lcName = name.toLowerCase();
-		for (RosterField f : fields) {
-			if (f.name().toLowerCase().equals(lcName)) {
-				return f;
-			}
-		}
-		throw new IllegalArgumentException("Unknown roster field: " + name);
+		return Sort.find(values(), name);
 	}
 	
 	/**
@@ -50,15 +43,6 @@ public enum RosterField {
 	 * @return the resulting sort order
 	 */
 	public static RosterField[] sortBy(RosterField primary) {
-		RosterField[] def = getDefaultSortOrder();
-		RosterField[] result = new RosterField[def.length];
-		result[0] = primary;
-		int count = 1;
-		for (RosterField f : def) {
-			if (f != primary) {
-				result[count++] = f;
-			}
-		}
-		return result;
+		return Sort.sortBy(getDefaultSortOrder(), primary);
 	}
 }

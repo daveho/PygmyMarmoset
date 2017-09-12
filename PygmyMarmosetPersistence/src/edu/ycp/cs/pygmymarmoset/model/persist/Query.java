@@ -12,12 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import edu.ycp.cs.pygmymarmoset.app.model.PersistenceException;
-import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.User;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.DBField;
 import edu.ycp.cs.pygmymarmoset.app.model.introspect.Introspect;
@@ -269,6 +269,24 @@ public class Query {
 			buf.append(" as ");
 			buf.append(fieldAliasPrefix);
 			buf.append(dbField.getName());
+		}
+		return buf.toString();
+	}
+	
+	/**
+	 * Get order by clause corresponding to given sort order.
+	 * 
+	 * @param sortOrder the sort order
+	 * @param sortMap   mapping of sort fields to query columns and asending/descending spec
+	 * @return order by clause
+	 */
+	public static<E extends Enum<E>> String getOrderBy(E[] sortOrder, Map<E, String> sortMap) {
+		StringBuilder buf = new StringBuilder();
+		for (E f : sortOrder) {
+			if (buf.length() > 0) {
+				buf.append(", ");
+			}
+			buf.append(sortMap.get(f));
 		}
 		return buf.toString();
 	}

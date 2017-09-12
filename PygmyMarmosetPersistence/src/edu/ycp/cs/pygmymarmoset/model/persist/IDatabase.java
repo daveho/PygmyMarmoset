@@ -14,6 +14,7 @@ import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
+import edu.ycp.cs.pygmymarmoset.app.model.ProjectActivityField;
 import edu.ycp.cs.pygmymarmoset.app.model.Role;
 import edu.ycp.cs.pygmymarmoset.app.model.RoleType;
 import edu.ycp.cs.pygmymarmoset.app.model.Roles;
@@ -48,7 +49,7 @@ public interface IDatabase {
 	public Submission createSubmission(Project project, User student, String fileName, InputStream uploadData);
 	public Submission findSubmissionForSubmissionId(int submissionId);
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
-	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project);
+	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project, ProjectActivityField[] sortOrder);
 	public boolean updateProject(Project project);
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
