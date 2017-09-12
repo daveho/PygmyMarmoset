@@ -31,7 +31,10 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${studentActivity}" var="p">
-						<tr>
+						<c:set var="submissionSum" value="${p.second[0] + p.second[1]}"/>
+						<c:if test="${submissionSum == 0}"><c:set var="rowClass" value="missing"/></c:if>
+						<c:if test="${submissionSum != 0}"><c:set var="rowClass" value=""/></c:if>
+						<tr class="${rowClass}">
 							<td><a href="${pageContext.servletContext.contextPath}/i/submissions/${course.id}/${project.id}/${p.first.id}">${p.first.lastName}, ${p.first.firstName}</a></td>
 							<td style="text-align: center;">${p.second[0]}</td>
 							<td style="text-align: center;">${p.second[1]}</td>

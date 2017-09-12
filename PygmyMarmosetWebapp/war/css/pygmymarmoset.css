@@ -151,6 +151,14 @@ table.objtable tr:nth-child(even) {
 	background: #ddd;
 }
 
+table.objtable tr.missing {
+	background: #dbb;
+}
+
+table.objtable tr.missing:nth-child(even) {
+	background: #ecc;
+}
+
 table.objtable tr td a {
 	color: black;
 	text-decoration: none;
