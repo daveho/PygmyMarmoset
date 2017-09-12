@@ -21,22 +21,22 @@
 			<table class="objtable">
 				<thead>
 					<tr>
-						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=last_name">Student</a></th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=last_name">Student</a><c:if test="${sort == 'last_name'}">&#x25b2;</c:if></th>
 						<th>Ontime</th>
 						<th>Late</th>
 						<th>Very late</th>
-						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=section">Section</th>
-						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=role_type">Role</th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=section">Section</a><c:if test="${sort == 'section'}">&#x25b2;</c:if></th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/project/${course.id}/${project.id}?sort=role_type">Role</a><c:if test="${sort == 'role_type'}">&#x25b2;</c:if></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${studentActivity}" var="p">
 						<tr>
 							<td><a href="${pageContext.servletContext.contextPath}/i/submissions/${course.id}/${project.id}/${p.first.id}">${p.first.lastName}, ${p.first.firstName}</a></td>
-							<td style="text-align: right;">${p.second[0]}</td>
-							<td style="text-align: right;">${p.second[1]}</td>
-							<td style="text-align: right;">${p.second[2]}</td>
-							<td style="text-align: right;">${p.third.section}</td>
+							<td style="text-align: center;">${p.second[0]}</td>
+							<td style="text-align: center;">${p.second[1]}</td>
+							<td style="text-align: center;">${p.second[2]}</td>
+							<td style="text-align: center;">${p.third.section}</td>
 							<td>${p.third.type}</td>
 						</tr>
 					</c:forEach>

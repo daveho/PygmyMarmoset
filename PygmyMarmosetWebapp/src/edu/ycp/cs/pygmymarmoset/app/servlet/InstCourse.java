@@ -37,7 +37,6 @@ public class InstCourse extends AbstractServlet {
 			try {
 				RosterField primary = RosterField.find(sort.trim());
 				sortOrder = RosterField.sortBy(primary);
-				req.setAttribute("sort", sort);
 			} catch (IllegalArgumentException e) {
 				// invalid sort order was specified
 			}
@@ -46,7 +45,10 @@ public class InstCourse extends AbstractServlet {
 		// Use default sort order if none was specified
 		if (sortOrder == null) {
 			sortOrder = RosterField.getDefaultSortOrder();
+			sort = sortOrder[0].toString().toLowerCase();
 		}
+
+		req.setAttribute("sort", sort);
 		
 		// Get the roster
 		Course course = (Course) req.getAttribute("course");

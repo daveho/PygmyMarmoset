@@ -62,7 +62,7 @@ public class GetStudentProjectActivity extends DatabaseRunnable<List<Triple<User
 				"           group by x.userid) as y" +
 				"         on u.id = y.userid" +
 				"   order by " + getOrderBy();
-		System.out.println("Query: " + query);
+		//System.out.println("Query: " + query);
 		PreparedStatement stmt = prepareStatement(
 				conn,
 				query);

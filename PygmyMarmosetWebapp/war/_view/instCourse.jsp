@@ -41,7 +41,7 @@
 						<th><a href="${pageContext.servletContext.contextPath}/i/course/${course.id}?sort=last_name">Name</a><c:if test="${sort == 'last_name'}">&#x25b2;</c:if></th>
 						<th><a href="${pageContext.servletContext.contextPath}/i/course/${course.id}?sort=username">Username</a><c:if test="${sort == 'username'}">&#x25b2;</c:if></th>
 						<th><a href="${pageContext.servletContext.contextPath}/i/course/${course.id}?sort=section">Section</a><c:if test="${sort == 'section'}">&#x25b2;</c:if></th>
-						<th><a href="${pageContext.servletContext.contextPath}/i/course/${course.id}?sort=role_type">Role</a><c:if test="${empty sort or sort == 'role_type'}">&#x25b2;</c:if></th>
+						<th><a href="${pageContext.servletContext.contextPath}/i/course/${course.id}?sort=role_type">Role</a><c:if test="${sort == 'role_type'}">&#x25b2;</c:if></th>
 					</tr>
 				</thead>
 				<tbody>

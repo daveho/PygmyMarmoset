@@ -46,7 +46,7 @@ public class InstProject extends AbstractServlet {
 		getStudentActivity(req);
 		delegateToView(req, resp);
 	}
-
+	
 	private void getStudentActivity(HttpServletRequest req) {
 		Project project = (Project) req.getAttribute("project");
 
@@ -64,7 +64,10 @@ public class InstProject extends AbstractServlet {
 		
 		if (sortOrder == null) {
 			sortOrder = ProjectActivityField.getDefaultSortOrder();
+			sort = sortOrder[0].toString().toLowerCase();
 		}
+
+		req.setAttribute("sort", sort);
 		
 		GetStudentProjectActivityController getStudentProjectActivity =
 				new GetStudentProjectActivityController();
