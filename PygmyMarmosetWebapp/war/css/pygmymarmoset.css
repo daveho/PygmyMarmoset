@@ -43,6 +43,9 @@ body {
 	border: 8px solid #d5ba53;
 	border-radius: 24px;
 	padding: 1em 2em;
+	-webkit-box-shadow: 12px 12px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 12px 12px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 12px 12px 10px 0px rgba(0,0,0,0.75);
 }
 
 #loginbox h1 {
