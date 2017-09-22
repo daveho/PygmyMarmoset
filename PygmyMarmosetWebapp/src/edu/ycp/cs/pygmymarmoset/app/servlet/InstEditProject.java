@@ -15,8 +15,8 @@ import edu.ycp.cs.pygmymarmoset.app.controller.UpdateProjectController;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 
 @Route(pattern="/i/editProject/*", view="/_view/instEditProject.jsp")
-@Navigation(parent=InstCourse.class)
-@CrumbSpec(text="Update %p", items={PathInfoItem.COURSE_ID, PathInfoItem.PROJECT_ID})
+@Navigation(parent=InstProject.class)
+@CrumbSpec(text="Edit %p", items={PathInfoItem.COURSE_ID, PathInfoItem.PROJECT_ID, PathInfoItem.PROJECT_ID})
 public class InstEditProject extends AbstractFormServlet {
 	private static final long serialVersionUID = 1L;
 
