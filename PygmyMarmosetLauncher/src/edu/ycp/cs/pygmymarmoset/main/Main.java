@@ -15,8 +15,8 @@ public class Main {
 	private static final int PORT = 8080;
 
 	public static void main(String[] args) throws Exception {
-		String webappCodeBase = "../PygmyMarmosetWebapp/war";
-		File warFile = new File(webappCodeBase); // FIXME
+		String webappCodeBase = "../PygmyMarmosetWebapp/war"; // Assumes webapp is in sibling directory
+		File warFile = new File(webappCodeBase);
 		Launcher launcher = new Launcher();
 		Server server = launcher.launch(true, PORT, warFile.getAbsolutePath());
 		server.start();
