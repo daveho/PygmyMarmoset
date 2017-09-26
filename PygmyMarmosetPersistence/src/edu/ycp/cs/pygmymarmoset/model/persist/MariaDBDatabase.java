@@ -57,6 +57,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.InsertModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateModelObject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateUserPasswordHash;
 
@@ -241,8 +242,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public void updateModelObject(Object student) {
-		// TODO: implement
+	public boolean updateModelObject(Object student) {
+		return execute(new UpdateModelObject(student));
 	}
 
 	private Connection createConnection() {

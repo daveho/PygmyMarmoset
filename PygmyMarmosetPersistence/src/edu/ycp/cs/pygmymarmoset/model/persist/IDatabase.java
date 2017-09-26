@@ -56,5 +56,5 @@ public interface IDatabase {
 	public boolean getSubmissionData(Submission submission, IReadBlob reader);
 	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student);
 	public boolean updateUserPasswordHash(User user, String passwordHash);
-	public void updateModelObject(Object student);
+	public boolean updateModelObject(Object student);
 }
