@@ -179,6 +179,10 @@
 		<filter-name>InstLoadStudent</filter-name>
 		<url-pattern>/i/student/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>InstLoadStudent</filter-name>
+		<url-pattern>/i/editStudent/*</url-pattern>
+	</filter-mapping>
 	
 	<!--
 		Use the Welcome servlet as the welcome page.

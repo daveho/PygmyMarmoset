@@ -239,6 +239,11 @@ public class MariaDBDatabase implements IDatabase {
 	public boolean updateUserPasswordHash(User user, String passwordHash) {
 		return execute(new UpdateUserPasswordHash(user, passwordHash));
 	}
+	
+	@Override
+	public void updateModelObject(Object student) {
+		// TODO: implement
+	}
 
 	private Connection createConnection() {
 		try {

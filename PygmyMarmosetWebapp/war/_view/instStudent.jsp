@@ -34,6 +34,12 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<h2>Options</h2>
+			<div class="navgroup">
+				<ul>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/editStudent/${course.id}/${student.id}">Edit account</a></li>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
