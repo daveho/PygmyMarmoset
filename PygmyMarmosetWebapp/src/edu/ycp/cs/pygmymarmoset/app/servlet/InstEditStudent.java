@@ -39,7 +39,7 @@ public class InstEditStudent extends AbstractFormServlet {
 		
 		EditStudentController editStudent = new EditStudentController();
 		editStudent.execute(student);
-		req.setAttribute("resultmsg", "Editing student " + student.getUsername() + " successfully");
+		req.setAttribute("resultmsg", "Edited student " + student.getUsername() + " successfully");
 		
 		// clear the password hash
 		student.setPasswordHash("");
