@@ -52,12 +52,12 @@ public class Params {
 		if (reqObj != null) {
 			// Use the model object that already exists in the session attributes.
 			modelObjects.put(name, reqObj);
-			System.out.println(name + " object exists in request");
+//			System.out.println(name + " object exists in request");
 		} else {
 			// Create a new model object.
 			reqObj = BeanUtil.newInstance(modelCls);
 			modelObjects.put(name, reqObj);
-			System.out.println(name + " object does not exist in request");
+//			System.out.println(name + " object does not exist in request");
 		}
 		// Add to request attributes.
 		req.setAttribute(name, reqObj);

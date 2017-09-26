@@ -22,7 +22,7 @@ public class InstEditStudent extends AbstractFormServlet {
 
 	@Override
 	protected Params createParams(HttpServletRequest req) {
-		System.out.printf("B: Student object %s exist in request attributes\n", req.getAttribute("student") != null ? "does" : "does not");
+//		System.out.printf("B: Student object %s exist in request attributes\n", req.getAttribute("student") != null ? "does" : "does not");
 		// Make sure the student User object exists.
 		// Clear out the password hash, though.
 		// It will be loaded from form data on a POST

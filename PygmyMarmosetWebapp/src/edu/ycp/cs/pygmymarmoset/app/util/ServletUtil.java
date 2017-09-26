@@ -74,8 +74,8 @@ public class ServletUtil {
 			}
 			req.setAttribute("student", studentInfo.getFirst());
 			req.setAttribute("studentRoles", studentInfo.getSecond());
-			System.out.println("Adding student and student roles to request");
-			System.out.printf("A: Student object %s exist in request attributes\n", req.getAttribute("student") != null ? "does" : "does not");
+//			System.out.println("Adding student and student roles to request");
+//			System.out.printf("A: Student object %s exist in request attributes\n", req.getAttribute("student") != null ? "does" : "does not");
 		}
 		return true;
 	}
