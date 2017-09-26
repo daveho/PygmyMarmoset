@@ -85,7 +85,7 @@ public class Params {
 					" has type " + obj.getClass().getSimpleName() +
 					" but we expected " + modelCls.getSimpleName());
 		}
-		System.out.println("Adding object of type " + obj.getClass().getSimpleName() + " to Params as " + name);
+//		System.out.println("Adding object of type " + obj.getClass().getSimpleName() + " to Params as " + name);
 		modelObjects.put(name, obj);
 		return this;
 	}
