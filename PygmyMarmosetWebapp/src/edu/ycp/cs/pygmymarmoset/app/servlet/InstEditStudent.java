@@ -41,6 +41,9 @@ public class InstEditStudent extends AbstractFormServlet {
 		editStudent.execute(student);
 		req.setAttribute("resultmsg", "Editing student " + student.getUsername() + " successfully");
 		
+		// clear the password hash
+		student.setPasswordHash("");
+		
 		return LogicOutcome.STAY_ON_PAGE;
 	}
 }

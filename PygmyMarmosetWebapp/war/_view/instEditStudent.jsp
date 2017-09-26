@@ -39,8 +39,8 @@
 						<td><input type="submit" name="submit" value="Edit account"></td>
 					</tr>
 				</table>
-				
 			</form>
+			<pm:notification/>
 		</div>
 	</body>
 </html>
