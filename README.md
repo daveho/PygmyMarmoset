@@ -21,7 +21,7 @@ Pygmy Marmoset is ready for production!  We are using it for computer science co
 
 ### Development
 
-You will need Eclipse and JDK 1.8 (or higher).
+You will need Eclipse and JDK 1.8 (or higher?).
 
 You can use the following steps to try out Pygmy Marmoset in a development configuration:
 
@@ -36,7 +36,7 @@ You can use the following steps to try out Pygmy Marmoset in a development confi
 
 ### Production
 
-You will need JDK 1.8.
+You will need JDK 1.8 (or higher?).
 
 You can use the following steps to set up a production instance of Pygmy Marmoset:
 
