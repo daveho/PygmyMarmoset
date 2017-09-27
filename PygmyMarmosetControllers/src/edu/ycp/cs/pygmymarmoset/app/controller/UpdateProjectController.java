@@ -13,6 +13,6 @@ import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 public class UpdateProjectController {
 	public boolean execute(Project project) {
 		IDatabase db = DatabaseProvider.getInstance();
-		return db.updateProject(project);
+		return db.updateModelObject(project);
 	}
 }

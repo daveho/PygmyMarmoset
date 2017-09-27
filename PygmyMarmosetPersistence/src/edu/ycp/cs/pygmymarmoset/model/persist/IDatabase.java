@@ -50,7 +50,6 @@ public interface IDatabase {
 	public Submission findSubmissionForSubmissionId(int submissionId);
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
 	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project, ProjectActivityField[] sortOrder);
-	public boolean updateProject(Project project);
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
 	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
 	public boolean getSubmissionData(Submission submission, IReadBlob reader);

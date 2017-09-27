@@ -58,7 +58,6 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.ReadSubmissionBlob;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.RegisterStudent;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.SuggestUsernames;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateModelObject;
-import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateProject;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.UpdateUserPasswordHash;
 
 public class MariaDBDatabase implements IDatabase {
@@ -209,11 +208,6 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project, ProjectActivityField[] sortOrder) {
 		return execute(new GetStudentProjectActivity(project, sortOrder));
-	}
-	
-	@Override
-	public boolean updateProject(Project project) {
-		return execute(new UpdateProject(project));
 	}
 	
 	@Override
