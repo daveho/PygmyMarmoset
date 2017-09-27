@@ -92,7 +92,7 @@ to create the database tables and initial user account.
 java -jar pygmyMarmosetApp.jar start
 ```
 
-to start the webapp.  The webapp will listen for connections on `localhost:8080`.  You will almost certainly want to set up Apache 2 or nginx to act as a reverse proxy.  For example, I use the following in my Apache 2 configuration:
+to start the webapp.  The webapp will listen for connections on `localhost:8080`.  You will almost certainly want to set up Apache 2 or nginx to act as a reverse proxy (e.g., to allow for connections via https).  For example, I use the following in my Apache 2 configuration:
 
 ```
 # Transparently proxy requests for /marmoset to Pygmy Marmoset
