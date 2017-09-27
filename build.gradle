@@ -33,14 +33,23 @@ task copyWebappClasses(
 	exclude "pygmymarmoset.properties"
 }
 
+task buildModelClassesJar(dependsOn: [':PygmyMarmosetModelClasses:jar']) { }
+
+task buildPersistenceJar(dependsOn: [':PygmyMarmosetPersistence:jar']) { }
+
+task buildControllersJar(dependsOn: [':PygmyMarmosetControllers:jar']) { }
+
+// Make sure model classes, persistence, and controllers jar files are
+// built in the correct order.
+buildPersistenceJar.mustRunAfter(':buildModelClassesJar')
+buildControllersJar.mustRunAfter(':buildPersistenceJar')
+
 // Copy jars of projects depended on by the webapp into the uberjar
 // staging area.
 task copyWebappProjectJars(
 	type: Copy,
 	dependsOn: [
-		':PygmyMarmosetModelClasses:jar',
-		':PygmyMarmosetPersistence:jar',
-		':PygmyMarmosetControllers:jar'
+		':buildControllersJar' // ensures model classes and persistence jars are build, too
 	]) {
 	from 'PygmyMarmosetModelClasses/build/libs', 'PygmyMarmosetPersistence/build/libs',
 					'PygmyMarmosetControllers/build/libs'
