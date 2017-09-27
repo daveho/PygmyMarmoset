@@ -35,14 +35,15 @@ task copyWebappClasses(
 
 task buildModelClassesJar(dependsOn: [':PygmyMarmosetModelClasses:jar']) { }
 
-task buildPersistenceJar(dependsOn: [':PygmyMarmosetPersistence:jar']) { }
+task buildPersistenceJar(dependsOn: [':buildModelClassesJar', ':PygmyMarmosetPersistence:jar']) {
+	// persistence jar can't be built until model classes jar is built
+	mustRunAfter ':buildModelClassesJar'
+}
 
-task buildControllersJar(dependsOn: [':PygmyMarmosetControllers:jar']) { }
-
-// Make sure model classes, persistence, and controllers jar files are
-// built in the correct order.
-buildPersistenceJar.mustRunAfter(':buildModelClassesJar')
-buildControllersJar.mustRunAfter(':buildPersistenceJar')
+task buildControllersJar(dependsOn: [':buildPersistenceJar', ':PygmyMarmosetControllers:jar']) {
+	// controllers jar can't be built until persistence jar is built
+	mustRunAfter ':buildPersistenceJar'
+}
 
 // Copy jars of projects depended on by the webapp into the uberjar
 // staging area.
