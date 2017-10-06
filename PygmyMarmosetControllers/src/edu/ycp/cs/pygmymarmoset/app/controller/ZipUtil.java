@@ -24,7 +24,7 @@ public class ZipUtil {
 		// Get rid of leading slashes, if any
 		Matcher m2 = LEADING_SLASH.matcher(name);
 		if (m2.find()) {
-			String s = m.group(0);
+			String s = m2.group(0);
 			name = name.substring(s.length());
 		}
 		
