@@ -7,11 +7,13 @@
 package edu.ycp.cs.pygmymarmoset.app.util;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs.pygmymarmoset.app.controller.FindUserInCourseController;
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
@@ -78,5 +80,20 @@ public class ServletUtil {
 //			System.out.printf("A: Student object %s exist in request attributes\n", req.getAttribute("student") != null ? "does" : "does not");
 		}
 		return true;
+	}
+
+	/**
+	 * Clear all of the attributes out of a session
+	 * without invalidating it.  Useful when, e.g., switching
+	 * which account the user is logged in as.
+	 * 
+	 * @param session the session
+	 */
+	public static void clearSession(HttpSession session) {
+		Enumeration<String> e = session.getAttributeNames();
+		while (e.hasMoreElements()) {
+			String attr = e.nextElement();
+			session.removeAttribute(attr);
+		}
 	}
 }

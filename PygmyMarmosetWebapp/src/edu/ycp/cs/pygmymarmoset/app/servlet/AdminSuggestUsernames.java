@@ -7,9 +7,9 @@
 package edu.ycp.cs.pygmymarmoset.app.servlet;
 
 /**
- * Process username autocomplete suggestions for instructor servlets.
+ * Process username autocomplete suggestions for admin servlets.
  */
-@Route(pattern="/i/suggestUsernames/*")
-public class InstSuggestUsernames extends AbstractSuggestUsernamesServlet {
+@Route(pattern="/a/suggestUsernames/*")
+public class AdminSuggestUsernames extends AbstractSuggestUsernamesServlet {
 	private static final long serialVersionUID = 1L;
 }
