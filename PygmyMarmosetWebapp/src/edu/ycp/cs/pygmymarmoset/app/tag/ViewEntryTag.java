@@ -25,35 +25,52 @@ import edu.ycp.cs.pygmymarmoset.app.model.Submission;
 public class ViewEntryTag extends SimpleTagSupport {
 	private static final Map<String, String> HIGHLIGHTER_MAP = new HashMap<>();
 	static {
-		// These are brush names for syntaxhighlighter.js
-		HIGHLIGHTER_MAP.put(".pl", "perl");
-		HIGHLIGHTER_MAP.put(".c", "cpp");
+		// These are brush names for prism.js
+		HIGHLIGHTER_MAP.put(".css", "css");
+		HIGHLIGHTER_MAP.put(".c", "c");
 		HIGHLIGHTER_MAP.put(".cpp", "cpp");
 		HIGHLIGHTER_MAP.put(".cxx", "cpp");
-		HIGHLIGHTER_MAP.put(".java", "java");
-		HIGHLIGHTER_MAP.put(".rb", "ruby");
-		HIGHLIGHTER_MAP.put(".py", "python");
-		HIGHLIGHTER_MAP.put(".js", "js");
+		HIGHLIGHTER_MAP.put(".C", "cpp");
 		HIGHLIGHTER_MAP.put(".clj", "clojure");
-		HIGHLIGHTER_MAP.put(".cljc", "clojure");
 		HIGHLIGHTER_MAP.put(".cljs", "clojure");
 		HIGHLIGHTER_MAP.put(".cljx", "clojure");
-		HIGHLIGHTER_MAP.put(".mak", "Makefile");
+		HIGHLIGHTER_MAP.put(".js", "javascript");
+		HIGHLIGHTER_MAP.put(".ino", "arduino");
+		HIGHLIGHTER_MAP.put(".sh", "bash");
+		HIGHLIGHTER_MAP.put(".erl", "erlang");
+		HIGHLIGHTER_MAP.put(".go", "go");
+		HIGHLIGHTER_MAP.put(".groovy", "groovy");
+		HIGHLIGHTER_MAP.put(".hs", "haskell");
+		HIGHLIGHTER_MAP.put(".java", "java");
+		HIGHLIGHTER_MAP.put(".m", "matlab");
+		HIGHLIGHTER_MAP.put(".mk", "makefile");
+		HIGHLIGHTER_MAP.put(".mak", "makefile");
+		HIGHLIGHTER_MAP.put(".pl", "perl");
+		HIGHLIGHTER_MAP.put(".pde", "processing");
+		HIGHLIGHTER_MAP.put(".plg", "prolog");
+		HIGHLIGHTER_MAP.put(".properties", "properties");
+		HIGHLIGHTER_MAP.put(".py", "python");
+		HIGHLIGHTER_MAP.put(".rb", "ruby");
+		HIGHLIGHTER_MAP.put(".sass", "sass");
+		HIGHLIGHTER_MAP.put(".scss", "scss");
+		HIGHLIGHTER_MAP.put(".scm", "scheme");
+		HIGHLIGHTER_MAP.put(".v", "verilog");
+		HIGHLIGHTER_MAP.put(".vhdl", "vhdl");
 	}
 	
 	protected static String findBrush(String fileName) {
 		if (fileName.toLowerCase().equals("makefile")) {
 			// Special case for Makefiles, which normally don't have
 			// a file extension.
-			return "Makefile";
+			return "makefile";
 		}
 		int extPos = fileName.lastIndexOf('.');
 		if (extPos < 0) {
-			return "plain";
+			return "none";
 		}
 		String ext = fileName.substring(extPos);
 		String brush = HIGHLIGHTER_MAP.get(ext);
-		return brush != null ? brush : "plain";
+		return brush != null ? brush : "none";
 	}
 	
 	@Override
@@ -79,9 +96,8 @@ public class ViewEntryTag extends SimpleTagSupport {
 				try {
 					out.print("<h2>Entry ");
 					out.print(name);
-					out.print("</h2>");
-					out.print("<pre id=\"viewentry\"");
-					out.print(" class=\"brush: ");
+					out.println("</h2>");
+					out.print("<pre id=\"viewentry\"><code class=\"line-numbers language-");
 					out.print(findBrush(name));
 					out.print("\"");
 					out.print(">");
@@ -99,7 +115,7 @@ public class ViewEntryTag extends SimpleTagSupport {
 							out.write(c);
 						}
 					}
-					out.print("</pre>");
+					out.print("</code></pre>");
 				} catch (IOException e) {
 					throw new RuntimeException("Error reading submission entry data", e);
 				}

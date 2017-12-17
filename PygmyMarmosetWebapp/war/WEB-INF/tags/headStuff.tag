@@ -13,7 +13,8 @@
 <script src="${pageContext.servletContext.contextPath}/js/jquery-ui-timepicker-addon.min.js"></script>
 </c:if>
 <c:if test="${syntaxhighlight}">
-<!-- Include syntaxhighlighter js/css -->
-<script src="${pageContext.servletContext.contextPath}/js/syntaxhighlighter.min.js"></script>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.css">
+<!-- Include prism js/css -->
+<script src="${pageContext.servletContext.contextPath}/js/prism.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/prism.clojure.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/prism.css">
 </c:if>
