@@ -59,7 +59,8 @@ public class ViewEntryTag extends SimpleTagSupport {
 	}
 	
 	protected static String findBrush(String fileName) {
-		if (fileName.toLowerCase().equals("makefile")) {
+		String lcFilename = fileName.toLowerCase();
+		if (lcFilename.equals("makefile") || lcFilename.endsWith("/makefile")) {
 			// Special case for Makefiles, which normally don't have
 			// a file extension.
 			return "makefile";
