@@ -13,10 +13,10 @@ import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
-public class GetOntimeAndLateSubmissionsController {
+public class GetAllSubmissionsController {
 	public void execute(Project project, ZipOutputStream zout) {
 		ISubmissionCollector collector = new SubmissionArchiveCollector(zout);
 		IDatabase db = DatabaseProvider.getInstance();
-		db.getOntimeAndLateSubmissions(project, collector);
+		db.getAllSubmissions(project, collector);
 	}
 }

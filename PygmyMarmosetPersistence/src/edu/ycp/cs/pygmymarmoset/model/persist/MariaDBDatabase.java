@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.GetSubmissionsMode;
 import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
@@ -43,6 +44,7 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindSubmissionForSubmissionId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSelectedSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetCoursesForUser;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetOntimeAndLateSubmissions;
@@ -238,6 +240,11 @@ public class MariaDBDatabase implements IDatabase {
 	@Override
 	public boolean updateModelObject(Object student) {
 		return execute(new UpdateModelObject(student));
+	}
+	
+	@Override
+	public boolean getAllSubmissions(Project project, ISubmissionCollector collector) {
+		return execute(new GetSelectedSubmissions(project, collector, GetSubmissionsMode.ALL));
 	}
 
 	private Connection createConnection() {

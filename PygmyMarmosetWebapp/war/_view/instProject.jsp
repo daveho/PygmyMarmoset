@@ -57,6 +57,7 @@
 				<ul>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/editProject/${course.id}/${project.id}">Edit project</a></li>
 				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/downloadOntime/${course.id}/${project.id}">Download ontime and late submissions</a>
+				<li><a class="navlink" href="${pageContext.servletContext.contextPath}/i/downloadAll/${course.id}/${project.id}">Download all submissions</a>
 				</ul>
 			</div>
 		</div>

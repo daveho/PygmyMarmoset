@@ -125,6 +125,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>InstLoadProject</filter-name>
+		<url-pattern>/i/downloadAll/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>InstLoadProject</filter-name>
 		<url-pattern>/i/download/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

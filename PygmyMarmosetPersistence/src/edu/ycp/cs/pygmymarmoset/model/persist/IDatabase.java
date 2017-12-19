@@ -56,4 +56,5 @@ public interface IDatabase {
 	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student);
 	public boolean updateUserPasswordHash(User user, String passwordHash);
 	public boolean updateModelObject(Object student);
+	public boolean getAllSubmissions(Project project, ISubmissionCollector collector);
 }
