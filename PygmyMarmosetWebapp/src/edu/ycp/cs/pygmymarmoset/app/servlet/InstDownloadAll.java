@@ -14,7 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs.pygmymarmoset.app.controller.GetAllSubmissionsController;
+import edu.ycp.cs.pygmymarmoset.app.controller.GetSelectedSubmissionsController;
+import edu.ycp.cs.pygmymarmoset.app.model.GetSubmissionsMode;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 
 @Route(pattern="/i/downloadAll/*")
@@ -24,11 +25,8 @@ public class InstDownloadAll extends AbstractServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Project project = (Project) req.getAttribute("project");
-		if (project == null) {
-			throw new ServletException("No project!");
-		}
 		
-		GetAllSubmissionsController getSubs = new GetAllSubmissionsController();
+		GetSelectedSubmissionsController getSubs = new GetSelectedSubmissionsController();
 		
 		OutputStream out = resp.getOutputStream();
 		ZipOutputStream zout = new ZipOutputStream(out);
@@ -37,7 +35,7 @@ public class InstDownloadAll extends AbstractServlet {
 		String fileName = project.getName() + "-all.zip"; // probably doesn't match Marmoset's naming convention
 		resp.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 		
-		getSubs.execute(project, zout);
+		getSubs.execute(project, zout, GetSubmissionsMode.ALL);
 		zout.finish();
 	}
 }

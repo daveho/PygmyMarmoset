@@ -44,12 +44,11 @@ import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindSubmissionForSubmissionId;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserForUsername;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.FindUserInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllCourses;
-import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSelectedSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetAllTerms;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetCoursesForUser;
-import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetOntimeAndLateSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetProjectsInCourse;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetRoster;
+import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSelectedSubmissions;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetSingleStudentProjectActivity;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjectActivity;
 import edu.ycp.cs.pygmymarmoset.model.persist.txn.GetStudentProjects;
@@ -218,11 +217,6 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector) {
-		return execute(new GetOntimeAndLateSubmissions(project, collector));
-	}
-	
-	@Override
 	public boolean getSubmissionData(Submission submission, IReadBlob reader) {
 		return execute(new GetSubmissionData(submission, reader));
 	}
@@ -243,8 +237,8 @@ public class MariaDBDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean getAllSubmissions(Project project, ISubmissionCollector collector) {
-		return execute(new GetSelectedSubmissions(project, collector, GetSubmissionsMode.ALL));
+	public boolean getSelectedSubmissions(Project project, ISubmissionCollector collector, GetSubmissionsMode mode) {
+		return execute(new GetSelectedSubmissions(project, collector, mode));
 	}
 
 	private Connection createConnection() {

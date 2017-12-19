@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import edu.ycp.cs.pygmymarmoset.app.model.Course;
+import edu.ycp.cs.pygmymarmoset.app.model.GetSubmissionsMode;
 import edu.ycp.cs.pygmymarmoset.app.model.IReadBlob;
 import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Pair;
@@ -51,10 +52,10 @@ public interface IDatabase {
 	public boolean readSubmissionBlob(Submission submission, IReadBlob reader);
 	public List<Triple<User, Integer[], Role>> getStudentProjectActivity(Project project, ProjectActivityField[] sortOrder);
 	public Pair<Course, Project> findCourseAndProject(String courseName, String termName, Integer year, String projectName);
-	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
+//	public boolean getOntimeAndLateSubmissions(Project project, ISubmissionCollector collector);
 	public boolean getSubmissionData(Submission submission, IReadBlob reader);
 	public List<Pair<Project, Integer[]>> getSingleStudentProjectActivity(Course course, User student);
 	public boolean updateUserPasswordHash(User user, String passwordHash);
 	public boolean updateModelObject(Object student);
-	public boolean getAllSubmissions(Project project, ISubmissionCollector collector);
+	public boolean getSelectedSubmissions(Project project, ISubmissionCollector collector, GetSubmissionsMode mode);
 }

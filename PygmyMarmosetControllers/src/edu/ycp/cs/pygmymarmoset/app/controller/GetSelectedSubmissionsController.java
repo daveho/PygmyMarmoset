@@ -8,15 +8,16 @@ package edu.ycp.cs.pygmymarmoset.app.controller;
 
 import java.util.zip.ZipOutputStream;
 
+import edu.ycp.cs.pygmymarmoset.app.model.GetSubmissionsMode;
 import edu.ycp.cs.pygmymarmoset.app.model.ISubmissionCollector;
 import edu.ycp.cs.pygmymarmoset.app.model.Project;
 import edu.ycp.cs.pygmymarmoset.model.persist.DatabaseProvider;
 import edu.ycp.cs.pygmymarmoset.model.persist.IDatabase;
 
-public class GetOntimeAndLateSubmissionsController {
-	public void execute(Project project, ZipOutputStream zout) {
+public class GetSelectedSubmissionsController {
+	public void execute(Project project, ZipOutputStream zout, GetSubmissionsMode mode) {
 		ISubmissionCollector collector = new SubmissionArchiveCollector(zout);
 		IDatabase db = DatabaseProvider.getInstance();
-		db.getOntimeAndLateSubmissions(project, collector);
+		db.getSelectedSubmissions(project, collector, mode);
 	}
 }
