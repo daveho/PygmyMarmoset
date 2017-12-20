@@ -10,7 +10,7 @@ I had several motivations for creating Pygmy Marmoset:
 
 * *Smaller and more extensible code base*.  The Marmoset code base has a lot of the usual problems associated with being a research prototype.
 * *Ease of setup and deployment*.  Marmoset requires an application server to run.  Pygmy Marmoset is deployable as a single jar file, much the same as [CloudCoder](https://cloudcoder.org).
-* *Improved UI*.  The feature reduction comes will a significant simplification of the user interface.  Some aspects of the UI are improved: for example, [syntaxhighlighter.js](https://github.com/syntaxhighlighter/syntaxhighlighter) is used for highlighting submitted source code.
+* *Improved UI*.  The feature reduction comes will a significant simplification of the user interface.  Some aspects of the UI are improved: for example, [prism.js](http://prismjs.com/) is used for highlighting submitted source code.
 * *Bug fixes*.  In particular, Marmoset has issues allowing students to check their submissions: sometimes source files don't appear in the file listing for the submission.
 
 ## Current status
