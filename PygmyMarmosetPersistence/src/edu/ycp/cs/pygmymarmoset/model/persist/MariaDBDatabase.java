@@ -73,8 +73,6 @@ public class MariaDBDatabase implements IDatabase {
 	
 	private static Logger logger = LoggerFactory.getLogger(MariaDBDatabase.class);
 	
-	// TODO: don't hard-code
-	// jdbc:mysql://localhost/pygmymarmoset?user=root&password=root
 	public static String JDBC_URL;
 	static {
 		PMConfig config = PMConfig.getInstance();
