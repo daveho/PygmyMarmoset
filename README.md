@@ -17,6 +17,8 @@ I had several motivations for creating Pygmy Marmoset:
 
 Pygmy Marmoset is ready for production!  We are using it for computer science courses at [York College](https://www.ycp.edu) effective Fall 2017.
 
+Note that there are no formal releases because feature development typically happens on branches, and commits to the master branch correspond to actual deployed production versions.  So you should be fine building and running the version on the master branch.
+
 ## Trying it out
 
 ### Development
@@ -27,7 +29,7 @@ You can use the following steps to try out Pygmy Marmoset in a development confi
 
 1. Run the `fetchdeps.pl` script to fetch dependencies.
 2. Import all of the projects in the repository into Eclipse.
-3. Create a MariaDB database called `pygmymarmoset` using the MariaDB `root` account.
+3. Create a MariaDB database called `pygmymarmosetdb` using the MariaDB `root` account.
 4. Make sure it is possible to log into the MariaDB `root` account using the password `root`.
 5. Run the `CreateDatabase` program in the `PygmyMarmosetPersistence` project.  This will create the database tables and create an initial user account with superuser privileges.
 6. Run the `Main` program in the `PygmyMarmosetLauncher` project.
