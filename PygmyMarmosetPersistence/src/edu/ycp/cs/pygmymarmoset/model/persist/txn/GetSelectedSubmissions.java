@@ -1,5 +1,5 @@
 // Pygmy Marmoset - an assignment submission webapp for CS courses
-// Copyright (c) 2017, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2017,2018 David H. Hovemeyer <david.hovemeyer@gmail.com>
 //
 // This is free software distributed under the terms of the
 // GNU Affero Public License v3 or later.  See LICENSE.txt for details.
@@ -39,55 +39,74 @@ public class GetSelectedSubmissions extends DatabaseRunnable<Boolean> {
 	@Override
 	public Boolean execute(Connection conn) throws SQLException {
 		StringBuilder query = new StringBuilder();
+
 		query.append(
-				"select u.*, y.*, sb.data" +
-				" from users as u," + 
-				// Select ontime submissions (before ontime deadline)
-				"      (select s.*, 0 as status" +
-				"         from submissions as s" +
-				"          inner join (select ss.id, ss.userid, max(ss.timestamp) as maxts" +
-				"                        from submissions as ss" +
-				"                        where ss.projectid = ? and ss.timestamp <= ?" +
-				"                       group by ss.userid) as x" +
-				"           on s.userid = x.userid and s.timestamp = x.maxts" +
-				"       union " +
-				// Select late submissions (between ontime and late deadlines)
-				"       select s.*, 1 as status" +
-				"         from submissions as s" +
-				"          inner join (select ss.id, ss.userid, max(ss.timestamp) as maxts" +
-				"                        from submissions as ss" +
-				"                        where ss.projectid = ? and ss.timestamp > ? and ss.timestamp <= ?" +
-				"                       group by ss.userid) as x" +
-				"           on s.userid = x.userid and s.timestamp = x.maxts");
+				"select u.*, s.*, 0 as status, sb.data" +
+				"  from submissions as s," +
+				"       (select s.userid as userid, max(s.timestamp) as maxts" +
+				"          from submissions as s" +
+				"         where s.projectid = ?" +                     // project id
+				"           and s.timestamp <= ?" +                    // ontime ts
+				"         group by s.userid) as y," +
+				"       users as u," +
+				"       submissionblobs as sb" +
+				" where s.projectid = ?" +                             // project id
+				"   and u.id = y.userid" +
+				"   and s.userid = u.id" +
+				"   and s.timestamp = y.maxts" +
+				"   and s.id = sb.submissionid" +
+				"" +
+				" union" +
+				"" +
+				" select u.*, s.*, 1 as status, sb.data" +
+				"  from submissions as s," +
+				"       (select s.userid as userid, max(s.timestamp) as maxts" +
+				"          from submissions as s" +
+				"         where s.projectid = ?" +                     // project id
+				"           and s.timestamp > ?" +                     // ontime ts
+				"           and s.timestamp <= ?" +                    // late ts
+				"         group by s.userid) as y," +
+				"       users as u," +
+				"       submissionblobs as sb" +
+				" where s.projectid = ?" +                             // project id
+				"   and u.id = y.userid" +
+				"   and s.userid = u.id" +
+				"   and s.timestamp = y.maxts" +
+				"   and s.id = sb.submissionid");
+		
 		if (mode == GetSubmissionsMode.ALL) {
-			// Include verylate submissions
 			query.append(
-					"       union " +
-					// Select verylate submissions (after late deadline)
-					"       select s.*, 2 as status" +
-					"         from submissions as s" +
-					"          inner join (select ss.id, ss.userid, max(ss.timestamp) as maxts" +
-					"                        from submissions as ss" +
-					"                        where ss.projectid = ? and ss.timestamp > ?" +
-					"                       group by ss.userid) as x" +
-					"           on s.userid = x.userid and s.timestamp = x.maxts");
+					" union" +
+					"" +
+					" select u.*, s.*, 2 as status, sb.data" +
+					"  from submissions as s," +
+					"       (select s.userid as userid, max(s.timestamp) as maxts" +
+					"          from submissions as s" +
+					"         where s.projectid = ?" +                  // project id
+					"           and s.timestamp > ?" +                  // late ts
+					"         group by s.userid) as y," +
+					"       users as u," +
+					"       submissionblobs as sb" +
+					" where s.projectid = ?" +                          // project id
+					"   and u.id = y.userid" +
+					"   and s.userid = u.id" +
+					"   and s.timestamp = y.maxts" +
+					"   and s.id = sb.submissionid");
 		}
-		query.append(
-				"    ) as y," +
-				"    submissionblobs as sb" +
-				" where u.id = y.userid" +
-				"   and y.id = sb.id");
 		
 		PreparedStatement stmt = prepareStatement(conn, query.toString());
-		
+
 		stmt.setInt(1, project.getId());
 		stmt.setLong(2, project.getOntime());
 		stmt.setInt(3, project.getId());
-		stmt.setLong(4, project.getOntime());
-		stmt.setLong(5, project.getLate());
+		stmt.setInt(4, project.getId());
+		stmt.setLong(5, project.getOntime());
+		stmt.setLong(6, project.getLate());
+		stmt.setInt(7, project.getId());
 		if (mode == GetSubmissionsMode.ALL) {
-			stmt.setInt(6, project.getId());
-			stmt.setLong(7, project.getLate());
+			stmt.setInt(8, project.getId());
+			stmt.setLong(9, project.getLate());
+			stmt.setInt(10, project.getId());
 		}
 		
 		ResultSet resultSet = executeQuery(stmt);
