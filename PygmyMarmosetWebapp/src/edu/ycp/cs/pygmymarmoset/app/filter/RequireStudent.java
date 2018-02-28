@@ -56,6 +56,7 @@ public class RequireStudent extends AbstractLoginFilter implements Filter {
 		Pair<User, Roles> studentInfo = findUser.execute(course, studentId);
 		if (studentInfo == null) {
 			ServletUtil.sendNotFound(req, resp, "Student " + studentId + " is not registered in the course");
+			return;
 		}
 		User student = studentInfo.getFirst();
 		Roles studentRoles = studentInfo.getSecond();
