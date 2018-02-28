@@ -1,0 +1,26 @@
+<Project projectName="PygmyMarmoset">
+  <Jar>./build/uberJarStaging/war/WEB-INF/classes/edu</Jar>
+  <Jar>./build/uberJarStaging/war/WEB-INF/lib/PygmyMarmosetControllers.jar</Jar>
+  <Jar>./build/uberJarStaging/war/WEB-INF/lib/PygmyMarmosetModelClasses.jar</Jar>
+  <Jar>./build/uberJarStaging/war/WEB-INF/lib/PygmyMarmosetPersistence.jar</Jar>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/commons-beanutils-1.9.3.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/commons-csv-1.4.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/commons-io-2.5.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/commons-lang3-3.5.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/commons-logging-1.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/guava-21.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/jackson-annotations-2.8.7.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/jackson-core-2.8.7.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/jackson-databind-2.8.7.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/javassist-3.12.1.GA.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/log4j-1.2.16.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/mariadb-java-client-1.5.7.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/reflections-0.9.11.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/slf4j-api-1.6.4.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./build/uberJarStaging/war/WEB-INF/lib/slf4j-log4j12-1.6.4.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./deps/javax.servlet-api-3.1.0.jar</AuxClasspathEntry>
+  <SrcDir>./PygmyMarmosetWebapp/src</SrcDir>
+  <SrcDir>./PygmyMarmosetModelClasses/src</SrcDir>
+  <SrcDir>./PygmyMarmosetControllers/src</SrcDir>
+  <SrcDir>./PygmyMarmosetPersistence/src</SrcDir>
+</Project>
