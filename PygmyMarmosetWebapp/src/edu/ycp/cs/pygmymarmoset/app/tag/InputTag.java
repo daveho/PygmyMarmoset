@@ -1,5 +1,5 @@
 // Pygmy Marmoset - an assignment submission webapp for CS courses
-// Copyright (c) 2017, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2017,2018 David H. Hovemeyer <david.hovemeyer@gmail.com>
 //
 // This is free software distributed under the terms of the
 // GNU Affero Public License v3 or later.  See LICENSE.txt for details.
@@ -132,6 +132,11 @@ public class InputTag extends BeanTag {
 		}
 		if (type.equals("password") && !Boolean.valueOf(autocomplete)) {
 			out.print(" autocomplete=\"new-password\"");
+		}
+		// Disable autocompletion for timestamp fields: it interferes with the
+		// datetime picker UI.
+		if (dbfield.isTimestamp()) {
+			out.print(" autocomplete=\"off\"");
 		}
 		out.print(">");
 	}
